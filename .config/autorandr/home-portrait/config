@@ -1,0 +1,12 @@
+output VIRTUAL1
+off
+output HDMI1
+mode 1920x1080
+pos 0x0
+primary
+rate 60.00
+rotate left
+output eDP1
+mode 1366x768
+pos 1080x528
+rate 60.01

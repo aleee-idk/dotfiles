@@ -1,0 +1,45 @@
+#include "/home/agente_a/.config/colors/colors"
+
+*.foreground:  FOREGROUND
+*.background:  BACKGROUND
+*.cursorColor: FOREGROUND
+*.color0:      COLOR0
+*.color8:      COLOR8
+
+*.color1:      COLOR1
+*.color9:      COLOR9
+
+*.color2:      COLOR2
+*.color10:     COLOR10
+
+*.color3:      COLOR3
+*.color11:     COLOR11
+
+*.color4:      COLOR4
+*.color12:     COLOR12
+
+*.color5:      COLOR5
+*.color13:     COLOR13
+
+*.color6:      COLOR6
+*.color14:     COLOR14
+
+*.color7:      COLOR7
+*.color15:     COLOR15
+
+!*.font: xft: Apl385:pixelsize=12:regular
+*.font: APL385 Unicode:pixelsize=9:regular
+
+URxvt.termName: rxvt-256color
+URxvt.buffered: falseu
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: true
+URxvt.font: xft:APL385 Unicode:pixelsize=12:regular
+!URxvt.letterSpace:-1
+
+URxvt.perl-ext-common: clipboard
+URxvt.clipboard.autocopy: true
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
