@@ -1,0 +1,9 @@
+discord
+emacs
+i3
+i3-battery-popup-git
+i3-gaps
+i3blocks
+i3lock
+i3status
+polybar
