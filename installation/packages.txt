@@ -10,7 +10,6 @@ git
 grep
 gutenprint
 hplip
-i3
 i3-battery-popup-git
 i3-gaps
 i3blocks
