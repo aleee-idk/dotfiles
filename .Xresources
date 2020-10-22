@@ -29,6 +29,7 @@
 
 !*.font: xft: Apl385:pixelsize=12:regular
 *.font: APL385 Unicode:pixelsize=9:regular
+rofi.font: APL385 Unicode size 12
 
 URxvt.termName: rxvt-256color
 URxvt.buffered: falseu
@@ -43,3 +44,5 @@ URxvt.perl-ext-common: clipboard
 URxvt.clipboard.autocopy: true
 URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
+
+Emacs.default.attributeHeight: 94

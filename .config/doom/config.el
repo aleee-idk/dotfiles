@@ -34,7 +34,7 @@
 ;; Org Configuration
 (after! org
   (setq org-directory "~/Documents/Org/"
-  org-agenda-files '("~Documents/Org/")
+  org-agenda-files '("~/Documents/Org/Agenda/")
 ;;org-todo-keywords '((sequence "TODO(t)" "PROJ(p)" "VIDEO(v)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)" ))
   )
   (require 'org-bullets)
