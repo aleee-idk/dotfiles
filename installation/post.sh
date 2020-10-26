@@ -36,7 +36,7 @@ while : ; do
 	echo "The entered city don't exist, try again"
 done
 
-ln -sf /usr/share/zoneinfo/$zone/$city
+ln -sf /usr/share/zoneinfo/$zone/$city /etc/localtime
 
 hwclock --systohc
 
@@ -68,15 +68,33 @@ echo "127.0.0.1	localhost
 # Users configuration
 
 echo "Enter new password for root user"
-passwd
+
+while : ; do
+	passwd
+	[ $? -eq 0 ] && break
+	echo "Please try again"
+done
 
 echo "creating new user"
 echo "Enter name for new user"
-read user
-useradd -m "$user"
+
+
+while : ; do
+	read user
+	useradd -m "$user"
+	[ $? -eq 0 ] && break
+	echo "Please try again"
+done
+
 
 echo "Enter password for user $user"
-passwd "$user"
+
+while : ; do
+	passwd "$user"
+	[ $? -eq 0 ] && break
+	echo "Please try again"
+done
+
 groupadd lpadmin
 usermod -aG wheel,audio,video,optical,storage,lpadmin "$user"
 
@@ -121,9 +139,9 @@ git config --global credential.helper store
 
 # Install AUR Repository
 git clone https://aur.archlinux.org/yay-git.git
-chmod -R +x yay-git
+chmod 777 yay-git
 cd yay-git
-su -c "makepkg -si" "$user"
+su -c "makepkg -si" "$user"</dev/tty
 cd ..
 rm -r yay-git
 

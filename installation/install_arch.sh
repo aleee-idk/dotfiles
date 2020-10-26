@@ -40,7 +40,7 @@ done
 echo "$root was mounted"
 
 # Install arch
-pacstrap /mnt base linux linux-firmware sudo grub efibootmgr dosfstools os-prober mtools networkmanager base-devel git
+pacstrap /mnt base linux linux-firmware sudo grub efibootmgr dosfstools os-prober mtools networkmanager base-devel git go
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # Change to the new Arch instalation
