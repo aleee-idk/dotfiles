@@ -121,6 +121,7 @@ git config --global credential.helper store
 
 # Install AUR Repository
 git clone https://aur.archlinux.org/yay-git.git
+chmod -R +x yay-git
 cd yay-git
 su -c "makepkg -si" "$user"
 cd ..
