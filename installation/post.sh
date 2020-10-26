@@ -42,7 +42,7 @@ hwclock --systohc
 
 
 for i in "${locales[@]}"; do
-	sed -i -e "s/$i/g" /mnt/etc/locale.gen
+	sed -i -e "s/$i/g" /etc/locale.gen
 done
 
 locale-gen
