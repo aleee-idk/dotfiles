@@ -40,7 +40,7 @@ done
 echo "$root was mounted"
 
 # Install arch
-pacstrap /mnt base linux linux-firmware sudo grub efibootmmgr dosfstools os-prober mtools networkmanager base-devel git
+pacstrap /mnt base linux linux-firmware sudo grub efibootmgr dosfstools os-prober mtools networkmanager base-devel git
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # Change to the new Arch instalation
@@ -51,4 +51,4 @@ arch-chroot /mnt sh /home/installation.sh
 echo "Installation finished, reboot? (y/n)"
 read answer
 
-[ "$answer" == "y" || "$answer" == "Y" ] && reboot
+[[ "$answer" == "y" || "$answer" == "Y" ]] && reboot
