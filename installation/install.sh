@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 packages='packages.txt'
-n=1
 
 # read package file and install everythin, eather from the oficial repository or user repository
 while read line; do
