@@ -73,11 +73,11 @@ passwd
 echo "creating new user"
 echo "Enter name for new user"
 read user
-useradd "$user"
+useradd -m "$user"
 
 echo "Enter password for user $user"
 passwd "$user"
-
+groupadd lpadmin
 usermod -aG wheel,audio,video,optical,storage,lpadmin "$user"
 
 sed -i -e "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers
@@ -122,7 +122,7 @@ git config --global credential.helper store
 # Install AUR Repository
 git clone https://aur.archlinux.org/yay-git.git
 cd yay-git
-makepkg -si
+su -c "makepkg -si" "$user"
 cd ..
 rm -r yay-git
 

@@ -48,6 +48,8 @@ cp $(dirname $(realpath $0))/post.sh /mnt/home/installation.sh
 chmod +x /mnt/home/installation.sh
 arch-chroot /mnt sh /home/installation.sh
 
+rm /mnt/home/installation.sh
+
 echo "Installation finished, reboot? (y/n)"
 read answer
 
