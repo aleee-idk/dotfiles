@@ -12,6 +12,7 @@ gnome-terminal
 grep
 gutenprint
 hplip
+htop
 i3-battery-popup-git
 i3-gaps
 i3blocks
@@ -22,9 +23,12 @@ lightdm-gtk-greeter
 mpc
 ncmpcpp
 networkmanager
+os-prober
 polybar
 pulseaudio
 pulseaudio-bluetooth
+rxvt-unicode
+rxvt-unicode
 scrot
 splix
 vim

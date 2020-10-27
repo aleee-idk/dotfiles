@@ -129,11 +129,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 systemctl enable NetworkManager
 
-for i in "${x11latout[@]}"; do
-    localectl set-x11-keymap $i
-done
-
-
 # Storage github user and passwor so don't ask every time
 git config --global credential.helper store
 
@@ -141,21 +136,22 @@ git config --global credential.helper store
 git clone https://aur.archlinux.org/yay-git.git
 chmod 777 yay-git
 cd yay-git
-su -c "makepkg -si" "$user"</dev/tty
+sudo -u "$user" makepkg -si
 cd ..
 rm -r yay-git
 
 # dotfiles and package install
+rm -r /home/"$user"/{*,.*}
 cd /home/"$user"
-git clone https://github.com/aleee-idk/dotfiles.git
+git clone https://github.com/aleee-idk/dotfiles.git .
 cd installation
 
-
+chown -R "$user":"$user" /home/"$user"/
 packages='packages.txt'
 
 # read package file and install everything, eather from the oficial repository or user repository
 while read line; do
-   sudo pacman -S --noconfirm --needed "$line" || yay -S "$line" </dev/tty
+   pacman -S --noconfirm --needed "$line" || sudo -u "$user" yay -S "$line" </dev/tty
 done < $packages
 
 echo "Insalled packages"
@@ -167,3 +163,10 @@ systemctl enable lightdm
 # printer settup
 sed -i -e "s/SystemGroup sys root wheel/SystemGroup sys root wheel lpadmin/g" /etc/cups/cups-files.conf
 systemctl enable org.cups.cupsd.service
+
+
+for i in "${x11latout[@]}"; do
+    localectl set-x11-keymap $i
+done
+
+sed -i -e 's|#include "/home/.*|#include "/home/$user/.config/colors/colors"|g' /home/"$user"/.Xresources
