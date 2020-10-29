@@ -1,39 +1,52 @@
 #!/bin/bash
 
 
-# Add locales to the array in the same format 'comment locale'/'uncomment locale')
+## Add locales to the array in the same format 'comment locale'/'uncomment locale')
+
+# Names:
+hostname=archtest
+user=aleidk
+userpass=0000
+rootpass=0000
+
+# Partitions:
+efi=/dev/sda1
+
+# locales
+zone="Chile"
+city="Continental"
 locales=("#es_CL.UTF-8 UTF-8/es_CL.UTF-8 UTF-8")
 langs=("es_CL.UTF-8")
 layout=("la-latin1")
 x11layout=("latin")
 
 # Setting locales
-echo  "Enter region for timezone (enter '?' to list aviable regions with less)"
 
 while : ; do
+	[ -e /usr/share/zoneinfo/$zone ] && break
+
+	echo "The entered zone don't exist, try again"
+	echo  "Enter region for timezone (enter '?' to list aviable regions with less)"
 	read zone
 	if [ $zone == "?" ]; then
 		ls /usr/share/zoneinfo/ | less
 		echo "Enter region for timezone"
 		read zone
 	fi
-
-	[ -e /usr/share/zoneinfo/$zone ] && break
-	echo "The entered zone don't exist, try again"
 done
 
-echo  "Enter city for timezone (enter '?' to list aviable cities with less)"
 
 while : ; do
+	[ -e /usr/share/zoneinfo/$zone/$city ] && break
+
+	echo "The entered city don't exist, try again"
+	echo  "Enter city for timezone (enter '?' to list aviable cities with less)"
 	read city
 	if [ $city == "?" ]; then
 		ls /usr/share/zoneinfo/$zone | less
 		echo "Enter region for timezone"
 		read city
 	fi
-
-	[ -e /usr/share/zoneinfo/$zone/$city ] && break
-	echo "The entered city don't exist, try again"
 done
 
 ln -sf /usr/share/zoneinfo/$zone/$city /etc/localtime
@@ -52,13 +65,16 @@ for i in "${langs[@]}"; do
 done
 
 for i in "${layout[@]}"; do
-	echo "KEYMAP=$i" >> /etc/locale.conf
+	echo "KEYMAP=$i" >> /etc/vconsole.conf
 done
 
 # Network Configuration
 
-echo "Enter the hostname"
-read hostname
+if [ $hostname -z ]; then
+	echo "Enter the hostname"
+	read hostname
+fi
+
 echo "$hostname" > /etc/hostname
 
 echo "127.0.0.1	localhost
@@ -67,33 +83,43 @@ echo "127.0.0.1	localhost
 
 # Users configuration
 
-echo "Enter new password for root user"
+"Seeting Root password"
+if [ $rootpass -z ]; then
+	while : ; do
+		passwd
+		[ $? -eq 0 ] && break
+		echo "Please try again"
+	done
+else
+	echo -e "$rootpass\n$rootpass" | passwd
+fi
 
-while : ; do
-	passwd
-	[ $? -eq 0 ] && break
-	echo "Please try again"
-done
 
-echo "creating new user"
-echo "Enter name for new user"
+echo "Creating new user"
 
-
-while : ; do
-	read user
+if [ $user -z ]; then
+	while : ; do
+	echo "Enter name for new user"
+		read user
+		useradd -m "$user"
+		[ $? -eq 0 ] && break
+		echo "Please try again"
+	done
+else
 	useradd -m "$user"
-	[ $? -eq 0 ] && break
-	echo "Please try again"
-done
+fi
 
 
-echo "Enter password for user $user"
-
-while : ; do
-	passwd "$user"
-	[ $? -eq 0 ] && break
-	echo "Please try again"
-done
+"Seeting password for $user user"
+if [ $userpass -z ]; then
+	while : ; do
+		passwd "$user"
+		[ $? -eq 0 ] && break
+		echo "Please try again"
+	done
+else
+	echo -e "$userpass\n$userpass" | passwd "$user"
+fi
 
 groupadd lpadmin
 usermod -aG wheel,audio,video,optical,storage,lpadmin "$user"
@@ -104,23 +130,21 @@ sed -i -e "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers
 
 mkdir /boot/EFI
 
-echo "Enter EFI Partition"
+
+echo "Mounting $efi as root partition"
+# Ask for root partition untl the right one is entered
 while : ; do
-	read efi
-
 	check=$(blkid -o value --match-tag TYPE $efi)
-	if [ $check != "vfat" ]; then
-	       echo "wrong file system, please use an EFI partition"
-	       continue
+	if [ $check == "vfat" ]; then
+		mount $efi /boot/EFI
+        if [ $? -eq 0 ]; then
+            break
+        fi
 	fi
-
-	mount $efi /boot/EFI
-	if [ $? -eq 0 ]; then
-	       break
-	fi
-	echo "wrong partition"
+    echo "wrong file system, please use an EFI partition"
+	read efi
 done
-echo "$efi was mounted"
+echo "$efi was mounted as root"
 
 grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -165,8 +189,10 @@ sed -i -e "s/SystemGroup sys root wheel/SystemGroup sys root wheel lpadmin/g" /e
 systemctl enable org.cups.cupsd.service
 
 
-for i in "${x11latout[@]}"; do
-    localectl set-x11-keymap $i
-done
+# for i in "${x11latout[@]}"; do
+#     localectl set-x11-keymap $i
+# done
 
-sed -i -e 's|#include "/home/.*|#include "/home/$user/.config/colors/colors"|g' /home/"$user"/.Xresources
+setxkbmap -model pc105 -layout latam
+
+sed -i -e 's|#include "/home/.*|#include "/home/'"$user"'/.config/colors/colors"|g' /home/"$user"/.Xresources

@@ -27,6 +27,7 @@ os-prober
 polybar
 pulseaudio
 pulseaudio-bluetooth
+rofi
 rxvt-unicode
 rxvt-unicode
 scrot
