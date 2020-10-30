@@ -231,10 +231,11 @@ sed -i -e "s/SystemGroup sys root wheel/SystemGroup sys root wheel lpadmin/g" /e
 systemctl enable org.cups.cupsd.service
 
 
-for i in "${x11latout[@]}"; do
-	echo "setting X11 layout to: $i"
-    localectl set-x11-keymap $i
-done
+# for i in "${x11latout[@]}"; do
+# 	echo "setting X11 layout to: $i"
+#     localectl set-x11-keymap $i
+# done
 
+cp "/home/$user/installation/00-keyboard.conf" /etc/X11/xorg.conf/00-keyboard.conf
 
 sed -i -e 's|#include "/home/.*|#include "/home/'"$user"'/.config/colors/colors"|g' /home/"$user"/.Xresources
