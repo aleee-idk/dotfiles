@@ -4,13 +4,13 @@
 ## Add locales to the array in the same format 'comment locale'/'uncomment locale')
 
 # Names:
-hostname=archtest
-user=aleidk
-userpass=0000
-rootpass=0000
+hostname="archtest"
+user="aleidk"
+userpass="0000"
+rootpass="0000"
 
 # Partitions:
-efi=/dev/sda1
+efi="/dev/sda1"
 os=("/dev/sda4")
 
 # locales
@@ -71,7 +71,7 @@ done
 
 # Network Configuration
 
-if [ $hostname -z ]; then
+if [ -z $hostname ]; then
 	echo "Enter the hostname"
 	read hostname
 fi
@@ -84,8 +84,8 @@ echo "127.0.0.1	localhost
 
 # Users configuration
 
-"Seeting Root password"
-if [ $rootpass -z ]; then
+echo "Seeting Root password"
+if [ -z $rootpass  ]; then
 	while : ; do
 		passwd
 		[ $? -eq 0 ] && break
@@ -98,7 +98,7 @@ fi
 
 echo "Creating new user"
 
-if [ $user -z ]; then
+if [ -z $user ]; then
 	while : ; do
 	echo "Enter name for new user"
 		read user
@@ -112,7 +112,7 @@ fi
 
 
 "Seeting password for $user user"
-if [ $userpass -z ]; then
+if [ -z $userpass ]; then
 	while : ; do
 		passwd "$user"
 		[ $? -eq 0 ] && break
@@ -146,9 +146,9 @@ while : ; do
 	lsblk -o name,fstype,size,label,partlabel,mountpoint
 	read efi
 done
-echo "$efi was mounted as root"
+echo "$efi was mounted as boot partition"
 
-if [ ${#os[*]} -ne 0 ]; then
+if [ ${#os[@]} -ne 0 ]; then
 	echo "Mount another OS? (y/n)"
 	read answer
 	while [[ "$answer" == "y" || "$answer" == "Y" ]]; do
