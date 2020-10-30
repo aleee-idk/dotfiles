@@ -174,9 +174,10 @@ else
 			mkdir -p "/mnt$os"
 			mount $os "/mnt$os"
 			if [ $? -eq 0 ]; then
+				echo "$os was mounted"
 				break
 			fi
-			echo "wrong file system, please use an EFI partition"
+			echo "something goes wrong"
 			lsblk -o name,fstype,size,label,partlabel,mountpoint
 			read os
 		done
@@ -230,10 +231,10 @@ sed -i -e "s/SystemGroup sys root wheel/SystemGroup sys root wheel lpadmin/g" /e
 systemctl enable org.cups.cupsd.service
 
 
-# for i in "${x11latout[@]}"; do
-#     localectl set-x11-keymap $i
-# done
+for i in "${x11latout[@]}"; do
+	echo "setting X11 layout to: $i"
+    localectl set-x11-keymap $i
+done
 
-setxkbmap -model pc105 -layout latam
 
 sed -i -e 's|#include "/home/.*|#include "/home/'"$user"'/.config/colors/colors"|g' /home/"$user"/.Xresources
