@@ -111,7 +111,7 @@ else
 fi
 
 
-"Seeting password for $user user"
+echo "Seeting password for $user user"
 if [ -z $userpass ]; then
 	while : ; do
 		passwd "$user"
@@ -148,7 +148,7 @@ while : ; do
 done
 echo "$efi was mounted as boot partition"
 
-if [ ${#os[@]} -ne 0 ]; then
+if [ ${#os[@]} -eq 0 ]; then
 	echo "Mount another OS? (y/n)"
 	read answer
 	while [[ "$answer" == "y" || "$answer" == "Y" ]]; do
