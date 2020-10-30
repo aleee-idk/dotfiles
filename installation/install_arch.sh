@@ -17,6 +17,7 @@ while : ; do
 	       break
 	fi
 	echo "The swap partition is incorrect, please enter again:"
+	lsblk -o name,fstype,size,label,partlabel
 	read swap
 done
 echo "$swap was mounted as swap"
@@ -33,6 +34,7 @@ while : ; do
         fi
 	fi
     echo "wrong file system, please use an ext4 partition"
+	lsblk -o name,fstype,size,label,partlabel
 	read root
 done
 echo "$root was mounted as root"

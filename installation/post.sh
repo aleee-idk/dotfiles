@@ -142,12 +142,37 @@ while : ; do
         fi
 	fi
     echo "wrong file system, please use an EFI partition"
+	lsblk -o name,fstype,size,label,partlabel,mountpoint
 	read efi
 done
 echo "$efi was mounted as root"
 
+echo "Mount another OS? (y/n)"
+read answer
+while [[ "$answer" == "y" || "$answer" == "Y" ]]; do
+	lsblk -o name,fstype,size,label,partlabel,mountpoint
+	read os
+	while : ; do
+		mkdir "/mnt/$os"
+		mount $os "/mnt/$os"
+		if [ $? -eq 0 ]; then
+			break
+		fi
+		echo "wrong file system, please use an EFI partition"
+		lsblk -o name,fstype,size,label,partlabel,mountpoint
+		read os
+	done
+	echo "Mount another OS? (y/n)"
+	read answer
+	[[ "$answer" == "y" || "$answer" == "Y" ]] && continue
+done
+
 grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
+
+for dir in /mnt/*; do
+	umount $dir
+done
 
 # Enable Network Manager
 
