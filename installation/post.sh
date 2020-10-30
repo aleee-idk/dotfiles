@@ -148,14 +148,14 @@ while : ; do
 done
 echo "$efi was mounted as root"
 
-if [ ${#os[*]} -ne 0]; then
+if [ ${#os[*]} -ne 0 ]; then
 	echo "Mount another OS? (y/n)"
 	read answer
 	while [[ "$answer" == "y" || "$answer" == "Y" ]]; do
 		lsblk -o name,fstype,size,label,partlabel,mountpoint
 		read os
 		while : ; do
-			mkdir "/mnt$os"
+			mkdir -p "/mnt$os"
 			mount $os "/mnt$os"
 			if [ $? -eq 0 ]; then
 				break
@@ -171,7 +171,7 @@ if [ ${#os[*]} -ne 0]; then
 else
 	for i in "${os[@]}"; do
 		while : ; do
-			mkdir "/mnt$os"
+			mkdir -p "/mnt$os"
 			mount $os "/mnt$os"
 			if [ $? -eq 0 ]; then
 				break
