@@ -133,7 +133,7 @@ modules-left = bspwm i3 xwindow
 modules-center = mpd
 modules-right = wlan cpu temperature memory 99xkeyboard pulseaudio battery date powermenu
 
-tray-position = none
+tray-position = right
 tray-padding = 2
 ;tray-background = #0063ff
 

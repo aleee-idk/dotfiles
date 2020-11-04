@@ -1,4 +1,9 @@
+arc-gtk-theme
+arc-icon-theme
 base-devel
+blueberry
+bluez
+bluez-utils
 cups
 cups-pdf
 discord
@@ -11,6 +16,8 @@ git
 gnome-terminal
 grep
 gutenprint
+gvfs
+gvfs-smb
 hplip
 htop
 i3-battery-popup-git
@@ -20,10 +27,12 @@ i3lock
 i3status
 lightdm
 lightdm-gtk-greeter
+lxappearance
 mpc
 ncmpcpp
 networkmanager
 os-prober
+picom-tryone-git
 polybar
 pulseaudio
 pulseaudio-bluetooth
@@ -32,6 +41,11 @@ rxvt-unicode
 rxvt-unicode
 scrot
 splix
+sshfs
+thunar
+transmission-gtk
+transmission-remote-gtk
 vim
+xclip
 xf86-video-intel
 xorg

@@ -16,8 +16,8 @@ os=("/dev/sda4")
 # locales
 zone="Chile"
 city="Continental"
-locales=("#es_CL.UTF-8 UTF-8/es_CL.UTF-8 UTF-8")
-langs=("es_CL.UTF-8")
+locales=("#es_CL.UTF-8 UTF-8/es_CL.UTF-8 UTF-8" "#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8")
+langs=("en_US.UTF-8")
 layout=("la-latin1")
 x11layout=("latin")
 
@@ -230,12 +230,13 @@ systemctl enable lightdm
 sed -i -e "s/SystemGroup sys root wheel/SystemGroup sys root wheel lpadmin/g" /etc/cups/cups-files.conf
 systemctl enable org.cups.cupsd.service
 
+systemctl enable bluetooth
 
 # for i in "${x11latout[@]}"; do
 # 	echo "setting X11 layout to: $i"
 #     localectl set-x11-keymap $i
 # done
 
-cp "/home/$user/installation/00-keyboard.conf" /etc/X11/xorg.conf/00-keyboard.conf
+cp -v "/home/$user/installation/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
 
 sed -i -e 's|#include "/home/.*|#include "/home/'"$user"'/.config/colors/colors"|g' /home/"$user"/.Xresources
