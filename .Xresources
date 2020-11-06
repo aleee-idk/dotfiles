@@ -1,4 +1,4 @@
-#include "/home/agente_a/.config/colors/colors"
+#include "/home/aleidk/.config/colors/colors"
 
 *.foreground:  FOREGROUND
 *.background:  BACKGROUND

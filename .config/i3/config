@@ -10,10 +10,11 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 # Screen Configuration
-exec_always --no-startup-id ~/.config/screen_config.sh
+#exec_always --no-startup-id ~/.config/screen_config.sh
+exec syndaemon -K -R
 
 ## Variables
-set $wallpaper /home/agente_a/Seguro/Wallpapers/*
+set $wallpaper ~/Seguro/Wallpapers/*
 set $mpdHost 192.168.1.10
 
 set $mod Mod4
@@ -173,7 +174,7 @@ assign [class="Godot"] $ws5
 assign [class="Microsoft Teams"] $ws8
 
 # Chats
-assign [class="whatsapp-desktop"] $ws9
+assign [class="whatsapp-nativefier-d40211"] $ws9
 assign [class="discord"] $ws9
 
 
@@ -238,15 +239,7 @@ default_border pixel 2
 #hide_edge_borders smart_no_gaps
 
 ##	Start Programs
-
-# Launch polybar at start
-exec_always --no-startup-id orientation='normal' ~/.config/polybar/launch.sh
-
-# Backgrounds
-exec_always --no-startup-id feh --randomize --bg-fill $wallpaper
-
-# Picom (blur)
-exec_always --no-startup-id picom -b --experimental-backends
+exec_always --no-startup-id ~/.config/master.sh
 
 # Notifications
 exec_always --no-startup-id dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -cf "$fg" -nf "$fg -font $font" 
@@ -255,7 +248,7 @@ exec_always --no-startup-id dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -cf "$
 exec --no-startup-id i3-msg 'workspace $ws10; exec $terminal -e ncmpcpp'
 
 # Personal
-exec WhatsApp
+exec whatsapp-nativefier
 exec_always discord
 
 ## key binding
@@ -272,7 +265,7 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+x floating disable; floating enable
 
 # Open some programs in scratchpad
-for_window [class="Nemo"] floating enabled
+for_window [class="Thunar"] floating enabled
 
 # Notification controls
 bindsym $mod+BackSpace exec dunstctl close

@@ -1,6 +1,8 @@
 arc-gtk-theme
 arc-icon-theme
+autorandr
 base-devel
+bash-completion
 blueberry
 bluez
 bluez-utils
@@ -31,6 +33,7 @@ lxappearance
 mpc
 ncmpcpp
 networkmanager
+ntfs-3g
 os-prober
 picom-tryone-git
 polybar
@@ -45,7 +48,9 @@ sshfs
 thunar
 transmission-gtk
 transmission-remote-gtk
+tumbler
 vim
+whatsapp-nativefier
 xclip
 xf86-video-intel
 xorg
