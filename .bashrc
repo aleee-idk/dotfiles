@@ -1,7 +1,7 @@
 #Custom Configuration
 
 #  PATH Exports
-export PATH=$HOME/.emacs.d/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
@@ -186,3 +186,10 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
+
+# Start Fish
+if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
+then
+	exec fish
+fi
+eval "$(starship init bash)"

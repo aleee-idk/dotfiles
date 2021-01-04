@@ -1,38 +1,25 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
+## Add this to your wm startup file.
 
-# env variable Orientation
-# recive 'normal' or 'rotated'
-
-readarray -d : -t screens <<< $1
-
+readarray -t screens <<< $(xrandr --query | grep " connected" | cut -d" " -f1)
 # Bars:
-bars=("main-normal" "secondary")
+bars=("secondary" "main-normal")
 
-
-#kill already running instances
+# Terminate already running bar instances
 killall -q polybar
 
 # Wait until the processes have been shut down
-while pgrep -u $UID -x polybar > /dev/null; do sleep 1; done
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-#launch bar1
+# Launch bars
 if type "xrandr"; then
-    # for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-
-    #     case $m in
-    #         $mon1 )
-    #         MONITOR=$m polybar -q --reload $bar1 &;;
-    #         $mon2 )
-    #         MONITOR=$m polybar -q --reload $bar2 &;;
-    #     esac
-
-    # done
     for (( i=0; i < ${#screens[@]}; i++ )); do
         s=$(echo ${screens[$i]}| awk '/[a-zA-Z]+/ { print }')
-        MONITOR="$s" polybar -q --reload ${bars[i]} &
+        MONITOR="$s" polybar -c ~/.config/polybar/config.ini -q --reload ${bars[i]} &
     done
 
 else
-    polybar --reload example &
+    # Default bar
+    polybar -c ~/.config/polybar/config.ini main &
 fi

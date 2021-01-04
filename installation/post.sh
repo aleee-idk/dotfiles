@@ -224,6 +224,7 @@ echo "Insalled packages"
 
 # Install lightdm
 sed -i -e "s/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/g" /etc/lightdm/lightdm.conf
+sed -i -e "s/#display-setup-script=/display-setup-script=xrandr --output HDMI1 --primary/g" /etc/lightdm/lightdm.conf
 systemctl enable lightdm
 
 # printer settup
@@ -238,5 +239,6 @@ systemctl enable bluetooth
 # done
 
 cp -v "/home/$user/installation/00-keyboard.conf" /etc/X11/xorg.conf.d/00-keyboard.conf
+cp -v "/home/$user/installation/10-monitor.conf" /etc/X11/xorg.conf.d/10-monitor.conf
 
 sed -i -e 's|#include "/home/.*|#include "/home/'"$user"'/.config/colors/colors"|g' /home/"$user"/.Xresources
