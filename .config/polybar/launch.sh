@@ -5,6 +5,7 @@
 readarray -t screens <<< $(xrandr --query | grep " connected" | cut -d" " -f1)
 # Bars:
 bars=("secondary" "main-normal")
+# bars=("main-normal")
 
 # Terminate already running bar instances
 killall -q polybar

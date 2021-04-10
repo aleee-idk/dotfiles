@@ -1,6 +1,0 @@
-[submodule ".bash_it"]
-	path = .bash_it
-	url = https://github.com/Bash-it/bash-it.git
-[submodule ".emacs.d"]
-	path = .emacs.d
-	url = https://github.com/hlissner/doom-emacs

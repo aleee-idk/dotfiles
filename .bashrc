@@ -188,8 +188,8 @@ export SCM_CHECK=true
 source "$BASH_IT"/bash_it.sh
 
 # Start Fish
-if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
-then
-	exec fish
-fi
+# if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]
+# then
+# 	exec fish
+# fi
 eval "$(starship init bash)"

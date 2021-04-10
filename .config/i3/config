@@ -182,6 +182,7 @@ assign [class="Microsoft Teams"] $ws8
 
 # Chats
 assign [class="whatsapp-nativefier-d40211"] $ws9
+assign [class="TelegramDesktop"] $ws9
 assign [class="discord"] $ws9
 
 
@@ -247,6 +248,8 @@ default_border pixel 2
 
 ##	Start Programs
 exec_always --no-startup-id ~/.config/master.sh
+exec --no-startup-id udiskie
+exec --no-startup-id kdeconnect-indicator
 
 # Notifications
 exec_always --no-startup-id dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -cf "$fg" -nf "$fg -font $font" 
@@ -256,9 +259,12 @@ exec --no-startup-id i3-msg 'workspace $ws10; exec $terminal -e ncmpcpp'
 
 # Personal
 exec whatsapp-nativefier
-exec_always discord
+exec telegram-desktop
+exec discord
 
 ## key binding
+#
+# media keys are defined in: /usr/include/X11/XF86keysym.h
 
 # Scratchpad
 
@@ -295,10 +301,9 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
 
 # Media player controls
-#bindsym XF86AudioPlay exec playerctl play
-#bindsym XF86AudioPause exec playerctl pause
-#bindsym XF86AudioNext exec playerctl next
-#bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl position 10+
+bindsym XF86AudioPrev exec playerctl position 10-
 
 # MPC media player controls variant
 bindsym Shift+XF86AudioPlay exec "mpc --host=$mpdHost -q toggle"

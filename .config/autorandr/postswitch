@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-~/.config/master.sh "$AUTORANDR_MONITORS" "$AUTORANDR_CURRENT_PROFILE"
+# ~/.config/master.sh "$AUTORANDR_MONITORS" "$AUTORANDR_CURRENT_PROFILE"
