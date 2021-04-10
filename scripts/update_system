@@ -1,0 +1,113 @@
+#!/bin/bash
+# vim:foldmethod=marker
+
+## Variables {{{
+
+dependencies=(ranger timeshift gio) 
+
+max_backups=5
+backup_message="After Update Backup"
+
+# Colors
+red="\e[0;91m"
+blue="\e[0;94m"
+expand_bg="\e[K"
+blue_bg="\e[0;104m${expand_bg}"
+red_bg="\e[0;101m${expand_bg}"
+green_bg="\e[0;102m${expand_bg}"
+green="\e[0;92m"
+white="\e[0;97m"
+bold="\e[1m"
+uline="\e[4m"
+reset="\e[0m"
+
+## Variables }}}
+
+## 0.- Initialization {{{
+
+for dep in "${dependencies[@]}"; do
+	if ! command -v "$dep" &> /dev/null; then
+		echo -e "$red${dep}$reset not fount!"
+		exit 1
+	fi
+done
+
+## 0.- Initialization }}}
+
+## 1.- Delete Unused Packages {{{
+
+# Unused packages
+# TODO
+
+# Delete orphans packages
+echo -e "checking orphan packages"
+# pacman -Qtdq | pacman -Rns -
+paru -cc
+
+## 1.- Delete Unused Packages }}}
+
+## 2.- Update System {{{
+
+# Update system packages
+echo -e "Updating System"
+paru
+
+# Update nvim packages
+echo -e "Updating vim plugins"
+nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugUpdate"
+
+# update vim-plug
+echo -e "Updating vim-plug"
+nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugUpgrade"
+
+## 2.- Update System  }}}
+
+## 3.- Clean system {{{
+
+# Clean pacman and paru cache
+paru -Sc --noconfirm && paccache -rk2
+
+## 3.- Clean system }}}
+
+## 4.- Clean Custom Folders {{{
+
+# ~/Downloads
+
+# (xdg-user-dir DOWNLOAD)
+# (
+# 	"Music"
+# 	"Video"
+# 	"Pasar al Server"
+# 	"U"
+# )
+
+# ~/.config
+# lista=$(git ls-tree --full-tree --name-only --full-name HEAD | tr "\n" ",")
+
+## 4.- Clean Custom Folders }}}
+
+## 5.- Clean Trash {{{
+
+## 5.- Clean Trash }}}
+
+## 6.- Create Restore Point {{{
+
+sudo timeshift --create --comment "$backup_message"
+
+## 6.- Create Restore Point }}}
+
+## 7.- Delete Olds Restore Points {{{
+
+# Get Snapshots
+snapshots_lines=$(sudo timeshift --list | sed -n '/^-.*-$/, $ p' | sed -n '2,$ p')
+snapshots=()
+
+for line in "$snapshots_lines"; do
+	snapshots+=($(echo "$line" | awk '{print $3}'))
+done
+
+(( ${#snapshots[@]} > $max_backups )) && sudo timeshift --delete --snapshot "${snapshots[0]}"
+
+
+## 7.- Delete Olds Restore Points }}}
+
