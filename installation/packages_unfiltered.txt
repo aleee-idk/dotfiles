@@ -18,6 +18,8 @@ blueberry
 bluez-utils
 bmon
 bpython
+ccls
+cmake
 cmatrix
 cowsay
 cups-pdf
@@ -29,12 +31,13 @@ drawio-desktop
 droidcam
 dunst
 evtest
+exa
 firefox
 fish
 flameshot
 flex
 fortune-mod
-gdb
+gn
 go
 godot
 gparted
@@ -60,9 +63,10 @@ mpd
 ncdu
 ncmpcpp
 neofetch
-neovim
+neovide
 net-tools
 networkmanager-dmenu-git
+ninja
 nm-connection-editor
 obs-studio
 ookla-speedtest-bin
@@ -77,8 +81,10 @@ polybar
 python-iwlib
 python-pywal
 qt5ct
+qutebrowser
 ranger
 raw-thumbnailer
+rust
 sane-airscan
 scrot
 skanlite

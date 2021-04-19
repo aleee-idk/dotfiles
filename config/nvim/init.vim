@@ -9,16 +9,22 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-sensible'
 
 "" Core: {{{
+Plug 'antoinemadec/FixCursorHold.nvim' " Fix some performance bugs
 "Plug 'valloric/youcompleteme'      " Code completion
 Plug 'bkad/camelcasemotion'         " Move with camel case or snake case instead of words
 Plug 'tpope/vim-surround'           " Change or add text surrounding an element
 Plug 'simeji/winresizer'            " Resize and Rearrange windows more easily
-Plug 'simnalamburt/vim-mundo' 	    " Undo tree viewer	
+Plug 'simnalamburt/vim-mundo' 	    " Undo tree viewer
+Plug 'liuchengxu/vim-which-key'     " Keybindings popup
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim' 	    " General-purpose command-line fuzzy finder.
+Plug 'voldikss/vim-floaterm'        " Neovim floating terminalPlug 'antoinemadec/FixCursorHold.nvim'
 "" }}}
 
 "" Code Utilities: {{{
-Plug 'neoclide/coc.nvim', 
+Plug 'neoclide/coc.nvim',
             \ {'branch': 'release'} " Code completion and stuff
+Plug 'cdelledonne/vim-cmake'        " Cmake generation and build
 Plug 'vim-test/vim-test'            " Run test inside Vim
 Plug 'tpope/vim-commentary'         " Add commentary support to Vim
 Plug 'iamcco/markdown-preview.nvim', " Markdown live preview in web browser
@@ -26,13 +32,20 @@ Plug 'iamcco/markdown-preview.nvim', " Markdown live preview in web browser
 Plug 'mzlogin/vim-markdown-toc'     " Markdown table of contents
 Plug 'mattn/webapi-vim'             " An Interface to WEB APIs.
 Plug 'habamax/vim-godot' 	    " Godot support for Vim
+Plug 'SirVer/ultisnips'         " Snippets
+Plug 'honza/vim-snippets'
 
 "" }}}
 
 "" File Management: {{{
 " Plug 'vifm/vifm.vim'                " File Explorer
-Plug 'francoiscabrol/ranger.vim'    " Ranger file explorer in Vim
-Plug 'scrooloose/nerdtree'          " File tree explorer
+" Plug 'francoiscabrol/ranger.vim'    " Ranger file explorer in Vim
+" Plug 'scrooloose/nerdtree'          " File tree explorer
+Plug 'lambdalisue/fern.vim' 	    " File tree explorer
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'lambdalisue/fern-hijack.vim'    " Fern as default file explorer
+Plug 'lambdalisue/fern-git-status.vim'
+
 ""}}}
 
 "" Git: {{{
@@ -44,27 +57,177 @@ Plug 'Xuyuanp/nerdtree-git-plugin'  " Git status for NERDTree
 "" Better Looking: {{{
 Plug 'chiel92/vim-autoformat'       " Format with one button press (or automatically on save)
 Plug 'itchyny/lightline.vim'        " Status Line
-Plug 'arcticicestudio/nord-vim'     " Nord color scheme
+" Plug 'arcticicestudio/nord-vim'     " Nord color scheme
+Plug 'dylanaraps/wal.vim'           " Current wallpaper colorscheme
 Plug 'ap/vim-css-color'             " Display Hex colors
 Plug 'luochen1990/rainbow'          " Parentheses (and other surrounding elements) colors
 Plug 'ryanoasis/vim-devicons'       " Icons for some other plugins
+Plug 'lambdalisue/nerdfont.vim'     " Nerdfonts in vim
 "" }}}
 
 "" Misc: {{{
 Plug 'vimwiki/vimwiki'              " Personal Wiki for Vim
 Plug 'mattn/calendar-vim'           " Calendar utilities
-Plug 'glacambre/firenvim', 	    " Use NVim in web browsers 
-	\ { 'do': { _ -> firenvim#install(0) } }
 "" }}}
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 """}}}
 
+" General customization: {{{
+
+"" Basic Settings
+
+" Use system clipboard
+set clipboard+=unnamedplus
+
+" enable mouse
+set mouse=a
+
+" Number settings
+set number relativenumber
+
+" True colors support
+" set termguicolors
+
+" Color Scheme
+colorscheme wal
+
+" Line highlight (color theme have preference over this)
+set cursorline
+highlight CursorLine cterm=bold "" ctermbg=Cyan  guibg=#2b2b2b
+
+" Column highlight (color theme have preference over this)
+" set cursorcolumn
+" highlight CursorColumn ctermbg=Cyan cterm=bold guibg=#2b2b2b
+
+" Syntax highlight
+syntax on
+
+" Tabs and identation
+set tabstop=4 shiftwidth=4 expandtab
+
+" Autocompletion
+set wildmode=longest,list,full
+
+" disable Case sensitive
+set ignorecase
+
+set smartcase
+
+" Fix splitting
+set splitbelow splitright
+
+"" Custom Maping
+
+" Custom leader key
+let mapleader = "\<Space>"
+
+" Toggle auto comment
+map <Leader>c :setlocal formatoptions-=cro<CR>
+map <Leader>C :setlocal formatoptions=cro<CR>
+
+" Toggle auto indent
+map <Leader>i :setlocal autoindent<CR>
+map <Leader>I :setlocal noautoindent<CR>
+
+" Enable spell checking
+map <Leader>s :setlocal spell! spelllang=en:us<CR>
+
+" Split navigation
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+
+" Insert Current date
+nnoremap <F5> "=strftime("%B %d of %Y, %A")<CR>P
+inoremap <F5> <C-R>=strftime("%B %d of %Y, %A")<CR>
+
+"" Files Handling
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+au BufNewFile,BufFilePre,BufRead *vimwiki* set filetype=markdown
+
+"" AutoComands
+
+" Auto vertically center line on enter insert mode
+autocmd InsertEnter * norm zz
+
+" Remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+
+" Persistent undo
+" save undo trees in files
+
+set undofile
+set undodir=~/.vim/undo
+
+" number of undo saved
+set undolevels=10000
+
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+source ~/.vimrc
+
+
+" This enable folding for markdown
+let g:markdown_folding = 2
+
+"" GUI Config {{{
+
+set guifont=CaskaydiaCove\ Nerd\ Font:15
+
+""" neovide {{{
+
+" let g:neovide_transparency=0.8
+
+let g:neovide_cursor_vfx_mode = "pixiedust"
+
+"
+""" neovide }}}
+
+"" GUI Config }}}
+
+" }}}
+
 " Plugin Configuration: {{{
+
+"" Floaterm {{{
+
+let g:floaterm_keymap_new    = '<C-t><C-n>'
+let g:floaterm_keymap_prev   = '<C-t><C-p>'
+let g:floaterm_keymap_next   = '<C-t><C-n>'
+let g:floaterm_keymap_toggle = '<C-t><C-t>'
+
+"" }}}
 
 "" Winresizer {{{
 let g:winresizer_start_key = "<Leader>r"
+
+let g:winresizer_gui_enable = 1
+
+let g:winresizer_finish_with_escape = 1
+
+"" }}}
+
+"" Which-Key {{{
+
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+
+" set timeoutlen=100
+
+"" }}}
+
+"" FZF {{{
+
+nnoremap <Leader>g :GFiles<CR>
+nnoremap <Leader>f :Files<CR>
+
+" command! -bang -nargs=? -complete=dir Files
+" 	\ call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
+" command! -bang -nargs=? -complete=dir GFiles
+" 	\ call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
 
 "" }}}
 
@@ -81,7 +244,7 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileformat': 'MyFileformat',
       \ },
-      \ } 
+      \ }
 
 function! Branch()
     return ' ' . FugitiveHead()
@@ -199,8 +362,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>cf  <Plug>(coc-format-selected)
+nmap <leader>cf  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -212,13 +375,13 @@ augroup end
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>ca  <Plug>(coc-codeaction-selected)
+nmap <leader>ca  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>cac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>cqf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -279,6 +442,28 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 "" }}}
 
+"" Ultisnips {{{
+
+
+" This collaps with completion plugins like COC
+let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+"" }}}
+
+"" CMake {{{
+
+let g:cmake_link_compile_commands = 1
+
+nmap <Leader>cg :CMakeGenerate<cr>
+nmap <Leader>cb :CMakeBuild<cr>
+
+"" }}}
+
 "" VimWiki: {{{
 set nocompatible
 filetype plugin on
@@ -292,7 +477,7 @@ let g:vimwiki_list = [{'path': '~/Documents/Notes',
 
 " set to 1, nvim will open the preview window after entering the markdown buffer
 " default: 0
-let g:mkdp_auto_start = 0
+" let g:mkdp_auto_start = 1
 
 " set to 1, the nvim will auto close current preview window when change
 " from markdown buffer to another buffer
@@ -323,7 +508,7 @@ let g:mkdp_open_ip = ''
 
 " specify browser to open preview page
 " default: ''
-let g:mkdp_browser = ''
+let g:mkdp_browser = 'qutebrowser'
 
 " set to 1, echo preview page url in command line when open preview page
 " default is 0
@@ -354,7 +539,7 @@ let g:mkdp_preview_options = {
     \ 'uml': {},
     \ 'maid': {},
     \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
+    \ 'sync_scroll_type': 'relative',
     \ 'hide_yaml_meta': 1,
     \ 'sequence_diagrams': {},
     \ 'flowchart_diagrams': {},
@@ -379,119 +564,71 @@ let g:mkdp_page_title = '「${name}」'
 
 " recognized filetypes
 " these filetypes will have MarkdownPreview... commands
-let g:mkdp_filetypes = ['markdown', 'md']
+let g:mkdp_filetypes = ['markdown', 'md', 'vimwiki']
 
 "" }}}
 
 "" NERDTree: {{{
 
-" Open NERDTree
-nmap <C-f> :NERDTreeToggle<CR>
-
-" Auto open NERDTree
-if !exists('g:started_by_firenvim')
-	autocmd VimEnter * NERDTree | wincmd p
-endif
-
-" Auto leave if NERDTree is the only buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" " Open NERDTree
+" nmap <C-f> :NERDTreeToggle<CR>
+"
+" " Auto open NERDTree
+" " if !exists('g:started_by_firenvim')
+" " 	autocmd VimEnter * NERDTree | wincmd p
+" " endif
+"
+" " Start NERDTree when Vim is started without file arguments.
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+"
+" " Auto leave if NERDTree is the only buffer
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"
+" " Mirror the NERDTree before showing it. This makes it the same on all tabs.
+" nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 
 ""}}}
 
-" }}}
+"" Fern {{{
 
-" General customization: {{{
+let g:fern#drawer_width = 30
+" Show hidden files by default
+" let g:fern#default_hidden = 1
+" Don't close vim if fern is open
+" let g:fern#disable_drawer_smart_quit = 1
 
-"" Basic Settings
+noremap <silent><C-f> :Fern . -drawer <CR>
+noremap <silent><M-f> :FernDo close -drawer <CR>
 
-" Use system clipboard
-set clipboard+=unnamedplus
+function! s:init_fern() abort
 
-" enable mouse
-set mouse=a
+  nmap <buffer> v <Plug>(fern-action-open:split)
+  nmap <buffer> s <Plug>(fern-action-open:vsplit)
+  nmap <buffer> o <Plug>(fern-action-open:select)
+  nmap <buffer> R <Plug>(fern-action-rename)
+  nmap <buffer> M <Plug>(fern-action-move)
+  nmap <buffer> C <Plug>(fern-action-copy)
+  nmap <buffer> N <Plug>(fern-action-new-path)
+  nmap <buffer> H <Plug>(fern-action-hidden-toggle)
+  nmap <silent><buffer> O <Plug>(fern-action-cd)
+              \ :Fern . -drawer <CR>
+  nmap <buffer> <leader> <Plug>(fern-action-mark)
+endfunction
 
-" Number settings
-set number relativenumber
+" Custom open
+augroup fern-custom
+  autocmd! *
+  autocmd FileType fern call s:init_fern()
+augroup END
 
-" True colors support
-set termguicolors
-
-" Color Scheme
-colorscheme nord
-
-" Line highlight (color theme have preference over this)
-set cursorline
-highlight CursorLine ctermbg=Cyan cterm=bold guibg=#2b2b2b
-
-" Column highlight (color theme have preference over this)
-" set cursorcolumn
-" highlight CursorColumn ctermbg=Cyan cterm=bold guibg=#2b2b2b
-
-" Syntax highlight
-syntax on
-
-" Autocompletion
-set wildmode=longest,list,full
-
-" disable Case sensitive
-set ignorecase
-
-" Fix splitting
-set splitbelow splitright
-
-"" Custom Maping
-
-" Custom leader key
-let mapleader = "<Space>"
-
-" Toggle auto comment
-map <Leader>c :setlocal formatoptions-=cro<CR>
-map <Leader>C :setlocal formatoptions=cro<CR>
-
-" Toggle auto indent
-map <Leader>i :setlocal autoindent<CR>
-map <Leader>I :setlocal noautoindent<CR>
-
-" Enable spell checking
-map <Leader>s :setlocal spell! spelllang=en:us<CR>
-
-" Split navigation
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
-
-" Insert Current date
-nnoremap <F5> "=strftime("%B %d of %Y, %A")<CR>P
-inoremap <F5> <C-R>=strftime("%B %d of %Y, %A")<CR>
-
-"" Files Handling
-au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-au BufNewFile,BufFilePre,BufRead *vimwiki* set filetype=markdown
-
-"" AutoComands
-
-" Auto vertically center line on enter insert mode
-autocmd InsertEnter * norm zz
-
-" Remove trailing whitespace on save
-" autocmd BufWritePre * %s/\s\+$//e
-
-" Persistent undo
-" save undo trees in files
-
-set undofile
-" set undodir=~/.vim/undo
-
-" number of undo saved
-set undolevels=10000 
-
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
-source ~/.vimrc
+" You need this otherwise you cannot switch modified buffer
+set hidden
 
 
-" This enable folding for markdown
-let g:markdown_folding = 2 
+let g:fern#renderer = "nerdfont"
+
+"" }}}
 
 " }}}
+

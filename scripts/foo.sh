@@ -1,6 +1,15 @@
 #!/bin/bash
 
-cd ~/.config
-lista=$(git ls-tree --full-tree --name-only --full-name HEAD | tr "\n" ",")
+pid="$(pidof -x $(basename $0) -o $$)"
+if [[ $? -eq 0 ]]; then
+    echo "another instance running"
+    kill $pid
+else
+    echo "First run"
+fi
 
-echo "${lista[@]}"
+
+
+while true; do
+    sleep 1s
+done

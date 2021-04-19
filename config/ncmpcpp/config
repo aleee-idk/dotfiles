@@ -280,7 +280,7 @@ song_columns_list_format = (50)[cyan]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
 ## Note: Custom command that will be executed each time song changes. Useful for
 ## notifications etc.
 ##
-execute_on_song_change = "~/.ncmpcpp/art.sh"
+# execute_on_song_change = "~/.ncmpcpp/art.sh"
 #
 ##
 ## Note: Custom command that will be executed each time player state
