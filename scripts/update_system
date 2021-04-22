@@ -3,7 +3,7 @@
 
 ## Variables {{{
 
-dependencies=(ranger timeshift gio) 
+dependencies=(git ranger timeshift gio)
 
 max_backups=5
 backup_message="After Update Backup"
@@ -26,10 +26,10 @@ reset="\e[0m"
 ## 0.- Initialization {{{
 
 for dep in "${dependencies[@]}"; do
-	if ! command -v "$dep" &> /dev/null; then
-		echo -e "$red${dep}$reset not fount!"
-		exit 1
-	fi
+    if ! command -v "$dep" &> /dev/null; then
+        echo -e "$red${dep}$reset not fount!"
+        exit 1
+    fi
 done
 
 ## 0.- Initialization }}}
@@ -75,10 +75,10 @@ paru -Sc --noconfirm && paccache -rk2
 
 # (xdg-user-dir DOWNLOAD)
 # (
-# 	"Music"
-# 	"Video"
-# 	"Pasar al Server"
-# 	"U"
+#   "Music"
+#   "Video"
+#   "Pasar al Server"
+#   "U"
 # )
 
 # ~/.config
@@ -90,24 +90,47 @@ paru -Sc --noconfirm && paccache -rk2
 
 ## 5.- Clean Trash }}}
 
-## 6.- Create Restore Point {{{
+## 6.- Update Dotfiles {{{
+
+git_untracked=($(echo "$(git status --porcelain)" | awk '$1 == "??" {print $2}'))
+
+cd "$HOME/dotfiles"
+git commit -a -m "update $(date +'%m-%d-%Y')"
+git push origin master
+
+## 6.- Update Dotfiles }}}
+
+## 7.- Sort Wallpapers {{{
+
+sort_wallpapers.py
+
+
+## 7.- Sort Wallpapers }}}
+
+## 8.- Create Restore Point {{{
 
 sudo timeshift --create --comment "$backup_message"
 
-## 6.- Create Restore Point }}}
+## 8.- Create Restore Point }}}
 
-## 7.- Delete Olds Restore Points {{{
+## 9.- Delete Olds Restore Points {{{
 
 # Get Snapshots
 snapshots_lines=$(sudo timeshift --list | sed -n '/^-.*-$/, $ p' | sed -n '2,$ p')
 snapshots=()
 
 for line in "$snapshots_lines"; do
-	snapshots+=($(echo "$line" | awk '{print $3}'))
+    snapshots+=($(echo "$line" | awk '{print $3}'))
 done
 
 (( ${#snapshots[@]} > $max_backups )) && sudo timeshift --delete --snapshot "${snapshots[0]}"
 
 
-## 7.- Delete Olds Restore Points }}}
+## 9.- Delete Olds Restore Points }}}
+
+## 10.- Resume Output {{{
+
+(( "${#git_untracked[@]}" > 0 )) && echo -e "There were $red${#git_untracked[@]}$reset files, please check it out.
+
+## 10.- Resume Output }}}
 

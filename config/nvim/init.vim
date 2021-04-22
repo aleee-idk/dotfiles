@@ -14,10 +14,10 @@ Plug 'antoinemadec/FixCursorHold.nvim' " Fix some performance bugs
 Plug 'bkad/camelcasemotion'         " Move with camel case or snake case instead of words
 Plug 'tpope/vim-surround'           " Change or add text surrounding an element
 Plug 'simeji/winresizer'            " Resize and Rearrange windows more easily
-Plug 'simnalamburt/vim-mundo' 	    " Undo tree viewer
+Plug 'simnalamburt/vim-mundo'       " Undo tree viewer
 Plug 'liuchengxu/vim-which-key'     " Keybindings popup
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim' 	    " General-purpose command-line fuzzy finder.
+Plug 'junegunn/fzf.vim'         " General-purpose command-line fuzzy finder.
 Plug 'voldikss/vim-floaterm'        " Neovim floating terminalPlug 'antoinemadec/FixCursorHold.nvim'
 "" }}}
 
@@ -31,7 +31,7 @@ Plug 'iamcco/markdown-preview.nvim', " Markdown live preview in web browser
             \{ 'do': 'cd app && yarn install'  }
 Plug 'mzlogin/vim-markdown-toc'     " Markdown table of contents
 Plug 'mattn/webapi-vim'             " An Interface to WEB APIs.
-Plug 'habamax/vim-godot' 	    " Godot support for Vim
+Plug 'habamax/vim-godot'        " Godot support for Vim
 Plug 'SirVer/ultisnips'         " Snippets
 Plug 'honza/vim-snippets'
 
@@ -41,7 +41,7 @@ Plug 'honza/vim-snippets'
 " Plug 'vifm/vifm.vim'                " File Explorer
 " Plug 'francoiscabrol/ranger.vim'    " Ranger file explorer in Vim
 " Plug 'scrooloose/nerdtree'          " File tree explorer
-Plug 'lambdalisue/fern.vim' 	    " File tree explorer
+Plug 'lambdalisue/fern.vim'         " File tree explorer
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/fern-hijack.vim'    " Fern as default file explorer
 Plug 'lambdalisue/fern-git-status.vim'
@@ -107,6 +107,9 @@ syntax on
 " Tabs and identation
 set tabstop=4 shiftwidth=4 expandtab
 
+" Keep cursor centered
+set scrolloff=15
+
 " Autocompletion
 set wildmode=longest,list,full
 
@@ -139,6 +142,12 @@ nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+
+" Split move
+nmap <M-h> -1<C-w>x
+nmap <M-j> <C-w>x
+nmap <M-k> <C-w>x
+nmap <M-l> 1<C-w>x
 
 " Insert Current date
 nnoremap <F5> "=strftime("%B %d of %Y, %A")<CR>P
@@ -225,44 +234,44 @@ nnoremap <Leader>g :GFiles<CR>
 nnoremap <Leader>f :Files<CR>
 
 " command! -bang -nargs=? -complete=dir Files
-" 	\ call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
+"   \ call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
 " command! -bang -nargs=? -complete=dir GFiles
-" 	\ call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
+"   \ call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
 
 "" }}}
 
 "" Lightline: {{{
 let g:lightline = {
-      \ 'colorscheme': 'nord',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'Branch',
-      \   'filename': 'LightlineFilename',
-      \   'filetype': 'MyFiletype',
-      \   'fileformat': 'MyFileformat',
-      \ },
-      \ }
+            \ 'colorscheme': 'nord',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'Branch',
+            \   'filename': 'LightlineFilename',
+            \   'filetype': 'MyFiletype',
+            \   'fileformat': 'MyFileformat',
+            \ },
+            \ }
 
 function! Branch()
     return ' ' . FugitiveHead()
 endfunction
 
 function! LightlineFilename()
-  return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
-        \ &filetype ==# 'unite' ? unite#get_status_string() :
-        \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
-        \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+    return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
+                \ &filetype ==# 'unite' ? unite#get_status_string() :
+                \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
+                \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
 endfunction
 
 function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
 
 function! MyFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
 let g:unite_force_overwrite_statusline = 0
@@ -273,9 +282,15 @@ let g:vimshell_force_overwrite_statusline = 0
 "" Rainbow: {{{
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
-\    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-\    'ctermfgs': ['cyan', 'darkgreen', 'red', 'magenta'],
-\}
+            \    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+            \    'ctermfgs': ['cyan', 'darkgreen', 'red', 'magenta'],
+            \}
+nnoremap <f1> :echo synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
+nnoremap <f2> :echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">")<cr>
+nnoremap <f3> :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
+nnoremap <f4> :exec 'syn list '.synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
 "" }}}
 
 "" COC: {{{
@@ -299,42 +314,42 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
+    " Recently vim can merge signcolumn and number column into one
+    set signcolumn=number
 else
-  set signcolumn=yes
+    set signcolumn=yes
 endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
 if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
+    inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+    inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> g{ <Plug>(coc-diagnostic-prev)
+nmap <silent> g} <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -346,31 +361,31 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>cr <Plug>(coc-rename)
 
 " Formatting selected code.
 xmap <leader>cf  <Plug>(coc-format-selected)
 nmap <leader>cf  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
@@ -396,12 +411,12 @@ omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges.
@@ -442,13 +457,20 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 "" }}}
 
-"" Ultisnips {{{
+"" Autoformat {{{
 
+" Format on save
+au BufWrite * :Autoformat
+
+"" }}}
+
+"" Ultisnips {{{
 
 " This collaps with completion plugins like COC
 let g:UltiSnipsExpandTrigger="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -534,18 +556,18 @@ let g:mkdp_browserfunc = ''
 " content_editable: if enable content editable for preview page, default: v:false
 " disable_filename: if disable filename header for preview page, default: 0
 let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'relative',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {},
-    \ 'flowchart_diagrams': {},
-    \ 'content_editable': v:false,
-    \ 'disable_filename': 0
-    \ }
+            \ 'mkit': {},
+            \ 'katex': {},
+            \ 'uml': {},
+            \ 'maid': {},
+            \ 'disable_sync_scroll': 0,
+            \ 'sync_scroll_type': 'relative',
+            \ 'hide_yaml_meta': 1,
+            \ 'sequence_diagrams': {},
+            \ 'flowchart_diagrams': {},
+            \ 'content_editable': v:false,
+            \ 'disable_filename': 0
+            \ }
 
 " use a custom markdown style must be absolute path
 " like '/Users/username/markdown.css' or expand('~/markdown.css')
@@ -575,7 +597,7 @@ let g:mkdp_filetypes = ['markdown', 'md', 'vimwiki']
 "
 " " Auto open NERDTree
 " " if !exists('g:started_by_firenvim')
-" " 	autocmd VimEnter * NERDTree | wincmd p
+" "     autocmd VimEnter * NERDTree | wincmd p
 " " endif
 "
 " " Start NERDTree when Vim is started without file arguments.
@@ -603,23 +625,23 @@ noremap <silent><M-f> :FernDo close -drawer <CR>
 
 function! s:init_fern() abort
 
-  nmap <buffer> v <Plug>(fern-action-open:split)
-  nmap <buffer> s <Plug>(fern-action-open:vsplit)
-  nmap <buffer> o <Plug>(fern-action-open:select)
-  nmap <buffer> R <Plug>(fern-action-rename)
-  nmap <buffer> M <Plug>(fern-action-move)
-  nmap <buffer> C <Plug>(fern-action-copy)
-  nmap <buffer> N <Plug>(fern-action-new-path)
-  nmap <buffer> H <Plug>(fern-action-hidden-toggle)
-  nmap <silent><buffer> O <Plug>(fern-action-cd)
-              \ :Fern . -drawer <CR>
-  nmap <buffer> <leader> <Plug>(fern-action-mark)
+    nmap <buffer> v <Plug>(fern-action-open:split)
+    nmap <buffer> s <Plug>(fern-action-open:vsplit)
+    nmap <buffer> o <Plug>(fern-action-open:select)
+    nmap <buffer> R <Plug>(fern-action-rename)
+    nmap <buffer> M <Plug>(fern-action-move)
+    nmap <buffer> C <Plug>(fern-action-copy)
+    nmap <buffer> N <Plug>(fern-action-new-path)
+    nmap <buffer> H <Plug>(fern-action-hidden-toggle)
+    nmap <silent><buffer> O <Plug>(fern-action-cd)
+                \ :Fern . -drawer <CR>
+    nmap <buffer> <leader> <Plug>(fern-action-mark)
 endfunction
 
 " Custom open
 augroup fern-custom
-  autocmd! *
-  autocmd FileType fern call s:init_fern()
+    autocmd! *
+    autocmd FileType fern call s:init_fern()
 augroup END
 
 " You need this otherwise you cannot switch modified buffer

@@ -1,15 +1,13 @@
 #!/bin/bash
 
-pid="$(pidof -x $(basename $0) -o $$)"
-if [[ $? -eq 0 ]]; then
-    echo "another instance running"
-    kill $pid
-else
-    echo "First run"
-fi
+git_status="$(git status --porcelain)"
+modified=($(echo "$git_status" | awk '$1 == "M" {print $1}'))
+untracked=($(echo "$git_status" | awk '$1 == "??" {print $1}'))
+
+echo "${modified[@]}"
+echo "${untracked[@]}"
+
+echo "There are ${#modified[@]} modified files"
+echo "There are ${#untracked[@]} untracked files"
 
 
-
-while true; do
-    sleep 1s
-done

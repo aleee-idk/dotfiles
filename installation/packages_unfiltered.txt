@@ -5,6 +5,7 @@ arandr
 archiso
 autoconf
 automake
+autopep8
 autorandr
 awesome
 awmtt
@@ -37,6 +38,8 @@ fish
 flameshot
 flex
 fortune-mod
+gdb
+geeqie
 gn
 go
 godot
@@ -46,7 +49,6 @@ hplip
 htop
 i3-battery-popup
 i3blocks
-imv
 inotify-tools
 kdeconnect
 kitty
@@ -60,6 +62,7 @@ lxappearance
 mcomix
 mpc
 mpd
+multilockscreen
 ncdu
 ncmpcpp
 neofetch
@@ -75,7 +78,6 @@ pamac-aur
 paru
 pavucontrol
 picom-git
-pkgconf
 playerctl
 polybar
 python-iwlib
@@ -84,7 +86,6 @@ qt5ct
 qutebrowser
 ranger
 raw-thumbnailer
-rust
 sane-airscan
 scrot
 skanlite
@@ -146,3 +147,4 @@ xorg-xwayland
 xorg-xwd
 xorg-xwud
 xournalpp
+xss-lock

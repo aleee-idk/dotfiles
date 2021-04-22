@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-wallpapers="$HOME/Nextcloud/principal/Imagenes/Waifus"
+source "$HOME/dotfiles/scripts/env_variables.sh"
+
 change_time="20m"
 
 # Single instance running
@@ -21,12 +22,14 @@ else
     killall -q picom
     while pgrep -u $UID -x picom  > /dev/null; do sleep 1; done
     picom -b --experimental-backends &
+
+    xss-lock -l -- multilockscreen --lock blur &
 fi
 
 # Wallpapers
 while true; do
     finded_wallpapers=($(find "$wallpapers" -path "*Fondos_PC*" | shuf -n 5))
     $HOME/dotfiles/scripts/set_wallpapers.sh "${finded_wallpapers[@]}"
-	sleep "$change_time"
+    sleep "$change_time"
 done
 
