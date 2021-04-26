@@ -4,4 +4,4 @@
 feh --bg-fill "$@"
 
 # Change colorscheme
-custom_pywal.py "$1"
+# custom_pywal.py "$1"

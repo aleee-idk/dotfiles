@@ -1,7 +1,6 @@
 " vim:fileencoding=utf-8:foldmethod=marker
 
 " Plugins:{{{
-
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 
@@ -58,7 +57,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'  " Git status for NERDTree
 Plug 'chiel92/vim-autoformat'       " Format with one button press (or automatically on save)
 Plug 'itchyny/lightline.vim'        " Status Line
 " Plug 'arcticicestudio/nord-vim'     " Nord color scheme
-Plug 'dylanaraps/wal.vim'           " Current wallpaper colorscheme
+Plug 'ghifarit53/tokyonight-vim'    " Tokyonight color scheme
+" Plug 'dylanaraps/wal.vim'           " Current wallpaper colorscheme
 Plug 'ap/vim-css-color'             " Display Hex colors
 Plug 'luochen1990/rainbow'          " Parentheses (and other surrounding elements) colors
 Plug 'ryanoasis/vim-devicons'       " Icons for some other plugins
@@ -90,12 +90,18 @@ set number relativenumber
 " True colors support
 " set termguicolors
 
-" Color Scheme
-colorscheme wal
+" Color Scheme (moved to Tokyonight plugin conf)
+" colorscheme wal
 
 " Line highlight (color theme have preference over this)
-set cursorline
-highlight CursorLine cterm=bold "" ctermbg=Cyan  guibg=#2b2b2b
+" set cursorline
+" highlight CursorLine cterm=bold ctermbg=13
+" highlight CursorLineNr ctermbg=red
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
 
 " Column highlight (color theme have preference over this)
 " set cursorcolumn
@@ -242,7 +248,7 @@ nnoremap <Leader>f :Files<CR>
 
 "" Lightline: {{{
 let g:lightline = {
-            \ 'colorscheme': 'nord',
+            \ 'colorscheme': 'tokyonight',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -277,6 +283,17 @@ endfunction
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
+"" }}}
+
+"" Tokyonight {{{
+
+let g:tokyonight_style = 'storm'
+let g:tokyonight_transparent_background = 1
+let g:tokyonight_menu_selection_background = 'blue'
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight
+
 "" }}}
 
 "" Rainbow: {{{
@@ -632,7 +649,7 @@ function! s:init_fern() abort
     nmap <buffer> M <Plug>(fern-action-move)
     nmap <buffer> C <Plug>(fern-action-copy)
     nmap <buffer> N <Plug>(fern-action-new-path)
-    nmap <buffer> H <Plug>(fern-action-hidden-toggle)
+    nmap <buffer> H <Plug>(fern-action-hidden:toggle)
     nmap <silent><buffer> O <Plug>(fern-action-cd)
                 \ :Fern . -drawer <CR>
     nmap <buffer> <leader> <Plug>(fern-action-mark)

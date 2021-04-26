@@ -21,6 +21,40 @@ bold="\e[1m"
 uline="\e[4m"
 reset="\e[0m"
 
+function usage ()
+{
+    echo "Usage :  $0 [options] [--]
+
+    Options:
+    -h|help       Display this message
+    -G|no-git     Don't update git repos
+    -B|no-backup  Don't create a backup"
+
+}    # ----------  end of function usage  ----------
+
+#-----------------------------------------------------------------------
+#  Handle command line arguments
+#-----------------------------------------------------------------------
+
+do_git=true
+do_backup=true
+
+while getopts ":hBG" opt
+do
+    case ${opt} in
+
+        h|help     )  usage; exit 0   ;;
+
+        G|no-git   ) do_git=false ;;
+
+        B|no-backup ) do_backup=false ;;
+
+        * )  echo -e "\n  Option does not exist : OPTARG\n"
+            usage; exit 1   ;;
+
+        esac    # --- end of case ---
+    done
+
 ## Variables }}}
 
 ## 0.- Initialization {{{
@@ -92,11 +126,13 @@ paru -Sc --noconfirm && paccache -rk2
 
 ## 6.- Update Dotfiles {{{
 
-git_untracked=($(echo "$(git status --porcelain)" | awk '$1 == "??" {print $2}'))
+if $do_git; then
+    git_untracked=($(echo "$(git status --porcelain)" | awk '$1 == "??" {print $2}'))
 
-cd "$HOME/dotfiles"
-git commit -a -m "update $(date +'%m-%d-%Y')"
-git push origin master
+    cd "$HOME/dotfiles"
+    git commit -a -m "update $(date +'%m-%d-%Y')"
+    git push origin master
+fi
 
 ## 6.- Update Dotfiles }}}
 
@@ -109,7 +145,10 @@ sort_wallpapers.py
 
 ## 8.- Create Restore Point {{{
 
-sudo timeshift --create --comment "$backup_message"
+if $do_backup; then
+
+    sudo timeshift --create --comment "$backup_message"
+fi
 
 ## 8.- Create Restore Point }}}
 
@@ -130,7 +169,7 @@ done
 
 ## 10.- Resume Output {{{
 
-(( "${#git_untracked[@]}" > 0 )) && echo -e "There were $red${#git_untracked[@]}$reset files, please check it out.
+(( "${#git_untracked[@]}" > 0 )) && echo -e "There were $red${#git_untracked[@]}$reset files, please check it out."
 
 ## 10.- Resume Output }}}
 
