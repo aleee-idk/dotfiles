@@ -16,7 +16,7 @@ else
     lxsession &
 
     # Launch Polybar:
-    ~/.config/polybar/launch.sh "$1" "$2"
+    # ~/.config/polybar/launch.sh "$1" "$2"
 
     # Compositor
     killall -q picom
@@ -28,8 +28,7 @@ fi
 
 # Wallpapers
 while true; do
-    finded_wallpapers=($(find "$wallpapers" -path "*Fondos_PC*" | shuf -n 5))
-    $HOME/dotfiles/scripts/set_wallpapers.sh "${finded_wallpapers[@]}"
+    $HOME/dotfiles/scripts/set_wallpapers.sh
     sleep "$change_time"
 done
 

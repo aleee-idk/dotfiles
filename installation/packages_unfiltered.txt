@@ -3,6 +3,7 @@ android-file-transfer
 android-udev
 arandr
 archiso
+asciidoc
 autoconf
 automake
 autopep8
@@ -33,7 +34,6 @@ droidcam
 dunst
 evtest
 exa
-ferdi-bin
 firefox
 fish
 flameshot
@@ -43,6 +43,8 @@ gdb
 geeqie
 gn
 go
+go-tools
+gobject-introspection
 godot
 gparted
 grub
@@ -51,6 +53,8 @@ htop
 i3-battery-popup
 i3blocks
 inotify-tools
+itstool
+joplin-desktop
 kdeconnect
 kitty
 krita
@@ -59,8 +63,11 @@ libreoffice-still
 libunarr-bin
 lightdm-gtk-greeter-settings
 lightdm-webkit-theme-litarvan
+lutris
 lxappearance
 mcomix
+meson
+mkinitcpio-numlock
 mpc
 mpd
 multilockscreen
@@ -70,7 +77,6 @@ neofetch
 neovide
 net-tools
 networkmanager-dmenu-git
-ninja
 nm-connection-editor
 obs-studio
 ookla-speedtest-bin
@@ -82,9 +88,9 @@ pavucontrol
 picom-git
 playerctl
 polybar
+python-docutils
 python-iwlib
 python-pywal
-python-sphinx
 qt5ct
 qutebrowser
 ranger
@@ -108,10 +114,10 @@ tree
 ttf-times-new-roman
 udiskie
 v4l2loopback-dkms
+vala
 virtualbox
 visual-studio-code-bin
 whatsapp-nativefier
-wine
 wkhtmltopdf
 xdg-user-dirs
 xf86-input-synaptics

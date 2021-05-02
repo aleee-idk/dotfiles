@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 export terminal_directory="kitty --detach -d"
-export editor="nvim"
+export editor="--class editor nvim"
 export dotfile_folder="$HOME/dotfiles/"
 export config_folder="$HOME/.config/"
 export wallpapers="$HOME/Nextcloud/principal/Imagenes/Waifus"

@@ -10,7 +10,7 @@ local keys = require("keys")
 
 
 -- ##### Widgets ##### -- {{{
-    
+
 font = beautiful.font
 
 -- ===== Colors ===== -- {{{
@@ -67,151 +67,160 @@ end
 -- ===== Bar Widgets ===== -- {{{
 
 awful.screen.connect_for_each_screen(
-    function(s)
+function(s)
 
-        -- ***** Taglist ***** -- {{{
+    -- ***** Taglist ***** -- {{{
 
-        s.mytaglist = awful.widget.taglist {
-            screen = s,
+    s.mytaglist = awful.widget.taglist {
+        screen = s,
 
-            -- wich tags to include, all, selected or noempty
-            filter = awful.widget.taglist.filter.all,
-            buttons = keys.taglist_buttons,
-            style = {
-                    bg_focus = beautiful.wibar_bg_focused ,
-                    fg_focus = beautiful.wibar_fg_focused ,
-                    bg_urgent = beautiful.wibar_bg_urgent  ,
-                    fg_urgent = beautiful.wibar_fg_urgent  ,
-                    fg_occupied = beautiful.fg_occupied,
-                    bg_occupied = beautiful.bg_occupied,
-            },
-            -- Look --
-            -- layout = {
-                -- spacing = 10,
-                -- spacing_widget = {
-                --     color  = '#00ff00',
-                --     shape  = gears.shape.circle,
-                --     widget = wibox.widget.separator,
-                -- },
-            --     layout = wibox.layout.flex.horizontal,
-            -- },
+        -- wich tags to include, all, selected or noempty
+        filter = awful.widget.taglist.filter.all,
+        buttons = keys.taglist_buttons,
+        style = {
+            bg_focus = beautiful.wibar_bg_focused ,
+            fg_focus = beautiful.wibar_fg_focused ,
+            bg_urgent = beautiful.wibar_bg_urgent  ,
+            fg_urgent = beautiful.wibar_fg_urgent  ,
+            fg_occupied = beautiful.fg_occupied,
+            bg_occupied = beautiful.bg_occupied,
+        },
+        -- Look --
+        -- layout = {
+        -- spacing = 10,
+        -- spacing_widget = {
+        --     color  = '#00ff00',
+        --     shape  = gears.shape.circle,
+        --     widget = wibox.widget.separator,
+        -- },
+        --     layout = wibox.layout.flex.horizontal,
+        -- },
 
-            -- Functionallity --
-            -- widget_template = {
-            --     widget = wibox.container.background,
-            --     create_callback = function(self, tag, index, _)
-            --         update_taglist(self, tag, index)
-            --     end,
-            --     update_callback = function(self, tag, index, _)
-            --         update_taglist(self, tag, index)
-            --     end,
-            -- }
-        }
-
-
-        -- ***** Taglist ***** -- }}}
-
-        -- ***** Tasklist ***** -- {{{    
-
-        -- s.taglist_box = awful.wibar({
-        --     screen = s,
-        --     visible = true,
-        --     ontop = false,
-        --     type = "dock",
-        --     position = "top",
-        --     height = dpi(10),
-        --     -- position = "left",
-        --     -- width = dpi(6),
-        --     bg = "#00000000",
-        -- })
-
-        -- s.taglist_box:setup {
-        --     widget = s.mytaglist,
+        -- Functionallity --
+        -- widget_template = {
+        --     widget = wibox.container.background,
+        --     create_callback = function(self, tag, index, _)
+        --         update_taglist(self, tag, index)
+        --     end,
+        --     update_callback = function(self, tag, index, _)
+        --         update_taglist(self, tag, index)
+        --     end,
         -- }
+    }
 
-        -- ***** Tasklist ***** -- }}}
 
-        -- ***** Systray ***** -- {{{
+    -- ***** Taglist ***** -- }}}
 
-        -- Create a system tray widget
-        s.systray = wibox.widget.systray()
+    -- ***** Tasklist ***** -- {{{
 
-        -- Create the tray popup
+    -- s.taglist_box = awful.wibar({
+    --     screen = s,
+    --     visible = true,
+    --     ontop = false,
+    --     type = "dock",
+    --     position = "top",
+    --     height = dpi(10),
+    --     -- position = "left",
+    --     -- width = dpi(6),
+    --     bg = "#00000000",
+    -- })
 
-        s.syspopup = awful.popup {
-            widget = {
-                {
-                    s.systray,
-                    widget = wibox.container.background
-                },
-                layout = wibox.layout.fixed.vertical
+    -- s.taglist_box:setup {
+    --     widget = s.mytaglist,
+    -- }
+
+    -- ***** Tasklist ***** -- }}}
+
+    -- ***** Clock ***** -- {{{
+
+    s.clock = awful.widget.textclock()
+
+    -- ***** Clock ***** -- }}}
+
+    -- ***** Systray ***** -- {{{
+
+    -- Create a system tray widget
+    s.systray = wibox.widget.systray()
+
+    -- Create the tray popup
+
+    s.syspopup = awful.popup {
+        widget = {
+            {
+                s.systray,
+                widget = wibox.container.background
             },
-            preferred_positions = "bottom",
-            preferred_anchors = "middle",
-            type = "popup_menu",
-            hide_on_right_click = true,
-            minimum_width = dpi(100),
-            minimum_height = dpi(100),
-            shape = gears.shape.infobubble,
-            ontop = true,
-            visible = false
-        }
+            layout = wibox.layout.fixed.vertical
+        },
+        preferred_positions = "bottom",
+        preferred_anchors = "middle",
+        type = "popup_menu",
+        hide_on_right_click = true,
+        minimum_width = dpi(100),
+        minimum_height = dpi(100),
+        shape = gears.shape.infobubble,
+        ontop = true,
+        visible = false
+    }
 
-        s.sysicon = wibox.widget {
-            text = " ",
-            font = font .. " 15",
-            widget = wibox.widget.textbox
-        }
+    s.sysicon = wibox.widget {
+        text = " ",
+        font = font .. " 15",
+        widget = wibox.widget.textbox
+    }
 
-        s.syspopup:bind_to_widget(s.sysicon)
+    s.syspopup:bind_to_widget(s.sysicon)
 
-        helpers.add_hover_cursor(s.sysicon, "hand1")
+    helpers.add_hover_cursor(s.sysicon, "hand1")
 
-        -- ***** Systray ***** -- }}}
+    -- ***** Systray ***** -- }}}
 
-        -- ***** Layouts ***** --- {{{
+    -- ***** Layouts ***** --- {{{
 
-        s.mylayoutbox = awful.widget.layoutbox(s)
-        s.mylayoutbox:buttons(gears.table.join(
-                            awful.button({ }, 1, function () awful.layout.inc( 1) end),
-                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
-                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
-                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+    s.mylayoutbox = awful.widget.layoutbox(s)
+    s.mylayoutbox:buttons(gears.table.join(
+    awful.button({ }, 1, function () awful.layout.inc( 1) end),
+    awful.button({ }, 3, function () awful.layout.inc(-1) end),
+    awful.button({ }, 4, function () awful.layout.inc( 1) end),
+    awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
-        -- ***** Layouts ***** --- }}}
+    -- ***** Layouts ***** --- }}}
 
-        -- ***** Main Bar ***** --- {{{
-        s.main_bar = awful.wibar({
-            screen = s,
-            visible = true,
-            ontop = false,
-            position = beautiful.wibar_position,
-            -- height = 20,
-            bg = beautiful.wibar_bg,
-            fg = beautiful.wibar_fg,
-        })
+    -- ***** Main Bar ***** --- {{{
+    s.main_bar = awful.wibar({
+        screen = s,
+        visible = true,
+        ontop = false,
+        position = beautiful.wibar_position,
+        -- height = 20,
+        bg = beautiful.wibar_bg,
+        fg = beautiful.wibar_fg,
+    })
 
-        s.main_bar:setup {
+    s.main_bar:setup {
+        layout = wibox.layout.align.horizontal,
+        {
             layout = wibox.layout.align.horizontal,
-            {
-                layout = wibox.layout.align.horizontal,
-                s.mytaglist,
-            },
-            {
-                layout = wibox.layout.align.horizontal,
-            },
-            {
-                s.mylayoutbox,
-                s.sysicon,
-                spacing = dpi(5),
-                layout = wibox.layout.fixed.horizontal,
-            },
-        }
+            s.mytaglist,
+        },
+        {
+            layout = wibox.layout.align.horizontal,
+        },
+        {
+            s.clock,
+            s.mylayoutbox,
+            s.sysicon,
+            spacing = dpi(5),
+            layout = wibox.layout.fixed.horizontal,
+        },
+    }
 
-        -- ***** Main Bar ***** --- }}}
-    end
+    -- ***** Main Bar ***** --- }}}
+end
 )
 
 -- ===== Bar Widgets ===== -- }}}
 
 -- ##### Widgets ##### -- }}}
+
+-- vim:foldmethod=marker

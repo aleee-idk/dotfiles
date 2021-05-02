@@ -26,11 +26,11 @@ end
 -- ***** Files ***** -- {{{
 
 apps.file_manager = function ()
-    awful.spawn(user.file_manager, { floating = true })
+    awful.spawn(user.file_manager)
 end
 
 apps.file_manager_cli = function ()
-    awful.spawn(user.file_manager_cli, { floating = true })
+    awful.spawn(user.file_manager_cli)
 end
 
 -- ***** Files ***** -- }}}
@@ -38,11 +38,15 @@ end
 -- ***** Apps for Edit and Create ***** -- {{{
 
 apps.editor = function ()
-    helper.run_or_rise({instance = 'editor'}, true, user.editor, { switchtotag = true})
+    helpers.run_or_raise({instance = 'editor'}, true, user.editor, { switchtotag = true})
+end
+
+apps.editor_selector = function ()
+    helpers.run_or_raise({instance = 'editor'}, true, user.editor_selector, { switchtotag = true})
 end
 
 apps.editor_cli = function ()
-    helper.run_or_rise({instance = 'editor_cli'}, true, user.editor_cli, { switchtotag = true})
+    helpers.run_or_raise({instance = 'editor_cli'}, true, user.editor_cli, { switchtotag = true})
 end
 
 -- ***** Apps for Edit and Create ***** -- }}}
@@ -51,6 +55,10 @@ end
 
 apps.app_launcher = function ()
     awful.spawn.with_shell(user.app_launcher)
+end
+
+apps.terminal_selector = function ()
+    awful.spawn.with_shell(user.terminal_selector)
 end
 
 -- ***** Launchers ***** -- }}}
@@ -77,4 +85,14 @@ end
 
 -- ***** Configs ***** -- }}}
 
+-- ***** System ***** {{{
+
+apps.powermenu = function ()
+    awful.spawn.with_shell(user.powermenu)
+end
+
+-- ***** System ***** }}}
+
 return apps
+
+-- vim:foldmethod=marker

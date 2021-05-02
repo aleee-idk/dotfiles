@@ -4,6 +4,9 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local naughty = require("naughty")
 
+auto_start = true
+-- local auto_start = false
+
 -- ***** Variables ***** -- {{{
 
 -- ##### User Variables ##### -- {{{
@@ -11,16 +14,28 @@ local naughty = require("naughty")
 user = {
     profile_picture = os.getenv("HOME").."/.config/awesome/themes/user.jpg",
     terminal = "kitty -1",
+
+    -- Rofi script to open terminal in custom path
+    terminal_selector = os.getenv("HOME") .. "/dotfiles/scripts/rofi/open_terminal.sh",
+
     browser = "firefox",
     file_manager = "thunar",
     file_manager_cli = "kitty -1 --class files -e ranger",
     editor = "code",
     editor_cli = "kitty -1 --class editor -e nvim",
+
+    -- Rofi script to open the editor in custom path
+    editor_selector = os.getenv("HOME") .. "/dotfiles/scripts/rofi/edit_file.sh",
+
     screenshot = "scrot -ub /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'",
     screenshot_gui = "flameshot gui",
 
     -- Launchers --
     app_launcher = "~/.config/rofi/launchers/misc/launcher.sh",
+
+    mpd = "kitty -1 --class music -e ncmpcpp",
+
+    powermenu = os.getenv("HOME") .. "/dotfiles/config/rofi/applets/menu/powermenu.sh",
 
     dirs = {
         downloads = os.getenv("XDG_DOWNLOAD_DIR") or "~/Downloads",
@@ -30,7 +45,7 @@ user = {
         videos = os.getenv("XDG_VIDEOS_DIR") or "~/Videos",
         -- Make sure the directory exists so that your screenshots
         -- are not lost
-    --     screenshots = os.getenv("XDG_SCREENSHOTS_DIR") or "~/Pictures/Screenshots",
+        --     screenshots = os.getenv("XDG_SCREENSHOTS_DIR") or "~/Pictures/Screenshots",
     },
     sidebar = {
         hide_on_mouse_leave = true,
@@ -45,7 +60,7 @@ user = {
     -- lock_screen_custom_password = "",
     lock_screen_custom_password = "awesome",
 
-        -- >> Battery <<
+    -- >> Battery <<
     -- You will receive notifications when your battery reaches these
     -- levels.
     battery_threshold_low = 20,
@@ -116,7 +131,7 @@ local notification_themes = {
 
 local notification_theme = notification_themes[1]
 
--- ================================================== -- 
+-- ================================================== --
 
 local icon_themes = {
     "default"
@@ -124,7 +139,7 @@ local icon_themes = {
 
 local icon_theme = icon_themes[1]
 
--- ================================================== -- 
+-- ================================================== --
 
 local dashboard_themes = {
     "default"
@@ -149,7 +164,7 @@ local exit_screen_theme = exit_screen_themes[1]
 -- ##### Theme handling ##### -- {{{
 
 local xrdb = beautiful.xresources.get_current_theme()
--- Make dpi function global 
+-- Make dpi function global
 dpi = beautiful.xresources.aplly_dpi
 -- Make xresources colors global
 x = {
@@ -172,7 +187,7 @@ x = {
     color13    = xrdb.color13,
     color14    = xrdb.color14,
     color15    = xrdb.color15,
-} 
+}
 
 -- Load AwesomeWM libraries
 require("awful.autofocus")
@@ -206,7 +221,7 @@ local keys = require("keys")
 local helpers = require("helpers")
 
 -- ================================================== --
--- Desktop Components -- 
+-- Desktop Components --
 
 -- Status bar(s)
 require("custom_objects.bars." .. bar_theme)
@@ -236,7 +251,7 @@ require("custom_objects.window_switcher")
 -- ================================================== --
 -- -- Daemons --
 require("daemons_utils")
- 
+
 -- ================================================== --
 -- Layouts
 awful.layout.layout = layouts
@@ -263,14 +278,16 @@ local function set_wallpaper(s)
         -- awful.spawn.with_shell(os.getenv("HOME") .. "/.fehbg")
     end
 end
--- Set wallpaper
-awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
-    set_wallpaper(s)
-end)
+-- Set wallpaper (I do it via script)
+-- awful.screen.connect_for_each_screen(function(s)
+--     -- Wallpaper
+--     set_wallpaper(s)
+-- end)
 
--- ================================================== --
--- Tags
+-- ##### Features ##### -- }}}
+
+-- ##### Tags ##### {{{
+
 awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table
     local l = awful.layout.suit
@@ -285,8 +302,8 @@ awful.screen.connect_for_each_screen(function(s)
         l.spiral.dwindle, -- 6 --
         l.spiral.dwindle, -- 7 --
         l.spiral.dwindle, -- 8 --
-        l.spiral.dwindle, -- 9 --
-        l.spiral.dwindle -- 0 --
+        l.max,            -- 9 --
+        l.spiral.dwindle  -- 0 --
     }
 
     -- Tag names
@@ -316,7 +333,10 @@ awful.screen.connect_for_each_screen(function(s)
     -- ...
 end)
 
--- ================================================== --
+-- ##### Tags ##### }}}
+
+-- ##### Rules ##### -- {{{
+
 -- Floatin windows configuration
 
 local floating_client_placement = function(c)
@@ -337,18 +357,16 @@ local centered_client_placement = function(c)
     end)
 end
 
-
--- ##### Features ##### -- }}}
-
--- ##### Rules ##### -- {{{
-
 -- Rules to apply to new clients (through the "manage" signal).
+
 awful.rules.rules = {
+
     --- Clients windows configuration {{{
+
     {
         -- All clients will match this rule.
         rule = { },
-        properties = { 
+        properties = {
             border_width = beautiful.border_width,
             border_color = beautiful.border_normal,
             focus = awful.client.focus.filter,
@@ -368,7 +386,7 @@ awful.rules.rules = {
     },
 
     -- Floating clients.
-    { 
+    {
         rule_any = {
             instance = {
                 "DTA",  -- Firefox addon DownThemAll.
@@ -377,6 +395,8 @@ awful.rules.rules = {
                 "Devtools", -- Firefox devtools
             },
             class = {
+                "Thunar",
+                "Godot",
                 "Arandr",
                 "Blueman-manager",
                 "Gpick",
@@ -386,7 +406,8 @@ awful.rules.rules = {
                 "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
                 "Wpa_gui",
                 "veromix",
-                "xtightvncviewer"
+                "xtightvncviewer",
+                "files",
             },
             -- Note that the name property shown in xprop might be set slightly after creation of the client
             -- and the name shown there might not match defined rules here.
@@ -398,16 +419,16 @@ awful.rules.rules = {
                 "ConfigManager",  -- Thunderbird's about:config.
                 "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
             },
-      }, 
-      properties = { floating = true },
+        },
+        properties = { floating = true, ontop = true },
     },
 
-      -- Fullscreen Clients
+    -- Fullscreen Clients
     {
         rule_any = {
             class = {
 
-            }, 
+            },
             instance = {
 
             },
@@ -415,7 +436,7 @@ awful.rules.rules = {
         properties = { fullscreen = true }
     },
 
-      -- Centered Clients
+    -- Centered Clients
     {
         rule_any = {
             type = {
@@ -435,7 +456,7 @@ awful.rules.rules = {
         properties = { placement = centered_client_placement },
     },
 
-        -- Tilebars OFF (explicitly)
+    -- Tilebars OFF (explicitly)
     {
         rule_any = {
             type = {
@@ -443,7 +464,7 @@ awful.rules.rules = {
             },
             class = {
 
-            }, 
+            },
             instance = {
 
             },
@@ -453,7 +474,7 @@ awful.rules.rules = {
         end
     },
 
-        -- Tilebars ON (explicitly)
+    -- Tilebars ON (explicitly)
     {
         rule_any = {
             type = {
@@ -468,14 +489,13 @@ awful.rules.rules = {
         end
     },
 
-        -- "Needy": Jump to client when they are urgents
+    -- "Needy": Jump to client when they are urgents
     {
         rule_any = {
             type = {
                 "dialog",
             },
             class = {
-                "TelegramDesktop",
                 "firefox",
             },
         },
@@ -508,7 +528,7 @@ awful.rules.rules = {
 
     --- Start Apps on Tag {{{
 
-        -- Browsers
+    -- Browsers
     {
         rule_any = {
             class = {
@@ -520,10 +540,10 @@ awful.rules.rules = {
             instance = { "Toolkit" },
             type = { "dialog" },
         },
-        properties = { screen = 1, tag = awful.screen.focused().tags[1]}, 
+        properties = { screen = 1, tag = awful.screen.focused().tags[1]},
     },
 
-        -- Games 
+    -- Games
     {
         rule_any = {
             class = {
@@ -536,26 +556,69 @@ awful.rules.rules = {
         properties = { screen = 1, tag = awful.screen.focused().tags[7]},
     },
 
-        -- Chat
+    -- Chat
     {
         rule_any = {
             class = {
                 "TelegramDesktop",
+                "whatsapp-nativefier-d40211",
+                "discord"
             },
         },
-        properties = { screen = 1, tag = awful.screen.focused().tags[9]}
-    }
+        properties = { screen = 2, tag = "9"}
+    },
+
+    -- Music
+    {
+        rule_any = {
+            class = {
+                "music",
+                "Spotify",
+            },
+        },
+        properties = {tag = "10"}
+    },
+
+    -- U' Stuff
+    {
+        rule_any = {
+            class = {
+                "Microsoft Teams"
+            },
+        },
+        properties = { screen = 2, tag = "8"}
+    },
     --- Start Apps on Tag }}}
 }
 
+
 -- ##### Rules ##### -- }}}
+
+-- ##### Autostart ##### {{{
+
+
+auto_start_apps = {
+    os.getenv("HOME") .. "/dotfiles/scripts/master.sh",
+    "telegram-desktop",
+    "whatsapp-nativefier",
+    "discord",
+    user.mpd,
+}
+
+if auto_start then
+    for app = 1, #auto_start_apps do
+        awful.spawn(auto_start_apps[app])
+    end
+end
+
+-- ##### Autostart ##### }}}
 
 -- ##### Error Handling ##### -- {{{
 
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
+    title = "Oops, there were errors during startup!",
+    text = awesome.startup_errors })
 end
 
 -- Handle runtime errors after startup
@@ -567,8 +630,8 @@ do
         in_error = true
 
         naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = tostring(err) })
+        title = "Oops, an error happened!",
+        text = tostring(err) })
         in_error = false
     end)
 end
@@ -596,6 +659,10 @@ client.connect_signal("manage", function (c)
     --     awful.placement.no_overlap(c)
     -- end
 
+end)
+
+client.connect_signal("mouse::enter", function(c)
+    client.focus = c
 end)
 
 -- When a client starts up in fullscreen, resize it to cover the fullscreen a short moment later
@@ -652,19 +719,19 @@ end)
 -- a tag which includes an urgent client, the urgent client is
 -- unfocused but still covers all other windows (even the currently
 -- focused window).
-awful.tag.attached_connect_signal(s, "property::selected", function ()
-    local urgent_clients = function (c)
-        return awful.rules.match(c, { urgent = true })
-    end
-    for c in awful.client.iterate(urgent_clients) do
-        if c.first_tag == mouse.screen.selected_tag then
-            client.focus = c
-        end
-    end
-end)
+-- awful.tag.attached_connect_signal(s, "property::selected", function ()
+--     local urgent_clients = function (c)
+--         return awful.rules.match(c, { urgent = true })
+--     end
+--     for c in awful.client.iterate(urgent_clients) do
+--         if c.first_tag == mouse.screen.selected_tag then
+--             client.focus = c
+--         end
+--     end
+-- end)
 
 -- Raise focused clients automatically
-client.connect_signal("focus", function(c) c:raise() end)
+-- client.connect_signal("focus", function(c) c:raise() end)
 
 -- Focus all urgent clients automatically
 -- client.connect_signal("property::urgent", function(c)
@@ -718,3 +785,5 @@ collectgarbage("setstepmul", 1000)
 -- ##### Signals ##### -- }}}
 
 -- ***** Initialization ***** -- }}}
+
+-- vim:foldmethod=marker
