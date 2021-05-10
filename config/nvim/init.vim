@@ -18,6 +18,7 @@ Plug 'liuchengxu/vim-which-key'     " Keybindings popup
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'         " General-purpose command-line fuzzy finder.
 Plug 'voldikss/vim-floaterm'        " Neovim floating terminalPlug 'antoinemadec/FixCursorHold.nvim'
+Plug 'ActivityWatch/aw-watcher-vim' " Time tracker
 "" }}}
 
 "" Code Utilities: {{{
@@ -56,13 +57,18 @@ Plug 'Xuyuanp/nerdtree-git-plugin'  " Git status for NERDTree
 "" Better Looking: {{{
 Plug 'chiel92/vim-autoformat'       " Format with one button press (or automatically on save)
 Plug 'itchyny/lightline.vim'        " Status Line
-" Plug 'arcticicestudio/nord-vim'     " Nord color scheme
-Plug 'ghifarit53/tokyonight-vim'    " Tokyonight color scheme
-" Plug 'dylanaraps/wal.vim'           " Current wallpaper colorscheme
 Plug 'ap/vim-css-color'             " Display Hex colors
 Plug 'luochen1990/rainbow'          " Parentheses (and other surrounding elements) colors
 Plug 'ryanoasis/vim-devicons'       " Icons for some other plugins
 Plug 'lambdalisue/nerdfont.vim'     " Nerdfonts in vim
+"" }}}
+
+"" Color Scheme {{{
+" Plug 'dylanaraps/wal.vim'           " Current wallpaper colorscheme
+" Plug 'arcticicestudio/nord-vim'     " Nord color scheme
+Plug 'ghifarit53/tokyonight-vim'    " Tokyonight color scheme
+" Plug 'marko-cerovac/material.nvim'
+Plug 'shaunsingh/moonlight.nvim'      " Fork of material
 "" }}}
 
 "" Misc: {{{
@@ -90,8 +96,8 @@ set number relativenumber
 " True colors support
 " set termguicolors
 
-" Color Scheme (moved to Tokyonight plugin conf)
-" colorscheme wal
+" Color Scheme (moved to moonlight)
+" colorscheme material
 
 " Line highlight (color theme have preference over this)
 " set cursorline
@@ -248,18 +254,18 @@ nnoremap <Leader>f :Files<CR>
 
 "" Lightline: {{{
 let g:lightline = {
-            \ 'colorscheme': 'tokyonight',
+            \ 'colorscheme': 'powerline',
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-            \ },
-            \ 'component_function': {
-            \   'gitbranch': 'Branch',
-            \   'filename': 'LightlineFilename',
-            \   'filetype': 'MyFiletype',
-            \   'fileformat': 'MyFileformat',
-            \ },
-            \ }
+                \   'left': [ [ 'mode', 'paste' ],
+                \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+                \ },
+                \ 'component_function': {
+                    \   'gitbranch': 'Branch',
+                    \   'filename': 'LightlineFilename',
+                    \   'filetype': 'MyFiletype',
+                    \   'fileformat': 'MyFileformat',
+                    \ },
+                    \ }
 
 function! Branch()
     return ' ' . FugitiveHead()
@@ -283,17 +289,6 @@ endfunction
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
-"" }}}
-
-"" Tokyonight {{{
-
-let g:tokyonight_style = 'storm'
-let g:tokyonight_transparent_background = 1
-let g:tokyonight_menu_selection_background = 'blue'
-let g:tokyonight_enable_italic = 1
-
-colorscheme tokyonight
-
 "" }}}
 
 "" Rainbow: {{{
@@ -668,6 +663,33 @@ set hidden
 let g:fern#renderer = "nerdfont"
 
 "" }}}
+
+"" Tokyonight {{{
+
+let g:tokyonight_style = 'storm'
+let g:tokyonight_transparent_background = 1
+let g:tokyonight_menu_selection_background = 'blue'
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight
+
+"" }}}
+
+"" Material {{{
+
+let g:material_style = "moonlight"
+let g:material_italic_comments = 1
+let g:material_italic_keywords = 1
+let g:material_italic_functions = 1
+let g:material_italic_variables = 1
+let g:material_contrast = 0
+let g:material_borders = 0
+let g:material_disable_background = "true"
+
+"" Load the colorsheme
+" colorscheme material
+
+""}}}
 
 " }}}
 

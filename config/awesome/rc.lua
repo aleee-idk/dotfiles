@@ -4,21 +4,24 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local naughty = require("naughty")
 
-auto_start = true
+-- Hide tmux keybinds from the hotkeys popup
+package.loaded['awful.hotkeys_popup.keys.tmux'] = {}
+
+local auto_start = true
 -- local auto_start = false
 
 -- ***** Variables ***** -- {{{
 
 -- ##### User Variables ##### -- {{{
 
-user = {
+USER = {
     profile_picture = os.getenv("HOME").."/.config/awesome/themes/user.jpg",
     terminal = "kitty -1",
 
     -- Rofi script to open terminal in custom path
     terminal_selector = os.getenv("HOME") .. "/dotfiles/scripts/rofi/open_terminal.sh",
 
-    browser = "firefox",
+    browser = os.getenv("HOME") .. "/dotfiles/scripts/rofi/rofi_buku",
     file_manager = "thunar",
     file_manager_cli = "kitty -1 --class files -e ranger",
     editor = "code",
@@ -27,13 +30,14 @@ user = {
     -- Rofi script to open the editor in custom path
     editor_selector = os.getenv("HOME") .. "/dotfiles/scripts/rofi/edit_file.sh",
 
-    screenshot = "scrot -ub /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'",
+    screenshot = "sleep 0.5 && scrot -ub /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'",
     screenshot_gui = "flameshot gui",
 
     -- Launchers --
     app_launcher = "~/.config/rofi/launchers/misc/launcher.sh",
 
     mpd = "kitty -1 --class music -e ncmpcpp",
+    mpd_server = "10.0.0.10",
 
     powermenu = os.getenv("HOME") .. "/dotfiles/config/rofi/applets/menu/powermenu.sh",
 
@@ -68,21 +72,23 @@ user = {
 
 }
 
+awful.util.shell = "/usr/bin/bash"
+
 -- ##### User variables ##### -- }}}
 
 -- ##### Themes ##### -- {{{
 
-local layouts = {
+awful.layout.layouts = {
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
     awful.layout.suit.magnifier,
     awful.layout.suit.max,
     awful.layout.suit.floating,
+    -- awful.layout.suit.tile.top,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.corner.nw,
@@ -602,7 +608,7 @@ auto_start_apps = {
     "telegram-desktop",
     "whatsapp-nativefier",
     "discord",
-    user.mpd,
+    USER.mpd,
 }
 
 if auto_start then

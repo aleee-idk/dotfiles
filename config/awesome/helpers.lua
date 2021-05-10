@@ -106,14 +106,14 @@ function helpers.single_double_tap(single_tap_function, double_tap_function)
     end
 
     double_tap_timer =
-        gears.timer.start_new(0.20, function()
-            double_tap_timer = nil
-            -- naughty.notify({text = "We got a single tap"})
-            if single_tap_function then
-                single_tap_function()
-            end
-            return false
-        end)
+    gears.timer.start_new(0.20, function()
+        double_tap_timer = nil
+        -- naughty.notify({text = "We got a single tap"})
+        if single_tap_function then
+            single_tap_function()
+        end
+        return false
+    end)
 end
 
 
@@ -234,8 +234,8 @@ function helpers.float_and_edge_snap(c, direction)
     c.maximized_horizontal = false
     c.floating = true
     local f = awful.placement.scale
-        + awful.placement[direction_translate[direction]]
-        + awful.placement['maximize_'..axis_translate[direction]]
+    + awful.placement[direction_translate[direction]]
+    + awful.placement['maximize_'..axis_translate[direction]]
     f(c, {honor_padding = true, honor_workarea=true, to_percent = 0.5, margins = beautiful.useless_gap * 2 })
 end
 
@@ -292,7 +292,7 @@ function helpers.prompt(action, textbox, prompt, callback)
             done_callback = callback,
             exe_callback = function(input)
                 if not input or #input == 0 then return end
-                awful.spawn.with_shell("noglob "..user.web_search_cmd.."'"..input.."'")
+                awful.spawn.with_shell("noglob "..USER.web_search_cmd.."'"..input.."'")
                 naughty.notify { title = "Searching the web for", text = input, icon = icons.image.firefox, urgency = "low" }
             end
         }
@@ -440,8 +440,8 @@ end
 -- The directory of the currently executed lua script
 -- Requires the `debug` library to be available in the build of Lua that is running
 function helpers.this_dir()
-   local str = debug.getinfo(2, "S").source:sub(2)
-   return str:match("(.*/)")
+    local str = debug.getinfo(2, "S").source:sub(2)
+    return str:match("(.*/)")
 end
 
 return helpers

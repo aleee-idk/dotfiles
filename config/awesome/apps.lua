@@ -3,96 +3,80 @@ local helpers = require("helpers")
 
 local apps = {}
 
--- ***** Internet ***** -- {{{
+-- ***** Internet ***** --
 
-apps.browser = function ()
-    awful.spawn(user.browser, { switchtotag = true })
+function apps.browser()
+    awful.spawn(USER.browser, { switchtotag = true })
 end
 
--- ===== Chats ===== -- {{{
+-- ===== Chats ===== --
 
 apps.telegram = function ()
     helpers.run_or_rise({class = 'TelegramDesktop'}, false, "telegram", { switchtotag = true})
 end
 
-apps.discord = function ()
-    helper.run_or_rise({class = 'discord'}, false, "discord")
+function apps.discord()
+    helpers.run_or_rise({class = 'discord'}, false, "discord")
 end
 
--- ===== Chats ===== -- }}}
+-- ***** Files ***** --
 
--- ***** Internet ***** -- }}}
-
--- ***** Files ***** -- {{{
-
-apps.file_manager = function ()
-    awful.spawn(user.file_manager)
+function apps.file_manager()
+    awful.spawn(USER.file_manager)
 end
 
-apps.file_manager_cli = function ()
-    awful.spawn(user.file_manager_cli)
+function apps.file_manager_cli()
+    awful.spawn(USER.file_manager_cli)
 end
 
--- ***** Files ***** -- }}}
+-- ***** Apps for Edit and Create ***** --
 
--- ***** Apps for Edit and Create ***** -- {{{
-
-apps.editor = function ()
-    helpers.run_or_raise({instance = 'editor'}, true, user.editor, { switchtotag = true})
+function apps.editor()
+    helpers.run_or_raise({instance = 'editor'}, true, USER.editor, { switchtotag = true})
 end
 
-apps.editor_selector = function ()
-    helpers.run_or_raise({instance = 'editor'}, true, user.editor_selector, { switchtotag = true})
+function apps.editor_selector()
+    helpers.run_or_raise({instance = 'editor'}, true, USER.editor_selector, { switchtotag = true})
 end
 
-apps.editor_cli = function ()
-    helpers.run_or_raise({instance = 'editor_cli'}, true, user.editor_cli, { switchtotag = true})
+function apps.editor_cli()
+    helpers.run_or_raise({instance = 'editor_cli'}, true, USER.editor_cli, { switchtotag = true})
 end
 
--- ***** Apps for Edit and Create ***** -- }}}
+-- ***** Launchers ***** --
 
--- ***** Launchers ***** -- {{{
-
-apps.app_launcher = function ()
-    awful.spawn.with_shell(user.app_launcher)
+function apps.app_launcher()
+    awful.spawn.with_shell(USER.app_launcher)
 end
 
-apps.terminal_selector = function ()
-    awful.spawn.with_shell(user.terminal_selector)
+function apps.terminal_selector()
+    awful.spawn.with_shell(USER.terminal_selector)
 end
 
--- ***** Launchers ***** -- }}}
-
--- ***** Utilities ***** -- {{{
+-- ***** Utilities ***** --
 
 -- Focused window screenshot
-apps.screenshot = function ()
-    awful.spawn.with_shell(user.screenshot)
+function apps.screenshot()
+    awful.spawn.with_shell(USER.screenshot)
 end
 
 -- Gui screenshot
-apps.screenshot_gui = function ()
-    awful.spawn.with_shell(user.screenshot_gui)
+function apps.screenshot_gui()
+    awful.spawn.with_shell(USER.screenshot_gui)
 end
 
--- ***** Utilities ***** -- }}}
+-- ***** Configs ***** --
 
--- ***** Configs ***** -- {{{
-
-apps.sound = function ()
+function apps.sound()
     helpers.run_or_rise({class = 'Pavucontrol'}, true, 'pavucontrol')
 end
 
--- ***** Configs ***** -- }}}
+-- ***** System *****
 
--- ***** System ***** {{{
-
-apps.powermenu = function ()
-    awful.spawn.with_shell(user.powermenu)
+function apps.powermenu()
+    awful.spawn.with_shell(USER.powermenu)
 end
-
--- ***** System ***** }}}
 
 return apps
 
--- vim:foldmethod=marker
+-- vim:foldmethod=syntax

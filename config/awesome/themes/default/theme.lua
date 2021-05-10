@@ -9,10 +9,10 @@ local gfs = require("gears.filesystem")
 local theme_name = "default"
 
 local themes_path = gfs.get_themes_dir()
-local layout_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/layout/"
-local titlebar_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/titlebar/"
-local taglist_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/taglist/"
-local tip = titlebar_icon_path --alias to save time/space
+-- local layout_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/layout/"
+-- local titlebar_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/titlebar/"
+-- local taglist_icon_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. theme_name .. "/taglist/"
+-- local tip = titlebar_icon_path --alias to save time/space
 local xrdb = xresources.get_current_theme()
 
 
@@ -41,17 +41,15 @@ theme.bg_urgent     = x.color8
 theme.bg_minimize   = x.color8
 theme.bg_systray    = x.background
 
-theme.fg_normal     = x.color8
+theme.fg_normal     = x.foreground
 theme.fg_occupied   = x.color1
 theme.fg_focus      = x.color4
 theme.fg_urgent     = x.color9
 theme.fg_minimize   = x.color8
 
-theme.bg_transparent = "#00000000"
+theme.bg_transparent = "#00000022"
 
--- ##### Colors font and Wallpaper ##### --- }}}
-
--- ##### Client stuff ##### --- {{{
+-- ##### Client stuff ##### ---
 
 -- Gaps
 theme.useless_gap   = dpi(5)
@@ -85,9 +83,7 @@ theme.titlebar_fg_focus = x.background
 theme.titlebar_fg_normal = x.color8
 --theme.titlebar_fg = x.color7
 
--- ##### Client stuff ##### --- }}}
-
--- ##### Notifications ##### --- {{{
+-- ##### Notifications ##### ---
 
 -- Note: Some of these options are ignored by my custom
 -- notification widget_template
@@ -112,9 +108,6 @@ theme.notification_opacity = 1
 theme.notification_padding = theme.screen_margin * 2
 theme.notification_spacing = theme.screen_margin * 4
 
--- ##### Notifications ##### --- }}}
-
-
 -- Edge snap
 
 theme.snap_shape = gears.shape.rectangle
@@ -135,7 +128,7 @@ theme.tagnames = {
     "0",
 }
 
--- ##### Bar ##### --- {{{
+-- ##### Bar ##### ---
 
 -- Widget separator
 theme.separator_text = "|"
@@ -150,7 +143,7 @@ theme.wibar_position = "top"
 theme.wibar_height = dpi(25)
 
 -- Wibar colors
-theme.wibar_fg = x.background
+theme.wibar_fg = theme.fg_normal
 theme.wibar_bg = theme.bg_transparent
 
 theme.wibar_fg_focused = theme.fg_focus
@@ -170,60 +163,58 @@ theme.wibar_width = dpi(380)
 
 theme.prefix_fg = x.color8
 
- --There are other variable sets
- --overriding the default one when
- --defined, the sets are:
- --taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
- --tasklist_[bg|fg]_[focus|urgent]
- --titlebar_[bg|fg]_[normal|focus]
- --tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
- --mouse_finder_[color|timeout|animate_timeout|radius|factor]
- --prompt_[fg|bg|fg_cursor|bg_cursor|font]
- --hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
- --Example:
+--There are other variable sets
+--overriding the default one when
+--defined, the sets are:
+--taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
+--tasklist_[bg|fg]_[focus|urgent]
+--titlebar_[bg|fg]_[normal|focus]
+--tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
+--mouse_finder_[color|timeout|animate_timeout|radius|factor]
+--prompt_[fg|bg|fg_cursor|bg_cursor|font]
+--hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
+--Example:
 --theme.taglist_bg_focus = "#ff0000"
 
--- ##### Bar ##### --- }}}
-
--- ##### titlebar ##### --- {{{
+-- ##### titlebar ##### ---
 client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
     local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.move(c)
-        end),
-        awful.button({ }, 3, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.resize(c)
-        end)
+    awful.button({ }, 1, function()
+        c:emit_signal("request::activate", "titlebar", {raise = true})
+        awful.mouse.client.move(c)
+    end),
+    awful.button({ }, 3, function()
+        c:emit_signal("request::activate", "titlebar", {raise = true})
+        awful.mouse.client.resize(c)
+    end)
     )
 
     awful.titlebar(c) : setup {
         { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
+        awful.titlebar.widget.iconwidget(c),
+        buttons = buttons,
+        layout  = wibox.layout.fixed.horizontal
+    },
+    { -- Middle
+    { -- Title
+    align  = "center",
+    widget = awful.titlebar.widget.titlewidget(c)
+},
+buttons = buttons,
+layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
+        awful.titlebar.widget.floatingbutton (c),
+        awful.titlebar.widget.maximizedbutton(c),
+        awful.titlebar.widget.stickybutton   (c),
+        awful.titlebar.widget.ontopbutton    (c),
+        awful.titlebar.widget.closebutton    (c),
+        layout = wibox.layout.fixed.horizontal()
+    },
+    layout = wibox.layout.align.horizontal
+}
 end)
--- ##### titlebar ##### --- }}}
 
 return theme
+-- vim:foldmethod=syntax

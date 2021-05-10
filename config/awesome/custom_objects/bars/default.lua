@@ -9,15 +9,37 @@ local helpers = require("helpers")
 local keys = require("keys")
 
 
--- ##### Widgets ##### -- {{{
+-- ##### Widgets ##### --
 
 font = beautiful.font
 
--- ===== Colors ===== -- {{{
+-- ===== Colors ===== --
 
-local tag_colors_empty = { "#00000000", "#00000000", "#00000000", "#00000000", "#00000000", "#00000000", "#00000000", "#00000000", "#00000000", "#00000000" }
+local tag_colors_empty = {
+    "#00000000",
+    "#00000000",
+    "#00000000",
+    "#00000000",
+    "#00000000",
+    "#00000000",
+    "#00000000",
+    "#00000000",
+    "#00000000",
+    "#00000000"
+}
 
-local tag_colors_urgent = { x.foreground, x.foreground, x.foreground, x.foreground, x.foreground, x.foreground, x.foreground, x.foreground, x.foreground, x.foreground }
+local tag_colors_urgent = {
+    x.foreground,
+    x.foreground,
+    x.foreground,
+    x.foreground,
+    x.foreground,
+    x.foreground,
+    x.foreground,
+    x.foreground,
+    x.foreground,
+    x.foreground
+}
 
 local tag_colors_focused = {
     x.color1,
@@ -62,20 +84,18 @@ local update_taglist = function (item, tag, index)
     end
 end
 
--- ===== Colors ===== -- }}}
-
--- ===== Bar Widgets ===== -- {{{
+-- ===== Bar Widgets ===== --
 
 awful.screen.connect_for_each_screen(
 function(s)
 
-    -- ***** Taglist ***** -- {{{
+    -- ***** Taglist ***** --
 
     s.mytaglist = awful.widget.taglist {
         screen = s,
 
         -- wich tags to include, all, selected or noempty
-        filter = awful.widget.taglist.filter.all,
+        filter = awful.widget.taglist.filter.noempty,
         buttons = keys.taglist_buttons,
         style = {
             bg_focus = beautiful.wibar_bg_focused ,
@@ -108,10 +128,7 @@ function(s)
         -- }
     }
 
-
-    -- ***** Taglist ***** -- }}}
-
-    -- ***** Tasklist ***** -- {{{
+    -- ***** Tasklist ***** --
 
     -- s.taglist_box = awful.wibar({
     --     screen = s,
@@ -129,15 +146,11 @@ function(s)
     --     widget = s.mytaglist,
     -- }
 
-    -- ***** Tasklist ***** -- }}}
-
     -- ***** Clock ***** -- {{{
 
-    s.clock = awful.widget.textclock()
+    s.clock = wibox.widget.textclock("%I:%M")
 
-    -- ***** Clock ***** -- }}}
-
-    -- ***** Systray ***** -- {{{
+    -- ***** Systray ***** --
 
     -- Create a system tray widget
     s.systray = wibox.widget.systray()
@@ -173,9 +186,7 @@ function(s)
 
     helpers.add_hover_cursor(s.sysicon, "hand1")
 
-    -- ***** Systray ***** -- }}}
-
-    -- ***** Layouts ***** --- {{{
+    -- ***** Layouts ***** ---
 
     s.mylayoutbox = awful.widget.layoutbox(s)
     s.mylayoutbox:buttons(gears.table.join(
@@ -184,7 +195,6 @@ function(s)
     awful.button({ }, 4, function () awful.layout.inc( 1) end),
     awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
-    -- ***** Layouts ***** --- }}}
 
     -- ***** Main Bar ***** --- {{{
     s.main_bar = awful.wibar({
@@ -223,4 +233,4 @@ end
 
 -- ##### Widgets ##### -- }}}
 
--- vim:foldmethod=marker
+-- vim:foldmethod=syntax
