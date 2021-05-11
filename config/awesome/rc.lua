@@ -8,7 +8,6 @@ local naughty = require("naughty")
 package.loaded['awful.hotkeys_popup.keys.tmux'] = {}
 
 local auto_start = true
--- local auto_start = false
 
 -- ***** Variables ***** -- {{{
 

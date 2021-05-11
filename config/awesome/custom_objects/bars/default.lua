@@ -1,4 +1,5 @@
 local awful = require("awful")
+local naughty = require("naughty")
 local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
@@ -146,45 +147,17 @@ function(s)
     --     widget = s.mytaglist,
     -- }
 
-    -- ***** Clock ***** -- {{{
+    -- ***** Clock ***** --
 
     s.clock = wibox.widget.textclock("%I:%M")
 
-    -- ***** Systray ***** --
-
-    -- Create a system tray widget
-    s.systray = wibox.widget.systray()
-
-    -- Create the tray popup
-
-    s.syspopup = awful.popup {
-        widget = {
-            {
-                s.systray,
-                widget = wibox.container.background
-            },
-            layout = wibox.layout.fixed.vertical
-        },
-        preferred_positions = "bottom",
-        preferred_anchors = "middle",
-        type = "popup_menu",
-        hide_on_right_click = true,
-        minimum_width = dpi(100),
-        minimum_height = dpi(100),
-        shape = gears.shape.infobubble,
-        ontop = true,
-        visible = false
-    }
-
-    s.sysicon = wibox.widget {
+    s.toggle_bar = wibox.widget {
         text = " ",
         font = font .. " 15",
-        widget = wibox.widget.textbox
+        widget = wibox.widget.textbox,
     }
 
-    s.syspopup:bind_to_widget(s.sysicon)
-
-    helpers.add_hover_cursor(s.sysicon, "hand1")
+    helpers.add_hover_cursor(s.toggle_bar, "hand1")
 
     -- ***** Layouts ***** ---
 
@@ -196,7 +169,7 @@ function(s)
     awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
 
-    -- ***** Main Bar ***** --- {{{
+    -- ***** Main Bar ***** ---
     s.main_bar = awful.wibar({
         screen = s,
         visible = true,
@@ -207,7 +180,9 @@ function(s)
         fg = beautiful.wibar_fg,
     })
 
-    s.main_bar:setup {
+    local bar_widgets = {}
+    bar_widgets[1] = {
+        id = "main",
         layout = wibox.layout.align.horizontal,
         {
             layout = wibox.layout.align.horizontal,
@@ -219,18 +194,63 @@ function(s)
         {
             s.clock,
             s.mylayoutbox,
-            s.sysicon,
+            s.toggle_bar,
             spacing = dpi(5),
             layout = wibox.layout.fixed.horizontal,
         },
     }
 
-    -- ***** Main Bar ***** --- }}}
+    bar_widgets[2] = {
+        id = "second",
+        layout = wibox.layout.align.horizontal,
+        {
+            layout = wibox.layout.align.horizontal,
+        },
+        {
+            layout = wibox.layout.align.horizontal,
+            wibox.widget.systray(),
+        },
+        {
+            layout = wibox.layout.fixed.horizontal,
+            s.toggle_bar,
+        },
+    }
+
+    local return_main_widgets_timer = gears.timer {
+        timeout   = 60,
+        single_shot = true,
+        callback  = function()
+            s.main_bar : setup (bar_widgets[1])
+        end
+    }
+
+    local function cycle_bar()
+        local id = s.main_bar:get_children_by_id("main")
+
+        if id then
+            s.main_bar : setup (bar_widgets[2])
+            return_main_widgets_timer:start()
+            naughty.notify({text = "change bar to 2"})
+        else
+            s.main_bar : setup (bar_widgets[1])
+            return_main_widgets_timer:stop()
+            naughty.notify({text = "change bar to 1"})
+        end
+    end
+
+    s.main_bar:setup(bar_widgets[1])
+
+    s.toggle_bar:buttons(gears.table.join(
+    -- Middle click - Hide traybox
+    awful.button({ }, 1, function ()
+        cycle_bar()
+    end)
+    ))
+
+
+    -- s.second_bar.connect_signal("mouse::leave", change_bars())
+
 end
 )
-
--- ===== Bar Widgets ===== -- }}}
-
--- ##### Widgets ##### -- }}}
 
 -- vim:foldmethod=syntax
