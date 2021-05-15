@@ -39,12 +39,11 @@ fish
 flameshot
 flex
 fortune-mod
+gdb
 geeqie
-gn
 go
 godot
 gparted
-gperf
 grub
 gtest
 hplip
@@ -61,11 +60,10 @@ libreoffice-still
 libunarr-bin
 lightdm-gtk-greeter-settings
 lightdm-webkit-theme-litarvan
-lua51-lpeg
-lua51-mpack
 lutris
 lxappearance
 mcomix
+mingw-w64-gcc
 mkinitcpio-numlock
 mpc
 mpd
@@ -76,8 +74,7 @@ neofetch
 neovide
 net-tools
 networkmanager-dmenu-git
-ninja
-nm-connection-editor
+nodejs-nativefier
 obs-studio
 ookla-speedtest-bin
 pacman-contrib
@@ -94,7 +91,6 @@ qt5ct
 qutebrowser
 ranger
 raw-thumbnailer
-rust
 sane-airscan
 scrot
 skanlite

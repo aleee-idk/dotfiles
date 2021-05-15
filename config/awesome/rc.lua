@@ -7,11 +7,11 @@ local naughty = require("naughty")
 -- Hide tmux keybinds from the hotkeys popup
 package.loaded['awful.hotkeys_popup.keys.tmux'] = {}
 
-local auto_start = true
+-- local auto_start = true
 
--- ***** Variables ***** -- {{{
+-- ***** Variables ***** --
 
--- ##### User Variables ##### -- {{{
+-- ##### User Variables ##### --
 
 USER = {
     profile_picture = os.getenv("HOME").."/.config/awesome/themes/user.jpg",
@@ -39,6 +39,8 @@ USER = {
     mpd_server = "10.0.0.10",
 
     powermenu = os.getenv("HOME") .. "/dotfiles/config/rofi/applets/menu/powermenu.sh",
+    run_command = os.getenv("HOME") .. "/dotfiles/scripts/rofi/exec_command",
+    open_bookmark = os.getenv("HOME") .. "/dotfiles/scripts/rofi/buku",
 
     dirs = {
         downloads = os.getenv("XDG_DOWNLOAD_DIR") or "~/Downloads",
@@ -73,7 +75,7 @@ USER = {
 
 awful.util.shell = "/usr/bin/bash"
 
--- ##### User variables ##### -- }}}
+-- ##### User variables ##### --
 
 -- ##### Themes ##### -- {{{
 
@@ -160,50 +162,13 @@ local exit_screen_themes = {
 
 local exit_screen_theme = exit_screen_themes[1]
 
--- ##### Themes ##### -- }}}
-
--- ***** Variables ***** -- }}}
-
---***** Initialization ***** -- {{{
-
--- ##### Theme handling ##### -- {{{
-
-local xrdb = beautiful.xresources.get_current_theme()
--- Make dpi function global
-dpi = beautiful.xresources.aplly_dpi
--- Make xresources colors global
-x = {
-    --           xrdb variable
-    background = xrdb.background,
-    foreground = xrdb.foreground,
-    color0     = xrdb.color0,
-    color1     = xrdb.color1,
-    color2     = xrdb.color2,
-    color3     = xrdb.color3,
-    color4     = xrdb.color4,
-    color5     = xrdb.color5,
-    color6     = xrdb.color6,
-    color7     = xrdb.color7,
-    color8     = xrdb.color8,
-    color9     = xrdb.color9,
-    color10    = xrdb.color10,
-    color11    = xrdb.color11,
-    color12    = xrdb.color12,
-    color13    = xrdb.color13,
-    color14    = xrdb.color14,
-    color15    = xrdb.color15,
-}
+-- ##### Theme handling ##### --
 
 -- Load AwesomeWM libraries
 require("awful.autofocus")
 
--- Default notification libray
-
--- Load theme
-local theme_dir = "~/.config/awesome/themes/".. theme .. "/"
-beautiful.init(theme_dir .. "theme.lua")
-
--- ##### Theme handling ##### -- }}}
+-- Load theme, see themes directory for a list of themes
+beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/default.lua")
 
 -- ##### Features ##### -- {{{
 
@@ -232,13 +197,13 @@ local helpers = require("helpers")
 require("custom_objects.bars." .. bar_theme)
 
 -- -- Exit screen
-require("custom_objects.exit_screen." .. exit_screen_theme)
+-- require("custom_objects.exit_screen." .. exit_screen_theme)
 
 -- -- Sidebar
 -- require("custom_objects.sidebar." .. sidebar_theme)
 
 -- -- Dashboard
-require("custom_objects.dashboard." .. dashboard_theme)
+-- require("custom_objects.dashboard." .. dashboard_theme)
 
 -- -- Lock screen
 -- local lock_screen = require("custom_objects.lock_screen")
@@ -248,7 +213,7 @@ require("custom_objects.dashboard." .. dashboard_theme)
 -- require("custom_objects.app_drawer")
 
 -- Window switcher
-require("custom_objects.window_switcher")
+-- require("custom_objects.window_switcher")
 
 -- -- Toggle-able microphone overlay
 -- require("custom_objects.microphone_overlay")

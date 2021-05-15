@@ -12,8 +12,6 @@ local keys = require("keys")
 
 -- ##### Widgets ##### --
 
-font = beautiful.font
-
 -- ===== Colors ===== --
 
 local tag_colors_empty = {
@@ -30,42 +28,42 @@ local tag_colors_empty = {
 }
 
 local tag_colors_urgent = {
-    x.foreground,
-    x.foreground,
-    x.foreground,
-    x.foreground,
-    x.foreground,
-    x.foreground,
-    x.foreground,
-    x.foreground,
-    x.foreground,
-    x.foreground
+    beautiful.foreground,
+    beautiful.foreground,
+    beautiful.foreground,
+    beautiful.foreground,
+    beautiful.foreground,
+    beautiful.foreground,
+    beautiful.foreground,
+    beautiful.foreground,
+    beautiful.foreground,
+    beautiful.foreground
 }
 
 local tag_colors_focused = {
-    x.color1,
-    x.color5,
-    x.color4,
-    x.color6,
-    x.color2,
-    x.color3,
-    x.color1,
-    x.color5,
-    x.color4,
-    x.color6,
+    beautiful.color1,
+    beautiful.color5,
+    beautiful.color4,
+    beautiful.color6,
+    beautiful.color2,
+    beautiful.color3,
+    beautiful.color1,
+    beautiful.color5,
+    beautiful.color4,
+    beautiful.color6,
 }
 
 local tag_colors_occupied = {
-    x.color1.."45",
-    x.color5.."45",
-    x.color4.."45",
-    x.color6.."45",
-    x.color2.."45",
-    x.color3.."45",
-    x.color1.."45",
-    x.color5.."45",
-    x.color4.."45",
-    x.color6.."45",
+    beautiful.color1.."45",
+    beautiful.color5.."45",
+    beautiful.color4.."45",
+    beautiful.color6.."45",
+    beautiful.color2.."45",
+    beautiful.color3.."45",
+    beautiful.color1.."45",
+    beautiful.color5.."45",
+    beautiful.color4.."45",
+    beautiful.color6.."45",
 }
 
 -- Helper function that updates a taglist item
@@ -153,7 +151,7 @@ function(s)
 
     s.toggle_bar = wibox.widget {
         text = " ",
-        font = font .. " 15",
+        font = beautiful.font .. " 15",
         widget = wibox.widget.textbox,
     }
 
@@ -208,7 +206,10 @@ function(s)
         },
         {
             layout = wibox.layout.align.horizontal,
+            expand = "none",
+            nil,
             wibox.widget.systray(),
+            nil,
         },
         {
             layout = wibox.layout.fixed.horizontal,
@@ -221,6 +222,7 @@ function(s)
         single_shot = true,
         callback  = function()
             s.main_bar : setup (bar_widgets[1])
+            s.main_bar.bg = beautiful.wibar_bg
         end
     }
 
@@ -229,12 +231,12 @@ function(s)
 
         if id then
             s.main_bar : setup (bar_widgets[2])
+            s.main_bar.bg = beautiful.bg_systray
             return_main_widgets_timer:start()
-            naughty.notify({text = "change bar to 2"})
         else
             s.main_bar : setup (bar_widgets[1])
+            s.main_bar.bg = beautiful.wibar_bg
             return_main_widgets_timer:stop()
-            naughty.notify({text = "change bar to 1"})
         end
     end
 
@@ -246,9 +248,6 @@ function(s)
         cycle_bar()
     end)
     ))
-
-
-    -- s.second_bar.connect_signal("mouse::leave", change_bars())
 
 end
 )

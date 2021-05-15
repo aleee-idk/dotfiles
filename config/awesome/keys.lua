@@ -376,6 +376,11 @@ apps.file_manager_cli,
 { description = "CLI File Manager", group = "Spawners"}
 ),
 
+awful.key({ modkey }, "x",
+apps.run_command,
+{ description = "Run a bash command", group = "Spawners"}
+),
+
 -- Editors --
 
 awful.key({ modkey }, "e",
@@ -385,7 +390,7 @@ apps.editor_selector,
 
 
 awful.key({ modkey }, "b",
-apps.editor_selector,
+apps.open_bookmark,
 { description = "Open in browser", group = "Spawners"}
 ),
 
@@ -431,28 +436,21 @@ end,
 -- Media --
 awful.key({ }, "XF86AudioPlay",
 function()
-    awful.spawn_with_shell("playerctl play")
+    awful.spawn.with_shell("playerctl play-pause")
 end,
 { description = "Media play ", group = "System Stuff"}
 ),
 
-awful.key({ }, "XF86AudioPause",
-function()
-    awful.spawn_with_shell("playerctl pause")
-end,
-{ description = "Media pause ", group = "System Stuff"}
-),
-
 awful.key({ }, "XF86AudioNext",
 function()
-    awful.spawn_with_shell("playerctl next")
+    awful.spawn.with_shell("playerctl next")
 end,
 { description = "Media next ", group = "System Stuff"}
 ),
 
 awful.key({ }, "XF86AudioPrev",
 function()
-    awful.spawn_with_shell("playerctl previous")
+    awful.spawn.with_shell("playerctl previous")
 end,
 { description = "Media previous ", group = "System Stuff"}
 ),

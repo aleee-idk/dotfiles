@@ -19,95 +19,95 @@ local window_switcher_hide
 local get_num_clients
 
 awful.screen.connect_for_each_screen(
-    function(s)
+function(s)
 
-        -- ===== Tasklist ===== -- {{{
-        s.window_switcher_tasklist = awful.widget.tasklist {
-            screen = s,
-            filter = awful.widget.tasklist.filter.currenttags,
-            buttons = keys.tasklist_buttons,
-            layout = {
-                layout = wibox.layout.fixed.vertical
-            },
-            widget_template = {
+    -- ===== Tasklist ===== -- {{{
+    s.window_switcher_tasklist = awful.widget.tasklist {
+        screen = s,
+        filter = awful.widget.tasklist.filter.currenttags,
+        buttons = keys.tasklist_buttons,
+        layout = {
+            layout = wibox.layout.fixed.vertical
+        },
+        widget_template = {
             {
-                    -- Standard icon (from beautiful.icon_theme)
-                    -- {
-                    --     awful.widget.clienticon,
-                    --     margins = 5,
-                    --     widget  = wibox.container.margin
-                    -- },
-                    -- Text icon
+                -- Standard icon (from beautiful.icon_theme)
+                -- {
+                --     awful.widget.clienticon,
+                --     margins = 5,
+                --     widget  = wibox.container.margin
+                -- },
+                -- Text icon
+                {
+                    id     = 'text_icon',
+                    -- font   = 'icomoon 25',
+                    forced_width = 50,
+                    align  = "center",
+                    valign = "center",
+                    widget = wibox.widget.textbox,
+                },
+                {
                     {
-                        id     = 'text_icon',
-                        -- font   = 'icomoon 25',
-                        forced_width = 50,
+                        id     = 'text_role',
                         align  = "center",
-                        valign = "center",
                         widget = wibox.widget.textbox,
                     },
-                    {
-                        {
-                            id     = 'text_role',
-                            align  = "center",
-                            widget = wibox.widget.textbox,
-                        },
-                        left = 6,
-                        right = 14,
-                        -- Add margins to top and bottom in order to force the
-                        -- text to be on a single line, if needed. Might need
-                        -- to adjust them according to font size.
-                        top  = 14,
-                        bottom = 14,
-                        widget = wibox.container.margin
-                    },
-                    layout  = wibox.layout.fixed.horizontal
+                    left = 6,
+                    right = 14,
+                    -- Add margins to top and bottom in order to force the
+                    -- text to be on a single line, if needed. Might need
+                    -- to adjust them according to font size.
+                    top  = 14,
+                    bottom = 14,
+                    widget = wibox.container.margin
                 },
-                forced_height = item_height,
-                id = "bg_role",
-                widget = wibox.container.background,
-                -- create_callback = function(self, c, _, __)
-                --     set_icon(self, c)
-                --     -- Handle clients which change their own class
-                --     c:connect_signal("property::class", function() set_icon(self, c) end)
-                -- end,
+                layout  = wibox.layout.fixed.horizontal
             },
-        }
-        -- ===== Tasklist ===== -- }}}
+            forced_height = item_height,
+            id = "bg_role",
+            widget = wibox.container.background,
+            -- create_callback = function(self, c, _, __)
+            --     set_icon(self, c)
+            --     -- Handle clients which change their own class
+            --     c:connect_signal("property::class", function() set_icon(self, c) end)
+            -- end,
+        },
+    }
+    -- ===== Tasklist ===== -- }}}
 
-        -- ===== Popup ===== -- {{{
-        s.window_switcher = awful.popup(
+    -- ===== Popup ===== -- {{{
+    s.window_switcher = awful.popup(
+    {
+        visible = false,
+        ontop = true,
+        screen = s,
+        bg = "=00000000",
+        fg = beutiful.foreground,
+        widget = {
             {
-                visible = false,
-                ontop = true,
-                screen = s,
-                bg = "=00000000",
-                fg = x.foreground,
-                widget = {
-                    {
-                        s.window_switcher_tasklist,
-                        forced_width = item_width,
-                        margins = window_switcher_margin,
-                        widget = wibox.container.margin
-                    },
-                    bg = x.color0,
-                    shape = helpers.rrect(beautiful.border_radius),
-                    widget = wibox.container.background
-                }
-            }
-        )
+                s.window_switcher_tasklist,
+                forced_width = item_width,
+                margins = window_switcher_margin,
+                widget = wibox.container.margin
+            },
+            bg = beutiful.color0,
+            shape = helpers.rrect(beautiful.border_radius),
+            widget = wibox.container.background
+        }
+    }
+    )
 
-        -- Center window switcher whenever its height changes
-        s.window_switcher:connect_signal("property::height", 
-            function()
-                awful.placement.centered(s.window_switcher, { honor_workarea = true, honor_padding = true })
-                if s.window_switcher.visible and get_num_clients(s) == 0 then
-                    window_switcher_hide()
-                end
-            end
-        )
-        -- ===== Popup ===== -- }}}
+    -- Center window switcher whenever its height changes
+    s.window_switcher:connect_signal("property::height",
+    function()
+        awful.placement.centered(s.window_switcher, { honor_workarea = true, honor_padding = true })
+        if s.window_switcher.visible and get_num_clients(s) == 0 then
+            window_switcher_hide()
+        end
     end
+    )
+    -- ===== Popup ===== -- }}}
+end
 )
 
 -- ##### Utilities ##### {{{

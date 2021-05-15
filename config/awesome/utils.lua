@@ -5,6 +5,14 @@ local xresources = require("beautiful.xresources")
 
 local utils = {}
 
+function utils.debug_notify(text)
+    naughty.notify({
+        title = "Debug notification",
+        text = text,
+        position = "top_middle"
+    })
+end
+
 --[[ For consistency ]]--
 local direction_translate = {
     ['up'] = 'top',

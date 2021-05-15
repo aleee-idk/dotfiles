@@ -53,6 +53,10 @@ function apps.terminal_selector()
     awful.spawn.with_shell(USER.terminal_selector)
 end
 
+function apps.open_bookmark()
+    awful.spawn.with_shell(USER.open_bookmark)
+end
+
 -- ***** Utilities ***** --
 
 -- Focused window screenshot
@@ -63,6 +67,11 @@ end
 -- Gui screenshot
 function apps.screenshot_gui()
     awful.spawn.with_shell(USER.screenshot_gui)
+end
+
+-- Run command
+function apps.run_command()
+    awful.spawn.with_shell(USER.run_command)
 end
 
 -- ***** Configs ***** --

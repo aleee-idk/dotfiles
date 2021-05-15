@@ -30,7 +30,7 @@ local lock_text_icon = ""
 -- local exit_text_icon = ""
 -- local lock_text_icon = ""
 
-local button_bg = x.color0
+local button_bg = beutiful.color0
 local button_size = dpi(120)
 
 
@@ -83,9 +83,9 @@ local create_button = function(symbol, hover_color, text, command)
 
     -- Bind left click to run the command
     button:buttons(gears.table.join(
-        awful.button({ }, 1, function ()
-            command()
-        end)
+    awful.button({ }, 1, function ()
+        command()
+    end)
     ))
 
     -- Change color on hover
@@ -94,7 +94,7 @@ local create_button = function(symbol, hover_color, text, command)
         button.border_color = hover_color
     end)
     button:connect_signal("mouse::leave", function ()
-        icon.markup = helpers.colorize_text(icon.text, x.foreground)
+        icon.markup = helpers.colorize_text(icon.text, beutiful.foreground)
         button.border_color = button_bg
     end)
 
@@ -105,11 +105,11 @@ local create_button = function(symbol, hover_color, text, command)
 end
 
 -- Create the buttons
-local poweroff = create_button(poweroff_text_icon, x.color1, "Poweroff", poweroff_command)
-local reboot = create_button(reboot_text_icon, x.color2, "Reboot", reboot_command)
-local suspend = create_button(suspend_text_icon, x.color3, "Suspend", suspend_command)
-local exit = create_button(exit_text_icon, x.color4, "Exit", exit_command)
-local lock = create_button(lock_text_icon, x.color5, "Lock", lock_command)
+local poweroff = create_button(poweroff_text_icon, beutiful.color1, "Poweroff", poweroff_command)
+local reboot = create_button(reboot_text_icon, beutiful.color2, "Reboot", reboot_command)
+local suspend = create_button(suspend_text_icon, beutiful.color3, "Suspend", suspend_command)
+local exit = create_button(exit_text_icon, beutiful.color4, "Exit", exit_command)
+local lock = create_button(lock_text_icon, beutiful.color5, "Lock", lock_command)
 
 -- Create the exit screen wibox
 exit_screen = wibox({visible = false, ontop = true, type = "dock"})
@@ -157,18 +157,18 @@ function exit_screen_show()
 end
 
 exit_screen:buttons(gears.table.join(
-    -- Left click - Hide exit_screen
-    awful.button({ }, 1, function ()
-        exit_screen_hide()
-    end),
-    -- Middle click - Hide exit_screen
-    awful.button({ }, 2, function ()
-        exit_screen_hide()
-    end),
-    -- Right click - Hide exit_screen
-    awful.button({ }, 3, function ()
-        exit_screen_hide()
-    end)
+-- Left click - Hide exit_screen
+awful.button({ }, 1, function ()
+    exit_screen_hide()
+end),
+-- Middle click - Hide exit_screen
+awful.button({ }, 2, function ()
+    exit_screen_hide()
+end),
+-- Right click - Hide exit_screen
+awful.button({ }, 3, function ()
+    exit_screen_hide()
+end)
 ))
 
 -- Item placement
