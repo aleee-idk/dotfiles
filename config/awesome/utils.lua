@@ -5,11 +5,13 @@ local xresources = require("beautiful.xresources")
 
 local utils = {}
 
-function utils.debug_notify(text)
+function utils.create_notification(text, title, position)
+    title = title or "Debug notification"
+    position = position or "top_middle"
     naughty.notify({
-        title = "Debug notification",
+        title = title,
         text = text,
-        position = "top_middle"
+        position = position
     })
 end
 
@@ -281,7 +283,7 @@ Send action to mpd server
 
 -]]
 function utils.mpd_action(action)
-    cmd = "mpc " .. action .. " --host " .. USER.mpd_server
+    local cmd = "mpc " .. action .. " --host " .. USER.mpd_server
     awful.spawn.easy_async_with_shell(cmd,
     function(stdout)
         naughty.notify { text = stdout }

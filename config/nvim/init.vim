@@ -72,7 +72,7 @@ Plug 'shaunsingh/moonlight.nvim'      " Fork of material
 "" }}}
 
 "" Misc: {{{
-Plug 'vimwiki/vimwiki'              " Personal Wiki for Vim
+" Plug 'vimwiki/vimwiki'              " Personal Wiki for Vim
 Plug 'mattn/calendar-vim'           " Calendar utilities
 "" }}}
 
@@ -256,16 +256,16 @@ nnoremap <Leader>f :Files<CR>
 let g:lightline = {
             \ 'colorscheme': 'powerline',
             \ 'active': {
-                \   'left': [ [ 'mode', 'paste' ],
-                \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-                \ },
-                \ 'component_function': {
-                    \   'gitbranch': 'Branch',
-                    \   'filename': 'LightlineFilename',
-                    \   'filetype': 'MyFiletype',
-                    \   'fileformat': 'MyFileformat',
-                    \ },
-                    \ }
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'Branch',
+            \   'filename': 'LightlineFilename',
+            \   'filetype': 'MyFiletype',
+            \   'fileformat': 'MyFileformat',
+            \ },
+            \ }
 
 function! Branch()
     return ' ' . FugitiveHead()
@@ -499,12 +499,12 @@ nmap <Leader>cb :CMakeBuild<cr>
 "" }}}
 
 "" VimWiki: {{{
-set nocompatible
-filetype plugin on
-let g:vimwiki_folding='expr'
+" set nocompatible
+" filetype plugin on
+" let g:vimwiki_folding='expr'
 
-let g:vimwiki_list = [{'path': '~/Documents/Notes',
-            \ 'syntax': 'markdown', 'ext':'.md',}]
+" let g:vimwiki_list = [{'path': '~/Documents/Notes',
+" \ 'syntax': 'markdown', 'ext':'.md',}]
 "" }}}
 
 "" Markdown Preview: {{{

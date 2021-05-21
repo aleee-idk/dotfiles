@@ -41,6 +41,7 @@ flex
 fortune-mod
 gdb
 geeqie
+gn
 go
 godot
 gparted
@@ -58,8 +59,6 @@ krita
 libpdfium-nojs
 libreoffice-still
 libunarr-bin
-lightdm-gtk-greeter-settings
-lightdm-webkit-theme-litarvan
 lutris
 lxappearance
 mcomix
@@ -74,7 +73,7 @@ neofetch
 neovide
 net-tools
 networkmanager-dmenu-git
-nodejs-nativefier
+ninja
 obs-studio
 ookla-speedtest-bin
 pacman-contrib
@@ -110,6 +109,7 @@ tree
 ttf-times-new-roman
 udiskie
 v4l2loopback-dkms
+vimiv-qt
 virtualbox
 visual-studio-code-bin
 whatsapp-nativefier
@@ -137,13 +137,13 @@ xorg-xcursorgen
 xorg-xdriinfo
 xorg-xev
 xorg-xgamma
+xorg-xinit
 xorg-xinput
 xorg-xkbevd
 xorg-xkbutils
 xorg-xkill
 xorg-xlsatoms
 xorg-xlsclients
-xorg-xmodmap
 xorg-xpr
 xorg-xrefresh
 xorg-xvinfo

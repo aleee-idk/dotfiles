@@ -57,6 +57,10 @@ function apps.open_bookmark()
     awful.spawn.with_shell(USER.open_bookmark)
 end
 
+function apps.password_manager()
+    awful.spawn.with_shell(USER.password_manager)
+end
+
 -- ***** Utilities ***** --
 
 -- Focused window screenshot
