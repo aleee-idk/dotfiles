@@ -64,6 +64,7 @@ lxappearance
 mcomix
 mingw-w64-gcc
 mkinitcpio-numlock
+mon2cam-git
 mpc
 mpd
 multilockscreen
@@ -86,6 +87,7 @@ playerctl
 polybar
 python-iwlib
 python-pywal
+python-sphinx
 qt5ct
 qutebrowser
 ranger
@@ -108,8 +110,7 @@ transmission-remote-gtk
 tree
 ttf-times-new-roman
 udiskie
-v4l2loopback-dkms
-vimiv-qt
+vimiv-qt-git
 virtualbox
 visual-studio-code-bin
 whatsapp-nativefier

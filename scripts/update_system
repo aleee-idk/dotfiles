@@ -86,6 +86,9 @@ paru -cc
 echo -e "Updating System"
 paru
 
+# Update Python packages
+pip freeze --user | cut -d'=' -f1 | xargs -n1 pip install -U
+
 # Update nvim packages
 echo -e "Updating vim plugins"
 nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugUpdate"
@@ -143,16 +146,22 @@ sort_wallpapers.py
 
 ## 7.- Sort Wallpapers }}}
 
-## 8.- Create Restore Point {{{
+## 8.- Change Wallpapers {{{
+
+set_wallpapers.sh
+
+## 8.- Change Wallpapers }}}
+
+## 9.- Create Restore Point {{{
 
 if $do_backup; then
 
     sudo timeshift --create --comment "$backup_message"
 fi
 
-## 8.- Create Restore Point }}}
+## 9.- Create Restore Point }}}
 
-## 9.- Delete Olds Restore Points {{{
+## 10.- Delete Olds Restore Points {{{
 
 # Get Snapshots
 snapshots_lines=$(sudo timeshift --list | sed -n '/^-.*-$/, $ p' | sed -n '2,$ p')
@@ -165,11 +174,11 @@ done
 (( ${#snapshots[@]} > $max_backups )) && sudo timeshift --delete --snapshot "${snapshots[0]}"
 
 
-## 9.- Delete Olds Restore Points }}}
+## 10.- Delete Olds Restore Points }}}
 
-## 10.- Resume Output {{{
+## 11.- Resume Output {{{
 
 (( "${#git_untracked[@]}" > 0 )) && echo -e "There were $red${#git_untracked[@]}$reset files, please check it out."
 
-## 10.- Resume Output }}}
+## 11.- Resume Output }}}
 
