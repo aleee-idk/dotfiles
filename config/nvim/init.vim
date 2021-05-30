@@ -32,6 +32,7 @@ Plug 'iamcco/markdown-preview.nvim', " Markdown live preview in web browser
 Plug 'mzlogin/vim-markdown-toc'     " Markdown table of contents
 Plug 'mattn/webapi-vim'             " An Interface to WEB APIs.
 Plug 'habamax/vim-godot'        " Godot support for Vim
+Plug 'tmhedberg/simpylfold'   " Fold support for Python
 Plug 'SirVer/ultisnips'         " Snippets
 Plug 'honza/vim-snippets'
 

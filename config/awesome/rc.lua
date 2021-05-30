@@ -7,9 +7,6 @@ local naughty = require("naughty")
 -- Hide tmux keybinds from the hotkeys popup
 package.loaded['awful.hotkeys_popup.keys.tmux'] = {}
 
--- local auto_start = true
-
-
 -- ##### User Variables ##### --
 
 --[[
@@ -100,31 +97,31 @@ require("custom_objects.bars.default")
 -- ##### Wallpaper ##### --
 -- In case you need it, if you don't manage the wallpaper by your own
 
--- local function set_wallpaper(s)
--- Wallpaper
--- if beautiful.wallpaper then
--- local wallpaper = beautiful.wallpaper
--- -- If wallpaper is a function, call it with the screen
--- if type(wallpaper) == "function" then
---     wallpaper = wallpaper(s)
--- end
+local function set_wallpaper(s)
+    if beautiful.wallpaper then
+        local wallpaper = beautiful.wallpaper
+        -- If wallpaper is a function, call it with the screen
+        if type(wallpaper) == "function" then
+            wallpaper = wallpaper(s)
+        end
 
--- >> Method 1: Built in wallpaper function
-gears.wallpaper.fit(beautiful.wallpaper, s)
-gears.wallpaper.maximized(beautiful.wallpaper, s)
+        -- >> Method 1: Built in wallpaper function
+        -- gears.wallpaper.fit(beautiful.wallpaper, s)
+        -- gears.wallpaper.maximized(beautiful.wallpaper, s)
 
--- >> Method 2: Set theme's wallpaper with feh
---awful.spawn.with_shell("feh --bg-fill " .. wallpaper)
+        -- >> Method 2: Set theme's wallpaper with feh
+        --awful.spawn.with_shell("feh --bg-fill " .. wallpaper)
 
--- >> Method 3: Set last wallpaper with feh
--- awful.spawn.with_shell(os.getenv("HOME") .. "/.fehbg")
--- end
--- end
+        -- >> Method 3: Set last wallpaper with feh
+        awful.spawn.with_shell(os.getenv("HOME") .. "/.fehbg")
+        awful.spawn.with_shell("wal -n -R")
+    end
+end
 -- Set wallpaper (I do it via script)
--- awful.screen.connect_for_each_screen(function(s)
---     -- Wallpaper
---     set_wallpaper(s)
--- end)
+awful.screen.connect_for_each_screen(function(s)
+    -- Wallpaper
+    set_wallpaper(s)
+end)
 
 -- ##### Tags ##### --
 
@@ -194,11 +191,16 @@ end)
 
 -- ##### Autostart Apps #####
 
-if auto_start then
-    for app = 1, #auto_start_apps do
-        awful.spawn(auto_start_apps[app])
+local uptime = 15
+-- If uptime is greater than "uptime" minutes autostart apps, this prevent run again
+-- apps whe awesome is restarted
+awful.spawn.easy_async("cat /proc/uptime | awk '{print $1}'", function(stdout)
+    if tonumber(stdout) * 60 < uptime then
+        for app = 1, #auto_start_apps do
+            awful.spawn(auto_start_apps[app])
+        end
     end
-end
+end)
 
 -- ##### Error Handling ##### --
 

@@ -2,6 +2,7 @@ activitywatch-bin
 alsa-utils
 android-file-transfer
 android-udev
+ant
 arandr
 archiso
 autoconf
@@ -43,6 +44,7 @@ gdb
 geeqie
 gn
 go
+go-tools
 godot
 gparted
 grub
@@ -67,6 +69,7 @@ mkinitcpio-numlock
 mon2cam-git
 mpc
 mpd
+mpv
 multilockscreen
 ncdu
 ncmpcpp
@@ -74,6 +77,7 @@ neofetch
 neovide
 net-tools
 networkmanager-dmenu-git
+newsboat
 ninja
 obs-studio
 ookla-speedtest-bin
@@ -85,9 +89,9 @@ pavucontrol
 picom-git
 playerctl
 polybar
+python-docutils
 python-iwlib
 python-pywal
-python-sphinx
 qt5ct
 qutebrowser
 ranger
@@ -104,6 +108,7 @@ teams
 telegram-desktop
 termdown
 timeshift
+tldr
 transmission-gtk
 transmission-qt
 transmission-remote-gtk
@@ -153,3 +158,4 @@ xorg-xwd
 xorg-xwud
 xournalpp
 xss-lock
+yarn

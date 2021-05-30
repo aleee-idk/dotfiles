@@ -26,9 +26,10 @@ function usage ()
     echo "Usage :  $0 [options] [--]
 
     Options:
-    -h|help       Display this message
-    -G|no-git     Don't update git repos
-    -B|no-backup  Don't create a backup"
+    -h|help         Display this message
+    -G|no-git       Don't update git repos
+    -B|no-backup    Don't create a backup
+    -W|no-wallpaper Don't change the wallpaper"
 
 }    # ----------  end of function usage  ----------
 
@@ -38,6 +39,7 @@ function usage ()
 
 do_git=true
 do_backup=true
+do_wallpaper=true
 
 while getopts ":hBG" opt
 do
@@ -48,6 +50,8 @@ do
         G|no-git   ) do_git=false ;;
 
         B|no-backup ) do_backup=false ;;
+
+        W|no-wallpaper ) do_wallpaper=false ;;
 
         * )  echo -e "\n  Option does not exist : OPTARG\n"
             usage; exit 1   ;;
@@ -148,7 +152,9 @@ sort_wallpapers.py
 
 ## 8.- Change Wallpapers {{{
 
-set_wallpapers.sh
+if $do_wallpaper; then
+    set_wallpapers.sh
+fi
 
 ## 8.- Change Wallpapers }}}
 

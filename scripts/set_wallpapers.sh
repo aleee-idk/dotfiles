@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 
+## First Argument to filter specific folder
+
 result_size=20
 
 source "$HOME/dotfiles/scripts/env_variables.sh"
@@ -12,22 +14,20 @@ for dep in "${dependencies[@]}"; do
         exit 1
     fi
 done
-
 finish="n"
 
 while true; do
-    # Get wallpapers and convert the string output in array
-    # This works even if the path of some wallpapers contain a space
-    output=$(find "$wallpapers" -path "*Fondos_PC*" | shuf -n "$result_size")
-    readarray -t finded_wallpapers <<<"$output"
 
-    # Open the random wallpapers for selection
-    # vimiv handle path with space itself.
+    echo -e "Select at least 1 wallpaper to use\nThe first wallpaper will set the color scheme and be set in the primary monitor (if you have more than one)"
 
-    echo -e "Select at least 1 wallpaper to use
-    The first wallpaper will set the color scheme and be set in the primary monitor (if you have more than one)"
+    # Use vimiv "mark-print" to get the path of the images, you can create a keybinding like
+    # Q : mark-print && quit
+    readarray -t selected_wallpapers < <(find "$wallpapers" -path "*$1*Fondos_PC*" | shuf -n "$result_size" | vimiv -i --command "enter thumbnail" --set thumbnail.size 256 2>/dev/null)
 
-    selected_wallpapers=($(vimiv --command "enter thumbnail" -o %m --set thumbnail.size 256 --set read-only "${finded_wallpapers[@]}" 2>/dev/null))
+    if (( "${#selected_wallpapers[@]}" == 0 )); then
+        echo "Select at least 1 wallpaper"
+        continue
+    fi
 
     wal -n -i "${selected_wallpapers[0]}"
 
@@ -38,6 +38,8 @@ while true; do
     read -n 1
     [[ $REPLY =~ ^[yY]$ ]] && break
 done
+
+awesome-client 'awesome.restart()'
 
 # Change colorscheme
 # custom_pywal.py "$1"
