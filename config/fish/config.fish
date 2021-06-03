@@ -1,5 +1,6 @@
 # PATH
 set -a PATH ~/dotfiles/scripts
+set -a PATH ~/.local/bin
 
 # Alias
 

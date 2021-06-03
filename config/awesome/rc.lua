@@ -73,6 +73,7 @@ USER = {
 }
 
 local auto_start_apps = {
+    -- Lock Screen
     "telegram-desktop",
     "whatsapp-nativefier",
     "discord",
@@ -191,16 +192,9 @@ end)
 
 -- ##### Autostart Apps #####
 
-local uptime = 15
--- If uptime is greater than "uptime" minutes autostart apps, this prevent run again
--- apps whe awesome is restarted
-awful.spawn.easy_async("cat /proc/uptime | awk '{print $1}'", function(stdout)
-    if tonumber(stdout) * 60 < uptime then
-        for app = 1, #auto_start_apps do
-            awful.spawn(auto_start_apps[app])
-        end
-    end
-end)
+for app = 1, #auto_start_apps do
+    awful.spawn.once(auto_start_apps[app], {})
+end
 
 -- ##### Error Handling ##### --
 

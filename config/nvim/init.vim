@@ -19,6 +19,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'         " General-purpose command-line fuzzy finder.
 Plug 'voldikss/vim-floaterm'        " Neovim floating terminalPlug 'antoinemadec/FixCursorHold.nvim'
 Plug 'ActivityWatch/aw-watcher-vim' " Time tracker
+Plug 'mhinz/vim-startify'           " Start Page
 "" }}}
 
 "" Code Utilities: {{{
@@ -243,8 +244,9 @@ nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
 "" FZF {{{
 
-nnoremap <Leader>g :GFiles<CR>
-nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>ff :Files<CR>
+nnoremap <Leader>fg :GFiles<CR>
+nnoremap <Leader>fb :Buffers<CR>
 
 " command! -bang -nargs=? -complete=dir Files
 "   \ call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
@@ -423,14 +425,14 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
+" if has('nvim-0.4.0') || has('patch-8.2.0750')
+"     nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"     nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"     inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+"     inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+"     vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"     vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+" endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
@@ -474,16 +476,26 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Format on save
 au BufWrite * :Autoformat
+autocmd FileType txt,tex,text,yaml,yml,md let b:autoformat_autoindent=0
 
 "" }}}
 
 "" Ultisnips {{{
 
-" This collaps with completion plugins like COC
-let g:UltiSnipsExpandTrigger="<c-tab>"
+" Default config
+" let g:UltiSnipsExpandTrigger="<c-tab>"
 
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsJumpForwardTrigger="<leader>n"
+" let g:UltiSnipsJumpBackwardTrigger="<leader>b"
+
+
+" This works for me with COC
+let g:UltiSnipsExpandTrigger = '<Nop>'
+
+imap <C-Tab> <Plug>(coc-snippets-expand)
+let g:coc_snippet_next = '<C-n>'
+let g:coc_snippet_prev = '<C-b>'
+
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"

@@ -9,6 +9,7 @@ autoconf
 automake
 autopep8
 autorandr
+autotrash
 awesome
 awmtt
 base
@@ -33,6 +34,7 @@ docker-compose
 drawio-desktop
 droidcam
 dunst
+element-desktop
 evtest
 exa
 firefox
@@ -40,11 +42,9 @@ fish
 flameshot
 flex
 fortune-mod
-gdb
 geeqie
 gn
 go
-go-tools
 godot
 gparted
 grub
@@ -89,13 +89,13 @@ pavucontrol
 picom-git
 playerctl
 polybar
-python-docutils
 python-iwlib
 python-pywal
 qt5ct
 qutebrowser
 ranger
 raw-thumbnailer
+rust
 sane-airscan
 scrot
 skanlite
