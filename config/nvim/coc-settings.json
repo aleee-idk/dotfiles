@@ -21,6 +21,9 @@
             "filetypes": ["sh"],
             "ignoredRootPaths": ["~"]
         }
+    },
+    "markdownlint.config": {
+        "default": true,
+        "line-length": true
     }
-
 }

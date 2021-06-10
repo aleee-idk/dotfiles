@@ -1,8 +1,8 @@
+acpi
 activitywatch-bin
 alsa-utils
 android-file-transfer
 android-udev
-ant
 arandr
 archiso
 autoconf
@@ -22,8 +22,8 @@ blueberry
 bluez-utils
 bmon
 bpython
+brave-bin
 ccls
-cmake
 cmatrix
 cowsay
 cups-pdf
@@ -61,6 +61,7 @@ krita
 libpdfium-nojs
 libreoffice-still
 libunarr-bin
+luarocks
 lutris
 lxappearance
 mcomix
@@ -115,9 +116,11 @@ transmission-remote-gtk
 tree
 ttf-times-new-roman
 udiskie
+vala
 vimiv-qt-git
 virtualbox
 visual-studio-code-bin
+vlc
 whatsapp-nativefier
 wkhtmltopdf
 xdg-user-dirs
@@ -158,4 +161,3 @@ xorg-xwd
 xorg-xwud
 xournalpp
 xss-lock
-yarn

@@ -192,9 +192,9 @@ end)
 
 -- ##### Autostart Apps #####
 
-for app = 1, #auto_start_apps do
-    awful.spawn.once(auto_start_apps[app], {})
-end
+-- for app = 1, #auto_start_apps do
+--     awful.spawn.once(auto_start_apps[app], {})
+-- end
 
 -- ##### Error Handling ##### --
 

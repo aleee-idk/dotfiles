@@ -8,6 +8,9 @@ local dpi = xresources.apply_dpi
 local helpers = require("helpers")
 local keys = require("config.keys")
 
+local battery_widget = require("widgets.battery-widget.battery")
+local volume_widget = require("widgets.volume-widget.volume")
+
 
 -- ##### Widgets ##### --
 
@@ -189,6 +192,11 @@ function(s)
             layout = wibox.layout.align.horizontal,
         },
         {
+            volume_widget(),
+            battery_widget({
+                show_current_level = true,
+                display_notification = true
+            }),
             s.clock,
             s.mylayoutbox,
             s.toggle_bar,

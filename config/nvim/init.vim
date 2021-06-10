@@ -476,7 +476,8 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Format on save
 au BufWrite * :Autoformat
-autocmd FileType txt,tex,text,yaml,yml,md let b:autoformat_autoindent=0
+autocmd FileType txt,tex,text,yaml,yml,md,markdown let b:autoformat_autoindent=0
+autocmd FileType md,markdown let b:autoformat_retab=0
 
 "" }}}
 
