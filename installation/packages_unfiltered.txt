@@ -5,6 +5,7 @@ android-file-transfer
 android-udev
 arandr
 archiso
+asciidoc
 autoconf
 automake
 autopep8
@@ -42,9 +43,11 @@ fish
 flameshot
 flex
 fortune-mod
+gdb
 geeqie
 gn
 go
+gobject-introspection
 godot
 gparted
 grub
@@ -54,6 +57,7 @@ htop
 i3-battery-popup
 i3blocks
 inotify-tools
+itstool
 joplin-desktop
 kdeconnect
 kitty
@@ -65,6 +69,7 @@ luarocks
 lutris
 lxappearance
 mcomix
+meson
 mingw-w64-gcc
 mkinitcpio-numlock
 mon2cam-git
@@ -79,7 +84,6 @@ neovide
 net-tools
 networkmanager-dmenu-git
 newsboat
-ninja
 obs-studio
 ookla-speedtest-bin
 pacman-contrib
@@ -96,7 +100,6 @@ qt5ct
 qutebrowser
 ranger
 raw-thumbnailer
-rust
 sane-airscan
 scrot
 skanlite

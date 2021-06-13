@@ -1,7 +1,6 @@
 -- Main file --
 local awful = require("awful")
 local beautiful = require("beautiful")
-local gears = require("gears")
 local naughty = require("naughty")
 
 -- Hide tmux keybinds from the hotkeys popup
@@ -72,6 +71,11 @@ USER = {
     },
 }
 
+THEME = {
+    theme                   =       os.getenv("HOME") .. "/.config/awesome/themes/default.lua",
+    bar                     =       "custom_objects.bars.default",
+}
+
 local auto_start_apps = {
     -- Lock Screen
     "telegram-desktop",
@@ -85,15 +89,8 @@ awful.util.shell = "/usr/bin/bash"
 -- ##### Themes ##### --
 
 require("awful.autofocus")
-
--- Load theme, see themes directory for a list of themes
-beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/default.lua")
-
--- ##### Custom Widgets and Stuff ##### --
-
--- Status bar(s)
-require("custom_objects.bars.default")
-
+beautiful.init(THEME.theme)
+require(THEME.bar)
 
 -- ##### Wallpaper ##### --
 -- In case you need it, if you don't manage the wallpaper by your own
@@ -192,9 +189,11 @@ end)
 
 -- ##### Autostart Apps #####
 
--- for app = 1, #auto_start_apps do
---     awful.spawn.once(auto_start_apps[app], {})
--- end
+if startup then
+    for app = 1, #auto_start_apps do
+        awful.spawn.once(auto_start_apps[app], {})
+    end
+end
 
 -- ##### Error Handling ##### --
 

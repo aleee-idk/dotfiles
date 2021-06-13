@@ -5,6 +5,12 @@ local xresources = require("beautiful.xresources")
 
 local utils = {}
 
+--[[
+Use naughty.notify to create a notification
+@param text (str): notification main text.
+@param title (str): notification title.
+@param position (str): notification position.
+--]]
 function utils.create_notification(text, title, position)
     title = title or "Debug notification"
     position = position or "top_middle"

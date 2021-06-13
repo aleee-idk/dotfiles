@@ -14,59 +14,6 @@ local volume_widget = require("widgets.volume-widget.volume")
 
 -- ##### Widgets ##### --
 
--- ===== Colors ===== --
-
-local tag_colors_empty = {
-    "#00000000",
-    "#00000000",
-    "#00000000",
-    "#00000000",
-    "#00000000",
-    "#00000000",
-    "#00000000",
-    "#00000000",
-    "#00000000",
-    "#00000000"
-}
-
-local tag_colors_urgent = {
-    beautiful.foreground,
-    beautiful.foreground,
-    beautiful.foreground,
-    beautiful.foreground,
-    beautiful.foreground,
-    beautiful.foreground,
-    beautiful.foreground,
-    beautiful.foreground,
-    beautiful.foreground,
-    beautiful.foreground
-}
-
-local tag_colors_focused = {
-    beautiful.color1,
-    beautiful.color5,
-    beautiful.color4,
-    beautiful.color6,
-    beautiful.color2,
-    beautiful.color3,
-    beautiful.color1,
-    beautiful.color5,
-    beautiful.color4,
-    beautiful.color6,
-}
-
-local tag_colors_occupied = {
-    beautiful.color1.."45",
-    beautiful.color5.."45",
-    beautiful.color4.."45",
-    beautiful.color6.."45",
-    beautiful.color2.."45",
-    beautiful.color3.."45",
-    beautiful.color1.."45",
-    beautiful.color5.."45",
-    beautiful.color4.."45",
-    beautiful.color6.."45",
-}
 
 -- Helper function that updates a taglist item
 local update_taglist = function (item, tag, index)
@@ -98,14 +45,21 @@ function(s)
         -- wich tags to include, all, selected or noempty
         filter = awful.widget.taglist.filter.noempty,
         buttons = keys.taglist_buttons,
-        style = {
-            bg_focus = beautiful.wibar_bg_focused ,
-            fg_focus = beautiful.wibar_fg_focused ,
-            bg_urgent = beautiful.wibar_bg_urgent  ,
-            fg_urgent = beautiful.wibar_fg_urgent  ,
-            fg_occupied = beautiful.fg_occupied,
-            bg_occupied = beautiful.bg_occupied,
-        },
+        -- widget_template = {
+        --     {
+        --         {
+        --             id = "index_role",
+        --             widget = wibox.widget.textbox
+        --         },
+        --     },
+        --     id = "background_role",
+        --     widget = wibox.container.background,
+        --     create_callback =function (self, c3, index, objects)
+        --         self:get_children_by_id('index_role')[1].markup = '<b> ' .. index .. ' </b>'
+        --     end
+        -- },
+
+
         -- Look --
         -- layout = {
         -- spacing = 10,
