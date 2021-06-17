@@ -12,4 +12,4 @@ fi
 
 cp "${finded_wallpapers[@]}" "/tmp/lock_wallpapers"
 
-multilockscreen -u "/tmp/lock_wallpapers"
+multilockscreen -u "/tmp/lock_wallpapers" --show-layout

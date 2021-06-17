@@ -45,19 +45,22 @@ function(s)
         -- wich tags to include, all, selected or noempty
         filter = awful.widget.taglist.filter.noempty,
         buttons = keys.taglist_buttons,
-        -- widget_template = {
-        --     {
-        --         {
-        --             id = "index_role",
-        --             widget = wibox.widget.textbox
-        --         },
-        --     },
-        --     id = "background_role",
-        --     widget = wibox.container.background,
-        --     create_callback =function (self, c3, index, objects)
-        --         self:get_children_by_id('index_role')[1].markup = '<b> ' .. index .. ' </b>'
-        --     end
-        -- },
+        widget_template = {
+            {
+                {
+                    id     = 'text_role',
+                    widget = wibox.widget.textbox,
+                },
+                left   = 10,
+                right  = 10,
+                top    = 3,
+                bottom = 3,
+                widget = wibox.container.margin
+            },
+            id     = 'background_role',
+            shape              = gears.shape.circle,
+            widget             = wibox.container.background
+        },
 
 
         -- Look --
@@ -151,6 +154,7 @@ function(s)
                 show_current_level = true,
                 display_notification = true
             }),
+            awful.widget.keyboardlayout:new(),
             s.clock,
             s.mylayoutbox,
             s.toggle_bar,

@@ -1,6 +1,5 @@
 acpi
 activitywatch-bin
-alsa-utils
 android-file-transfer
 android-udev
 arandr
@@ -94,9 +93,10 @@ pavucontrol
 picom-git
 playerctl
 polybar
-python-iwlib
 python-pywal
+python-xlib
 qt5ct
+qtile
 qutebrowser
 ranger
 raw-thumbnailer
