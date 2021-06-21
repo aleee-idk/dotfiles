@@ -75,7 +75,7 @@ dgroups_app_rules = init_rules()  # type: List
 main = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = True
 bring_front_click = True
-cursor_warp = True
+cursor_warp = False
 # floating_layout = layout.Floating(float_rules=[
 #     # Run the utility of `xprop` to see the wm class and name of an X client.
 #     Match(wm_class='confirm'),
