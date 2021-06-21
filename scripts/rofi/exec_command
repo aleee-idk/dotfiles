@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cmd=$(rofi -dmenu -p "Enter a command" -l 0)
+
+if [ "$cmd" ]; then
+
+    rofi -e "$($cmd)"
+
+fi

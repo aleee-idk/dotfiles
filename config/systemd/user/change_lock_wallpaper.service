@@ -1,0 +1,9 @@
+[Unit]
+Description=Change the Wallpaper of the lock screen each time the system suspend.
+
+[Service]
+Type=simple
+ExecStart=%h/dotfiles/scripts/set_lock_wallpaper.sh
+
+[Install]
+WantedBy=suspend.target

@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+msg="Welcome to Buku.
+Use <span color='#334433'>Alt+1</span> to search a Bookmark
+Use <span color='#334433'>Alt+2</span> to filter by a tag."
+
+# This work with awesomewm, get the current focused window
+# Need to be change for others WM-DE
+client="$(awesome-client 'return client.focus.class' | awk '{print $2}' | sed "s/\"//g")"
+
+# Send id of a buku entry
+get_url() {
+    echo "$(buku -f 10 -p $1 | sed "/waiting for input/d")"
+}
+
+# First argument need to be a buku entry
+get_id() {
+    echo "$(echo $1 | awk '{print $1}')"
+}
+
+# Get bookmarks of tag of all bookmarks
+get_bookmarks() {
+    if [[ $1 ]]; then
+        echo "$1"
+        content=$(buku --nc --np --st -f 3 "$1" | sed "/waiting for input/d")
+    else
+        content=$(buku --nc -p -f 3 | sed "/waiting for input/d")
+    fi
+
+    echo "$content"
+
+}
+
+# Select tags and get the bookmarks
+get_bookmarks_of_tag() {
+    prompt="Filter tag"
+    content=$(buku --nc --np --st | sed "/waiting for input/d" | awk '{print $2}')
+    tags=$(echo "$content" | rofi -dmenu -multi-select -i -p "$prompt" -mesg "$msg")
+    echo "$(get_bookmarks $tags)"
+}
+
+# Copy first argument to clipboard
+copy_to_clipboard() {
+    echo "$1" | xclip -selection clipboard
+}
+
+# Status have to be in sync with exist status from rofi
+# for custom keybinds goes from 1 on 1 starting on 10
+# Esc and Enter are 0 and 1
+change_mode() {
+    (( $1 == 0  )) && echo "done" && return
+    (( $1 == 1  )) && echo "done" && return
+    (( $1 == 10 )) && echo "get_bookmarks" && return
+    (( $1 == 11 )) && echo "get_tags" && return
+}
+
+# Get all bookmarks
+prompt="Search Bookmark"
+content=$(get_bookmarks "$tag")
+answer=$(echo "$content" | rofi -dmenu -sync -i -p "$prompt" -mesg "$msg")
+
+# Status have to be in sync with exist status from rofi
+# for custom keybinds goes from 1 on 1 starting on 10
+# Esc and Enter are 0 and 1
+status=$?
+
+# Custom Keybinding 1 - Filter bookmarks by tag
+if (( $status == 11 ));then
+    answer=""
+    content=$(get_bookmarks_of_tag)
+    answer=$(echo "$content" | rofi -dmenu -sync -i -p "$prompt" -mesg "$msg")
+    (( $? == 1 )) && exit 1
+
+# Esc - Exit without selection
+elif (( $status == 1 ));then
+    exit 1
+fi
+
+id=$(get_id "$answer")
+url=$(get_url $id)
+
+# Open URL in focused client or copy to clipboard
+if [[ "$client" == "firefox" ]]; then
+    firefox "$url"
+elif [[ "$client" == "qutebrowser" ]]; then
+    qutebrowser "$url"
+else
+    copy_to_clipboard "$url"
+fi
+
+
+"$HOME"/dotfiles/scripts/create_notification.sh "$answer" "Copied to clipboard:" "top_right"
+

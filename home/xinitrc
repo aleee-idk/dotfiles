@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# System Stuff
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+sysresources=/etc/X11/xinit/.Xresources
+sysmodmap=/etc/X11/xinit/.Xmodmap
+
+# merge in defaults and keymaps
+
+if [ -f $sysresources ]; then
+    xrdb -merge $sysresources
+fi
+
+if [ -f $sysmodmap ]; then
+    xmodmap $sysmodmap
+fi
+
+if [ -f "$userresources" ]; then
+    xrdb -merge "$userresources"
+fi
+
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
+fi
+
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+        [ -x "$f" ] && . "$f"
+    done
+    unset f
+fi
+
+# Sensible Env Variables
+$HOME/dotfiles/scripts/sensible_env.sh
+
+# Env Variables
+
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
+# Start Programs
+setxkbmap -layout latam,latam,latam,latam -variant ,dvorak,colemak,colemak-gaming -option grp:shifts_toggle,caps:escape
+
+picom -b --experimental-backends &
+xss-lock -l -- multilockscreen --lock --show-layout &
+lxsession &
+udiskie &
+kdeconnect-indicator &
+wal -R -n &
+
+# Start Window Manager or Desktop Enviroment
+exec awesome
