@@ -15,16 +15,16 @@ common_entries["Cheatsheets"]="$HOME/Documents/Notes/Cheatsheets"
 # Clean common_entries array making sure that the files exist
 declare -xA common_folders
 for i in "${!common_entries[@]}"; do
-    if [[ -d ${common_entries["${i}"]} ]]; then
-        common_folders["${i}"]="${common_entries[${i}]}"
-    fi
+	if [[ -d ${common_entries["${i}"]} ]]; then
+		common_folders["${i}"]="${common_entries[${i}]}"
+	fi
 done
 
 declare -xA common_files
 for i in "${!common_entries[@]}"; do
-    if [[ -f ${common_entries["${i}"]} ]]; then
-        common_files["${i}"]="${common_entries[${i}]}"
-    fi
+	if [[ -f ${common_entries["${i}"]} ]]; then
+		common_files["${i}"]="${common_entries[${i}]}"
+	fi
 done
 
 declare -xA recent_folders=$(cat "$HOME/.dirhistory")

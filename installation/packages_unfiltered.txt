@@ -49,6 +49,7 @@ go
 gobject-introspection
 godot
 gparted
+gperf
 grub
 gtest
 hplip
@@ -64,6 +65,8 @@ krita
 libpdfium-nojs
 libreoffice-still
 libunarr-bin
+lua51-lpeg
+lua51-mpack
 luarocks
 lutris
 lxappearance
