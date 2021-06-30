@@ -42,10 +42,10 @@ fish
 flameshot
 flex
 fortune-mod
-gdb
 geeqie
 gn
 go
+go-tools
 gobject-introspection
 godot
 gparted
@@ -83,9 +83,9 @@ ncdu
 ncmpcpp
 neofetch
 neovide
-net-tools
 networkmanager-dmenu-git
 newsboat
+nyx
 obs-studio
 ookla-speedtest-bin
 pacman-contrib
@@ -96,13 +96,16 @@ pavucontrol
 picom-git
 playerctl
 polybar
+python-docutils
 python-pywal
 python-xlib
+qmk
 qt5ct
 qtile
 qutebrowser
 ranger
 raw-thumbnailer
+rust
 sane-airscan
 scrot
 skanlite
@@ -116,6 +119,7 @@ telegram-desktop
 termdown
 timeshift
 tldr
+torbrowser-launcher
 transmission-gtk
 transmission-qt
 transmission-remote-gtk
