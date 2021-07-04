@@ -37,11 +37,13 @@ dunst
 element-desktop
 evtest
 exa
+fd
+figlet
 firefox
-fish
 flameshot
 flex
 fortune-mod
+fzf
 geeqie
 gn
 go
@@ -49,7 +51,6 @@ go-tools
 gobject-introspection
 godot
 gparted
-gperf
 grub
 gtest
 hplip
@@ -65,8 +66,7 @@ krita
 libpdfium-nojs
 libreoffice-still
 libunarr-bin
-lua51-lpeg
-lua51-mpack
+lolcat
 luarocks
 lutris
 lxappearance
@@ -135,6 +135,7 @@ whatsapp-nativefier
 wkhtmltopdf
 xdg-user-dirs
 xf86-input-synaptics
+xf86-input-xwiimote-git
 xf86-video-intel
 xf86-video-vesa
 xorg-bdftopcf

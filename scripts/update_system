@@ -3,7 +3,7 @@
 
 ## Variables {{{
 
-dependencies=(git ranger timeshift gio)
+dependencies=(git ranger timeshift gio fd)
 
 max_backups=5
 backup_message="After Update Backup"
@@ -23,13 +23,13 @@ reset="\e[0m"
 
 function usage ()
 {
-    echo "Usage :  $0 [options] [--]
+	echo "Usage :  $0 [options] [--]
 
-    Options:
-    -h|help         Display this message
-    -G|no-git       Don't update git repos
-    -B|no-backup    Don't create a backup
-    -W|no-wallpaper Don't change the wallpaper"
+	Options:
+	-h|help         Display this message
+	-G|no-git       Don't update git repos
+	-B|no-backup    Don't create a backup
+	-W|no-wallpaper Don't change the wallpaper"
 
 }    # ----------  end of function usage  ----------
 
@@ -43,31 +43,31 @@ do_wallpaper=true
 
 while getopts ":hBG" opt
 do
-    case ${opt} in
+	case ${opt} in
 
-        h|help     )  usage; exit 0   ;;
+		h|help     )  usage; exit 0   ;;
 
-        G|no-git   ) do_git=false ;;
+		G|no-git   ) do_git=false ;;
 
-        B|no-backup ) do_backup=false ;;
+		B|no-backup ) do_backup=false ;;
 
-        W|no-wallpaper ) do_wallpaper=false ;;
+		W|no-wallpaper ) do_wallpaper=false ;;
 
-        * )  echo -e "\n  Option does not exist : OPTARG\n"
-            usage; exit 1   ;;
+		* )  echo -e "\n  Option does not exist : OPTARG\n"
+			usage; exit 1   ;;
 
-        esac    # --- end of case ---
-    done
+		esac    # --- end of case ---
+	done
 
 ## Variables }}}
 
 ## 0.- Initialization {{{
 
 for dep in "${dependencies[@]}"; do
-    if ! command -v "$dep" &> /dev/null; then
-        echo -e "$red${dep}$reset not fount!"
-        exit 1
-    fi
+	if ! command -v "$dep" &> /dev/null; then
+		echo -e "$red${dep}$reset not fount!"
+		exit 1
+	fi
 done
 
 ## 0.- Initialization }}}
@@ -93,13 +93,14 @@ paru
 # Update Python packages
 pip freeze --user | cut -d'=' -f1 | xargs -n1 pip install -U
 
-# Update nvim packages
-echo -e "Updating vim plugins"
-nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugUpdate"
+# Update npm pacages
+sudo npm update -g
 
-# update vim-plug
-echo -e "Updating vim-plug"
-nvim -es -u ~/.config/nvim/init.vim -i NONE -c "PlugUpgrade"
+# Update nvim packages
+# PLUG=no disable some plugins
+echo -e "Updating vim plugins"
+PLUG=no nvim "+PackerSync" "+au BufLeave * qa!"
+
 
 ## 2.- Update System  }}}
 
@@ -123,22 +124,26 @@ paru -Sc --noconfirm && paccache -rk2
 # )
 
 # ~/.config
-# lista=$(git ls-tree --full-tree --name-only --full-name HEAD | tr "\n" ",")
+# TODO
 
 ## 4.- Clean Custom Folders }}}
 
 ## 5.- Clean Trash {{{
+
+## Autotrash do this automatically c:
 
 ## 5.- Clean Trash }}}
 
 ## 6.- Update Dotfiles {{{
 
 if $do_git; then
-    git_untracked=($(echo "$(git status --porcelain)" | awk '$1 == "??" {print $2}'))
+	cd "$dotfile_folder"
+	git_untracked=($(echo "$(git status --porcelain)" | awk '$1 == "??" {print $2}'))
 
-    cd "$HOME/dotfiles"
-    git commit -a -m "update $(date +'%m-%d-%Y')"
-    git push origin master
+	git commit -a -m "update $(date +'%m-%d-%Y')"
+	git push origin master
+
+	cd "$HOME"
 fi
 
 ## 6.- Update Dotfiles }}}
@@ -147,13 +152,12 @@ fi
 
 sort_wallpapers.py
 
-
 ## 7.- Sort Wallpapers }}}
 
 ## 8.- Change Wallpapers {{{
 
 if $do_wallpaper; then
-    set_wallpapers.sh
+	set_wallpapers.sh
 fi
 
 ## 8.- Change Wallpapers }}}
@@ -161,8 +165,7 @@ fi
 ## 9.- Create Restore Point {{{
 
 if $do_backup; then
-
-    sudo timeshift --create --comment "$backup_message"
+	sudo timeshift --create --comment "$backup_message"
 fi
 
 ## 9.- Create Restore Point }}}
@@ -174,11 +177,14 @@ snapshots_lines=$(sudo timeshift --list | sed -n '/^-.*-$/, $ p' | sed -n '2,$ p
 snapshots=()
 
 for line in "$snapshots_lines"; do
-    snapshots+=($(echo "$line" | awk '{print $3}'))
+	snapshots+=($(echo "$line" | awk '{print $3}'))
 done
 
-(( ${#snapshots[@]} > $max_backups )) && sudo timeshift --delete --snapshot "${snapshots[0]}"
+snapshot_diff=$((${#snapshots[@]} - $max_backups - 1))
 
+for i in seq 0 $snapshot_diff; do
+	sudo timeshift --delete --snapshot "${snapshots[$i]}"
+done
 
 ## 10.- Delete Olds Restore Points }}}
 

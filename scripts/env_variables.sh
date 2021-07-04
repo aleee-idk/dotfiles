@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 export terminal_directory="kitty --detach -d"
-export editor="--class editor nvim"
 export dotfile_folder="$HOME/dotfiles/"
 export config_folder="$HOME/.config/"
 export wallpapers="$HOME/Nextcloud/principal/Imagenes/Waifus"
+
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export EDITOR="nvim"
 
 declare -A common_entries
 common_entries[dotfiles]="$dotfile_folder"
