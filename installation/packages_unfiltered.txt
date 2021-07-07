@@ -93,7 +93,7 @@ pamac-aur
 paprefs
 paru
 pavucontrol
-picom-git
+picom-ibhagwan-git
 playerctl
 polybar
 python-docutils

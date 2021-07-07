@@ -39,14 +39,15 @@ $HOME/dotfiles/scripts/sensible_env.sh
 source "$HOME/dotfiles/scripts/env_variables.sh"
 
 # Start Programs
-setxkbmap -layout latam,latam,latam,latam -variant ,dvorak,colemak,colemak-gaming -option grp:shifts_toggle,caps:escape
+setxkbmap -layout latam -option grp:shifts_toggle,caps:escape
 
 picom -b --experimental-backends &
 xss-lock -l -- multilockscreen --lock --show-layout &
 lxsession &
 udiskie &
 kdeconnect-indicator &
-wal -R -n &
+$HOME/.fehbg
+# wal -R -n &
 
 # Start Window Manager or Desktop Enviroment
 exec awesome

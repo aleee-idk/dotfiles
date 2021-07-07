@@ -10,14 +10,14 @@ choice=$(printf '%s\n' "${entries[@]}" | sort | rofi -dmenu -p 'Edit config')
 
 # What to do when/if we choose a file to edit.
 if [ "$choice" ]; then
-    cfg=$(printf '%s\n' "${common_entries["${choice}"]}")
-    if [[ -n "$cfg" ]]; then
-        $terminal_directory "$cfg" $editor
-    else
-        $terminal_directory "$choice" $editor
-    fi
+	cfg=$(printf '%s\n' "${common_entries["${choice}"]}")
+	if [[ -n "$cfg" ]]; then
+		$terminal_directory "$cfg" $EDITOR
+	else
+		$terminal_directory "$choice" $EDITOR
+	fi
 
 # What to do if we just escape without choosing anything.
 else
-    echo "Program terminated." && exit 0
+	echo "Program terminated." && exit 0
 fi

@@ -7,6 +7,8 @@ export wallpapers="$HOME/Nextcloud/principal/Imagenes/Waifus"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export EDITOR="nvim"
 
+export SUDO_PROMP="\e[0;91mPsw Please!\e[0m "
+
 declare -A common_entries
 common_entries[dotfiles]="$dotfile_folder"
 common_entries[.config]="$config_folder"
