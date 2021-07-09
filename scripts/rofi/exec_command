@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
-cmd=$(rofi -dmenu -p "Enter a command" -l 0)
+# Create better theme for this
+rofi_theme="-theme $HOME/.config/rofi/themes/sidebar.rasi"
+
+cmd=$(rofi $rofi_theme -dmenu -p "Enter a command" -l 0)
 
 if [ "$cmd" ]; then
 
-    rofi -e "$($cmd)"
+    rofi $rofi_theme -e "$($cmd)"
 
 fi

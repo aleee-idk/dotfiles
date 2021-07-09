@@ -43,13 +43,14 @@ USER = {
 	screenshot_gui          =       "flameshot gui",
 
 	-- Launchers --
-	app_launcher            =       "~/.config/rofi/launchers/misc/launcher.sh",
+	app_launcher            =       "rofi -no-lazy-grab -show drun -modi drun -theme " .. os.getenv("HOME") .. "/.config/rofi/themes/fullscreen_transparent.rasi",
 
 	mpd                     =       terminal("ncmpcpp", "music"),
 	mpd_server              =       "10.0.0.10",
 
 	powermenu               =       os.getenv("HOME") .. "/dotfiles/config/rofi/applets/menu/powermenu.sh",
 	run_command             =       os.getenv("HOME") .. "/dotfiles/scripts/rofi/exec_command",
+	run_rofi_scripts		=		os.getenv("HOME") .. "/dotfiles/scripts/run_rofi_scripts.sh",
 	open_bookmark           =       os.getenv("HOME") .. "/dotfiles/scripts/rofi/buku",
 	password_manager        =       "bwmenu",
 
@@ -79,9 +80,8 @@ THEME = {
 local auto_start_apps = {
 	-- Lock Screen
 	"telegram-desktop",
-	"whatsapp-nativefier",
 	"discord",
-	USER.mpd,
+	os.getenv("HOME") .. "/.fehbg",
 }
 
 awful.util.shell = "/usr/bin/bash"
@@ -151,8 +151,8 @@ awful.screen.connect_for_each_screen(function(s)
 		l.spiral.dwindle, -- 5 --
 		l.spiral.dwindle, -- 6 --
 		l.spiral.dwindle, -- 7 --
-		l.spiral.dwindle, -- 8 --
-		l.max,            -- 9 --
+		l.max,            -- 8 --
+		l.spiral.dwindle, -- 9 --
 		l.spiral.dwindle  -- 0 --
 	}
 
@@ -183,14 +183,6 @@ awful.screen.connect_for_each_screen(function(s)
 	-- ...
 end)
 
--- ##### Autostart Apps #####
-
-if startup then
-	for app = 1, #auto_start_apps do
-		awful.spawn.once(auto_start_apps[app], {})
-	end
-end
-
 -- ##### Error Handling ##### --
 
 if awesome.startup_errors then
@@ -218,3 +210,11 @@ end
 
 awful.rules.rules = require("config.rules")
 require("config.signals")
+
+-- ##### Autostart Apps #####
+
+awesome.connect_signal("startup", function ()
+	for app = 1, #auto_start_apps do
+		awful.spawn.once(auto_start_apps[app], {})
+	end
+end)

@@ -1,0 +1,85 @@
+/* Fullscreen theme with transparent background thought for application launcher */
+
+
+configuration {
+	no-lazy-grab: true;
+}
+
+
+* {
+	// find cool font
+	font: "Noto Sans Bold 15";
+
+	// transparent color
+    background:                     #00000000;
+    background-dim:              	#00000055;
+    background-selected:                 #f2f2f215;
+    foreground:                     #f2f2f2EE;
+    accent:			            	#3DAEE966;
+
+	background-color:				@background;
+	text-color:						@foreground;
+	border-color:					@accent;
+	border:							0%;
+	border-radius:					10px; 
+}
+
+// Root window
+window {
+	fullscreen:		true;
+	transparency:		"real";	
+	background-color:	@background-dim;
+	padding: 10;
+}
+
+// container of everything
+mainbox {
+	padding: 15%;
+}
+
+prompt {
+	enabled: false;
+}
+
+entry {
+	background-color: @background-selected;
+    placeholder: "Type to Seach...";
+	margin: 0 1.5%;
+	padding: 0 1%;
+	horizontal-align: 0.5;
+}
+
+case-indicator {
+	enabled: false;
+}
+
+// Item list
+listview {
+	scrollbar: false;
+	sycle: true;
+	margin: 2% 0% 0% 0%;
+	columns: 3;
+	spacing: 1% 1%;
+}
+
+// List of entries
+element {
+	orientation: vertical;
+	padding: 1%;
+}
+
+
+element-icon {
+    size:                           64px;
+    border:                         0px;
+}
+
+element-text {
+	horizontal-align: 0.5;	
+	vertical-align: 0.5;	
+}
+
+// Selected entry
+element selected {
+	background-color: @background-selected;
+}

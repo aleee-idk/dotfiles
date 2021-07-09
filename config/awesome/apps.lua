@@ -78,6 +78,12 @@ function apps.run_command()
     awful.spawn.with_shell(USER.run_command)
 end
 
+
+-- Run Rofi Scripts 
+function apps.run_rofi_scripts()
+    awful.spawn.with_shell(USER.run_rofi_scripts)
+end
+
 -- ***** Configs ***** --
 
 function apps.sound()

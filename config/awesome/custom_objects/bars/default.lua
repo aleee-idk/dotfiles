@@ -66,37 +66,7 @@ awful.screen.connect_for_each_screen(
 					update_taglist(self, tag, index)
 				end,
 			},
-
-
-			-- Look --
-			-- layout = {
-			-- spacing = 10,
-			-- spacing_widget = {
-			--     color  = '#00ff00',
-			--     shape  = gears.shape.circle,
-			--     widget = wibox.widget.separator,
-			-- },
-			--     layout = wibox.layout.flex.horizontal,
-			-- },
 		}
-
-		-- ***** Tasklist ***** --
-
-		-- s.taglist_box = awful.wibar({
-		--     screen = s,
-		--     visible = true,
-		--     ontop = false,
-		--     type = "dock",
-		--     position = "top",
-		--     height = dpi(10),
-		--     -- position = "left",
-		--     -- width = dpi(6),
-		--     bg = "#00000000",
-		-- })
-
-		-- s.taglist_box:setup {
-		--     widget = s.mytaglist,
-		-- }
 
 		-- ***** Clock ***** --
 
@@ -148,7 +118,6 @@ awful.screen.connect_for_each_screen(
 					show_current_level = true,
 					display_notification = true
 				}),
-				awful.widget.keyboardlayout:new(),
 				s.clock,
 				s.mylayoutbox,
 				s.toggle_bar,

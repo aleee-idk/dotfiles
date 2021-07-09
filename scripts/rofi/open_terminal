@@ -3,10 +3,12 @@
 # Import common variables
 source "$HOME/dotfiles/scripts/env_variables.sh"
 
+rofi_theme="-theme $HOME/.config/rofi/themes/sidebar.rasi"
+
 entries=("${!common_folders[@]}" "${recent_folders[@]}")
 
 prompt="Open in terminal..."
-choice=$(printf '%s\n' "${entries[@]}" | sort | rofi -dmenu -p "$prompt")
+choice=$(printf '%s\n' "${entries[@]}" | sort | rofi $rofi_theme -dmenu -p "$prompt")
 
 # What to do...
 if [ "$choice" ]; then

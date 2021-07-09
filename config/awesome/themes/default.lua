@@ -19,7 +19,7 @@ local theme = {}
 theme.font = "CaskaydiaCove Nerd Font"
 
 -- Color with little transparency
-theme.bg_transparent = "#00000022"
+theme.bg_transparent = "#000000"
 
 theme.bg_dark       = colors.bg_dark
 theme.bg_normal     = colors.bg
@@ -83,7 +83,7 @@ theme.notification_icon_size = dpi(40)
 -- Colors
 theme.notification_bg = theme.bg_normal
 theme.notification_fg = theme.fg_normal
-theme.notification_opacity = 1
+theme.notification_opacity = 0.75
 
 -- Borders
 theme.notification_border_width = dpi(2)

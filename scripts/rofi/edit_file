@@ -1,12 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Import common variables
+rofi_theme="-theme $HOME/.config/rofi/themes/sidebar.rasi"
+
 source "$HOME/dotfiles/scripts/env_variables.sh"
 
 entries=("${!common_folders[@]}" "${recent_folders[@]}")
 
 # We use "printf '%s\n'" to format the array one item to a line.
-choice=$(printf '%s\n' "${entries[@]}" | sort | rofi -dmenu -p 'Edit config')
+choice=$(printf '%s\n' "${entries[@]}" | sort | rofi $rofi_theme -dmenu -p 'Edit config')
 
 # What to do when/if we choose a file to edit.
 if [ "$choice" ]; then

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+rofi_theme="-theme $HOME/.config/rofi/themes/sidebar.rasi"
+
 msg="Welcome to Buku.
 Use <span color='#334433'>Alt+1</span> to search a Bookmark
 Use <span color='#334433'>Alt+2</span> to filter by a tag."
@@ -35,7 +37,7 @@ get_bookmarks() {
 get_bookmarks_of_tag() {
     prompt="Filter tag"
     content=$(buku --nc --np --st | sed "/waiting for input/d" | awk '{print $2}')
-    tags=$(echo "$content" | rofi -dmenu -multi-select -i -p "$prompt" -mesg "$msg")
+    tags=$(echo "$content" | rofi $rofi_theme -dmenu -multi-select -i -p "$prompt" -mesg "$msg")
     echo "$(get_bookmarks $tags)"
 }
 
@@ -57,7 +59,7 @@ change_mode() {
 # Get all bookmarks
 prompt="Search Bookmark"
 content=$(get_bookmarks "$tag")
-answer=$(echo "$content" | rofi -dmenu -sync -i -p "$prompt" -mesg "$msg")
+answer=$(echo "$content" | rofi $rofi_theme -dmenu -sync -i -p "$prompt" -mesg "$msg")
 
 # Status have to be in sync with exist status from rofi
 # for custom keybinds goes from 1 on 1 starting on 10
@@ -68,7 +70,7 @@ status=$?
 if (( $status == 11 ));then
     answer=""
     content=$(get_bookmarks_of_tag)
-    answer=$(echo "$content" | rofi -dmenu -sync -i -p "$prompt" -mesg "$msg")
+    answer=$(echo "$content" | rofi $rofi_theme -dmenu -sync -i -p "$prompt" -mesg "$msg")
     (( $? == 1 )) && exit 1
 
 # Esc - Exit without selection

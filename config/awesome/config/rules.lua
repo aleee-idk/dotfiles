@@ -38,12 +38,12 @@ return {
 			-- screen = awful.screen.preferred,
 			screen = awful.screen.focused,
 			size_hint_honor = false,
-			honor_padding = true,
+			honor_padding = false,
 			maximized = false,
 			titlebars_enabled = beautiful.titlebars_enabled,
 --[[ maximized_horizontal = false,
 			maximized_vertial = false, ]]
-			-- placement = floating_client_placement
+			placement = floating_client_placement
 		}
 	},
 
@@ -126,15 +126,13 @@ return {
 				"splash",
 			},
 			class = {
-
+				"mpv", -- Fix bar overlay on fullscreen
 			},
 			instance = {
 
 			},
 		},
-		callback = function(c)
-			decorations.hide(c)
-		end
+		properties = { titlebars_enabled = false }
 	},
 
 	-- Tilebars ON (explicitly)
@@ -214,7 +212,7 @@ return {
 
 			},
 		},
-		properties = { screen = 1, tag = awful.screen.focused().tags[7]},
+		properties = { screen = 1, tag = awful.screen.focused().tags[5]},
 	},
 
 	-- Chat
@@ -226,7 +224,7 @@ return {
 				"discord"
 			},
 		},
-		properties = { screen = 2, tag = "9"}
+		properties = { screen = 2, tag = "8"}
 	},
 
 	-- Music
@@ -246,7 +244,7 @@ return {
 				"mpv",
 			},
 		},
-		properties = {tag = "5"}
+		properties = {tag = "9"}
 	},
 
 	-- U' Stuff
@@ -256,6 +254,6 @@ return {
 				"Microsoft Teams"
 			},
 		},
-		properties = { screen = 2, tag = "8"}
+		properties = { screen = 2, tag = "7"}
 	},
 }

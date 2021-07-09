@@ -381,6 +381,11 @@ keys.global_keys = gears.table.join(
 		{ description = "Run a bash command", group = "Spawners"}
 	),
 
+	awful.key({ modkey }, "r",
+		apps.run_rofi_scripts,
+		{ description = "Run a Rofi script", group = "Spawners"}
+	),
+
 	-- Editors --
 
 	awful.key({ modkey }, "e",

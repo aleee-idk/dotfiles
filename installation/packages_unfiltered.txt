@@ -19,7 +19,6 @@ bison
 bitwarden-bin
 bitwarden-rofi
 blueberry
-bluez-utils
 bmon
 bpython
 brave-bin
@@ -105,6 +104,10 @@ qtile
 qutebrowser
 ranger
 raw-thumbnailer
+rofi-bluetooth-git
+rofi-calc
+rofi-emoji
+rofi-power-menu
 rust
 sane-airscan
 scrot
@@ -125,7 +128,7 @@ transmission-qt
 transmission-remote-gtk
 tree
 ttf-times-new-roman
-udiskie
+udiskie-dmenu-git
 vala
 vimiv-qt-git
 virtualbox
