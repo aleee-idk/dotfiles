@@ -71,6 +71,9 @@ return require('packer').startup(
 			-- Auto Format
 			use 'Chiel92/vim-autoformat'
 
+			-- Align stuff
+			use 'junegunn/vim-easy-align'
+
 			-- Status Line
 			use { 'hoob3rt/lualine.nvim',	requires = {'kyazdani42/nvim-web-devicons', opt = true} }
 

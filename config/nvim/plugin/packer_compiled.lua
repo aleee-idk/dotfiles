@@ -190,6 +190,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-autoformat"
   },
+  ["vim-easy-align"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-easy-align"
+  },
   ["vim-repeat"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-repeat"

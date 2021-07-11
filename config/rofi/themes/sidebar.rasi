@@ -1,35 +1,36 @@
 configuration {
 	no-lazy-grab: true;
 	sidebar-mode: true;
+	case-sensitive: false;
 }
 
 
 * {
 	// find cool font
-	font: "Noto Sans Bold 13";
+	font                : "Noto Sans Bold 13";
 
 	// transparent color
-    background:                     #00000000;
-    background-dim:              	#00000055;
-    background-selected:                 #f2f2f215;
-    foreground:                     #f2f2f2EE;
-    accent:			            	#3DAEE966;
+    background          : #00000000;
+    background-dim      : #00000055;
+    background-selected : #f2f2f215;
+    foreground          : #f2f2f2EE;
+    accent              : #3DAEE966;
 
-	background-color:				@background;
-	text-color:						@foreground;
-	border-color:					@accent;
-	border:							0%;
-	border-radius:					0px; 
+	background-color    : @background;
+	text-color          : @foreground;
+	border-color        : @accent;
+	border              : 0%;
+	border-radius       : 0px;
 }
 
 // Root window
 window {
-	fullscreen:		false;
-	location: west;
-	transparency:		"real";	
-	background-color:	@background-dim;
-	width: 25%;
-	height: calc(100% - 4px);
+	fullscreen       : false;
+	location         : west;
+	transparency     : "real";
+	background-color : @background-dim;
+	width            : 25%;
+	height           : calc(100% - 4px);
 }
 
 // container of everything

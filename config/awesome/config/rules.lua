@@ -244,7 +244,7 @@ return {
 				"mpv",
 			},
 		},
-		properties = {tag = "9"}
+		properties = { ontop= true, tag = "9" }
 	},
 
 	-- U' Stuff

@@ -28,7 +28,7 @@ USER = {
 	terminal                =       terminal(),
 
 	-- Rofi script to open terminal in custom path
-	terminal_selector       =       os.getenv("HOME") .. "/dotfiles/scripts/rofi/open_terminal.sh",
+	terminal_selector       =       os.getenv("HOME") .. "/dotfiles/scripts/rofi/open_terminal",
 
 	browser                 =       os.getenv("HOME") .. "/dotfiles/scripts/rofi/rofi_buku",
 	file_manager            =       "thunar",
@@ -37,7 +37,7 @@ USER = {
 	editor_cli              =       terminal("nvim", "editor"),
 
 	-- Rofi script to open the editor in custom path
-	editor_selector         =       os.getenv("HOME") .. "/dotfiles/scripts/rofi/edit_file.sh",
+	editor_selector         =       os.getenv("HOME") .. "/dotfiles/scripts/rofi/edit_file",
 
 	screenshot              =       "sleep 0.5 && scrot -ub /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'",
 	screenshot_gui          =       "flameshot gui",
@@ -48,7 +48,7 @@ USER = {
 	mpd                     =       terminal("ncmpcpp", "music"),
 	mpd_server              =       "10.0.0.10",
 
-	powermenu               =       os.getenv("HOME") .. "/dotfiles/config/rofi/applets/menu/powermenu.sh",
+	powermenu               =       "rofi -show p -modi p:rofi-power-menu -i -theme " .. os.getenv("HOME") .. "/.config/rofi/themes/sidebar.rasi",
 	run_command             =       os.getenv("HOME") .. "/dotfiles/scripts/rofi/exec_command",
 	run_rofi_scripts		=		os.getenv("HOME") .. "/dotfiles/scripts/run_rofi_scripts.sh",
 	open_bookmark           =       os.getenv("HOME") .. "/dotfiles/scripts/rofi/buku",
@@ -215,6 +215,6 @@ require("config.signals")
 
 awesome.connect_signal("startup", function ()
 	for app = 1, #auto_start_apps do
-		awful.spawn.once(auto_start_apps[app], {})
+		awful.spawn.once(auto_start_apps[app], awful.rules.rules)
 	end
 end)

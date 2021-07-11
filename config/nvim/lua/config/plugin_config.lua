@@ -6,7 +6,7 @@ vim.opt_local.{option}   ->  :setlocal
 
 -- LSP
 
-local nvim_lsp = require("lspconfig")
+local nvim_lsp = require("lspconfig")  
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -38,6 +38,8 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', 'g}', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 	buf_set_keymap('n', '<Leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 	buf_set_keymap("n", "<Leader>cf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+	vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
 	-- TODO: Config https://github.com/ray-x/lsp_signature.nvim
 	require ('lsp_signature').on_attach()
@@ -167,7 +169,7 @@ i = {
 		selection_caret = "* ",
 		selection_strategy = "reset",
 		set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-		shorten_path = true,
+		path_display = {},
 		sorting_strategy = "descending",
 		use_less = true,
 		vimgrep_arguments = {
@@ -277,6 +279,13 @@ vim.opt.completeopt = "menuone,noselect"
 --	autocmd FileType md,markdown let b:autoformat_retab=0
 --	]]
 -- )
+
+-- Align Stuff
+-- Start interactive EasyAlign in visual mode (e.g. vipga)
+vim.api.nvim_set_keymap('x',"ga", [[<Plug>(EasyAlign)]], {})
+
+-- Start interactive EasyAlign for a motion/text object (e.g. gaip)
+vim.api.nvim_set_keymap('n',"ga", [[<Plug>(EasyAlign)]], {})
 
 -- LuaLine
 -- In colorscheme
