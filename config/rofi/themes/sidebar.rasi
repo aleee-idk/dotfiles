@@ -1,98 +1,97 @@
 configuration {
-	no-lazy-grab: true;
-	sidebar-mode: true;
-	case-sensitive: false;
+	no-lazy-grab         : true;
+	sidebar-mode         : true;
+	case-sensitive       : false;
 }
+
+@import "colors.rasi"
 
 
 * {
 	// find cool font
-	font                : "Noto Sans Bold 13";
+	font                 : "Noto Sans Bold 13";
 
 	// transparent color
-    background          : #00000000;
-    background-dim      : #00000055;
-    background-selected : #f2f2f215;
-    foreground          : #f2f2f2EE;
-    accent              : #3DAEE966;
+    transparent          : #00000000;
+    transparent-dim      : #00000055;
+    transparent-selected : #f2f2f215;
 
-	background-color    : @background;
-	text-color          : @foreground;
-	border-color        : @accent;
-	border              : 0%;
-	border-radius       : 0px;
+	background-color     : @transparent;
+	text-color           : @foreground;
+	border               : 0%;
+	border-radius        : 0px;
 }
 
 // Root window
 window {
-	fullscreen       : false;
-	location         : west;
-	transparency     : "real";
-	background-color : @background-dim;
-	width            : 25%;
-	height           : calc(100% - 4px);
+	fullscreen           : false;
+	location             : west;
+	transparency         : "real";
+	background-color     : @transparent-dim;
+	width                : 25%;
+	height               : calc(100% - 4px);
 }
 
 // container of everything
 mainbox {
-	background-color: @background-dim;
-	margin: 1% 0% 0% 2px ;	
-	padding: 2% 0%;
-	spacing: 1.5%;
+	margin               : 1% 0% 0% 2px ;
+	padding              : 2% 0%;
+	spacing              : 1.5%;
 }
 
 inputbar {
-	background-color: @background-selected;
-	border-radius: 10px;
-	margin: 0 1.5%;
-	padding: 0 1%;
+	background-color     : @transparent-selected;
+	border-radius        : 10px;
+	margin               : 0 1.5%;
+	padding              : 0 1%;
 }
 
 prompt {
-	enabled: false;
+	enabled              : false;
 }
 
 entry {
-    placeholder: "Type to Seach...";
-	horizontal-align: 0.5;
+    placeholder          : "Type to Seach...";
+	horizontal-align     : 0.5;
 }
 
 case-indicator {
-	enabled: false;
+	enabled              : false;
 }
 
 // Custom markup message
 message {
-	border: 1;
-	padding: 1%;
-	border-radius: 10px;
+	border               : 1;
+	padding              : 1%;
+	border-radius        : 10px;
 }
 
 // Item list
 listview {
-	scrollbar: false;
-	sycle: true;
-	spacing: 1% 1%;
+	scrollbar            : false;
+	sycle                : true;
+	spacing              : 1% 1%;
 }
 
 // List of entries
 element {
-	padding: 1%;
+	padding              : 1%;
 }
 
 
 element-icon {
-	enabled: false;
+	enabled              : false;
 }
 
 element-text {
-	horizontal-align: 0;	
-	vertical-align: 0.5;	
+	horizontal-align     : 0;
+	vertical-align       : 0.5;
 }
 
 // Selected entry
 element selected {
-	background-color: @background-selected;
-	border:           0 0 0 0.2%;
-	border-radius: 0;
+	background-color     : @transparent-selected;
+	border-color         : @selected-active-background;
+	border               : 0 0 0 0.2%;
+	border-radius        : 0;
 }

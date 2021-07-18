@@ -4,7 +4,8 @@ set -a PATH ~/.local/bin
 
 # Colors
 
-source ~/.config/fish/colors/tokyonight_strom.fish
+# Leave to the terminal?
+# source ~/.config/fish/colors/tokyonight_strom.fish
 
 # Alias
 
@@ -13,17 +14,13 @@ alias paci='sudo pacman -S'
 alias pacr='sudo pacman -Rs'
 alias pacu='sudo pacman -Syu'
 
-# Yay
-alias yay='yay -S'
-
-# create list of directory
+# get list of directory
 alias listdir='exa -la --no-permissions --no-filesize --no-time --no-time --no-user'
+# Pretty list directories
+alias ls='exa -l --color=always --icons --git'
 
 # Python
 alias py='python'
-
-# Nvim
-alias wiki='cd ~/Documents/Notes && nvim -c VimwikiIndex'
 
 # Functions
 
@@ -50,9 +47,6 @@ set file (cat $filename)
 
 	neofetch
 	starship init fish | source
-
-# Pywah Color Scheme
-	cat ~/.cache/wal/sequences &
 
 # Start X at login
 	if status is-login

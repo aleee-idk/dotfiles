@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 return require('packer').startup(
 	{
 		function ()
@@ -18,10 +19,7 @@ return require('packer').startup(
 			use 'chaoren/vim-wordmotion'
 
 			-- Surround words actions
-			use 'tpope/vim-surround'
-
-			-- Add . support to vim-surround
-			use 'tpope/vim-repeat'
+			use 'blackCauldron7/surround.nvim'
 
 			-- Window Resize
 			use 'simeji/winresizer'
@@ -35,8 +33,14 @@ return require('packer').startup(
 			use 'neovim/nvim-lspconfig'
 			use 'kabouzeid/nvim-lspinstall'
 
+			-- Show code actions
+			use 'kosayoda/nvim-lightbulb'
+
 			-- Treesitter
 			use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate" }
+			use { 'nvim-treesitter/playground', require =  'nvim-treesitter/nvim-treesitter'}
+			use { 'romgrk/nvim-treesitter-context', require =  'nvim-treesitter/nvim-treesitter'}
+			use { 'p00f/nvim-ts-rainbow', require =  'nvim-treesitter/nvim-treesitter'}
 
 			-- Fuzzy Finder
 
@@ -46,8 +50,15 @@ return require('packer').startup(
 				requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
 			}
 
+			use 'nvim-telescope/telescope-media-files.nvim'
+
+			use 'nvim-telescope/telescope-project.nvim'
+
 			-- Autocompletion
 			use 'hrsh7th/nvim-compe'
+
+			-- Pictograms in Autocompletion
+			use 'onsails/lspkind-nvim'
 
 			-- Function help as you type
 			use 'ray-x/lsp_signature.nvim'
@@ -64,12 +75,15 @@ return require('packer').startup(
 
 			use 'fszymanski/fzf-gitignore'
 
+			-- Peak lines
+			use 'nacro90/numb.nvim'
+
 			-- File Managment --
 			use 'kyazdani42/nvim-tree.lua'
 
 			-- Better Looking --
 			-- Auto Format
-			use 'Chiel92/vim-autoformat'
+			use 'mhartington/formatter.nvim'
 
 			-- Align stuff
 			use 'junegunn/vim-easy-align'
