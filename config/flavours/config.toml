@@ -1,0 +1,72 @@
+# Configuration for flavours
+# https://github.com/Misterio77/flavours
+#
+# This file should contain a [[items]] section for each application you want themed
+# You can also set a shell (outside items) on which to run hooks
+# Check flavours repository for more information and examples
+
+
+# Explanation and default values for keys:
+
+# # Through which shell command hooks will run. The command will be replaced in '{}'
+# shell = "sh -c '{}'"
+#
+# [[items]]
+# # File to inject to, supports tilde and env var expansion. required
+# file = "~/.config/example"
+# # Template to use. required
+# template = "example"
+#
+# # Subtemplate to use
+# subtemplate = "default"
+# # If not rewriting, on which line (usually a comment) to start replacing
+# start = "# Start flavours"
+# # If not rewriting, on which line (usually a comment) to stop replacing
+# end = "# End flavours"
+# # Should we rewrite the entire file, instead of using the above delimiters?
+# rewrite = false
+# # Command to execute after injecting (goes through shell)
+# hook = ""
+# # Whether this hook should be executed when flavours is ran with lightweight flag
+# light = true
+
+shell = "bash -c '{}'"
+
+[[item]]
+file = "~/.config/awesome/themes/colors/base16.lua"
+template = "awesomewm"
+rewrite = true
+hook = 'awesome-client "awesome.restart()"'
+
+[[item]]
+file = "~/.config/kitty/colors/base16.conf"
+template = "kitty"
+subtemplate = "default-256"
+rewrite = true
+
+[[item]]
+file = "~/.config/rofi/themes/colors.rasi"
+template = "rofi"
+subtemplate = "colors"
+rewrite = true
+
+[[item]]
+file = "~/.config/nvim/lua/colorscheme.lua"
+template = "nvim"
+start = "-- Start flavours"
+end = "-- End flavours"
+
+[[item]]
+file = "~/dotfiles/home/Xresources"
+template = "xresources"
+subtemplate = "default-256"
+start = "! Start flavours"
+end = "! End flavours"
+hook = "xrdb ~/dotfiles/home/Xresources"
+
+# [[items]]
+# file = "~/.config/beautifuldiscord/style.css"
+# template = "styles"
+# subtemplate = "css-variables"
+# start= "/* Start flavours */"
+# end = "/* End flavours */"

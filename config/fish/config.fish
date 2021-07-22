@@ -10,17 +10,36 @@ set -a PATH ~/.local/bin
 # Alias
 
 # Pacman
-alias paci='sudo pacman -S'
-alias pacr='sudo pacman -Rs'
-alias pacu='sudo pacman -Syu'
+function paci --wraps pacman --description 'alias paci=pacman -S'
+	sudo pacman -S $argv
+end
+function pacr
+	sudo pacman -Rs $argv
+end
+function pacu
+	sudo pacman -Syu $argv
+end
 
 # get list of directory
-alias listdir='exa -la --no-permissions --no-filesize --no-time --no-time --no-user'
+function listdir
+	exa -la --no-permissions --no-filesize --no-time --no-time --no-user $argv
+end
 # Pretty list directories
-alias ls='exa -l --color=always --icons --git'
+function ls --wraps exa --description 'alias ls=exa -l --color=always --icons --git '
+	exa -l --color=always --icons --git $argv
+end
 
 # Python
-alias py='python'
+function py
+	python $argv
+end
+
+# Plugins
+fundle plugin 'PatrickF1/fzf.fish'
+fundle plugin 'franciscolourenco/done'
+fundle plugin 'Gazorby/fish-abbreviation-tips'
+
+fundle init
 
 # Functions
 

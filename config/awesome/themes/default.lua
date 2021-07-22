@@ -5,12 +5,11 @@ local theme_assets = require("beautiful.theme_assets")
 local dpi = require("beautiful.xresources").apply_dpi
 local gfs = require("gears.filesystem")
 
-local colors = require("themes.colors.tokyonight")
+local colors = require("themes.colors.base16")
 
 local theme_name = "default"
 
 local themes_path = gfs.get_themes_dir()
-
 
 local theme = {}
 
@@ -19,38 +18,35 @@ local theme = {}
 theme.font = "CaskaydiaCove Nerd Font"
 
 -- Color with little transparency
-theme.bg_transparent = "#000000"
+theme.bg_transparent = "#00000000"
 
-theme.bg_dark       = colors.bg_dark
-theme.bg_normal     = colors.bg
-theme.bg_occupied   = colors.blue
-theme.bg_focus      = colors.green2
-theme.bg_urgent     = colors.red
-theme.bg_minimize   = colors.bg
-theme.bg_systray    = colors.bg
+theme.bg_systray = colors.base00
+theme.bg_normal = colors.base00
+theme.bg_occupied = colors.base00
+theme.bg_focus = colors.base01
+theme.bg_urgent = colors.base02
 
 theme.systray_icon_spacing = dpi(5)
 
-theme.fg_normal     = colors.fg
-theme.fg_occupied   = colors.fg
-theme.fg_focus      = colors.fg
-theme.fg_urgent     = colors.fg
-theme.fg_minimize   = colors.fg
-theme.fg_systray    = colors.fg
-
+theme.fg_normal = colors.base05
+theme.fg_focus = colors.base05
+theme.fg_occupied = colors.base03
+theme.fg_urgent = colors.base08
+theme.fg_minimize = colors.base03
+theme.fg_systray = colors.base04
 
 -- ##### Client stuff ##### ---
 
 -- Gaps
-theme.useless_gap   = dpi(5)
+theme.useless_gap = dpi(5)
 -- This could be used to manually determine how far away from the
 -- screen edge the bars / notifications should be.
 theme.screen_margin = dpi(5)
 
 -- Borders
-theme.border_width  = dpi(3)
+theme.border_width = dpi(3)
 theme.border_normal = theme.bg_normal
-theme.border_focus  = theme.bg_focus
+theme.border_focus = theme.bg_focus
 
 -- Rounded corners
 theme.border_radius = dpi(0)
@@ -101,16 +97,16 @@ theme.snap_border_width = dpi(3)
 
 -- Tag
 theme.tagnames = {
-	" ", -- 1 --
-	" ", -- 2 --
-	" ", -- 3 --
-	"ﯢ ", -- 4 --
-	" ", -- 5 --
-	" ", -- 6 --
-	" ", -- 7 --
-	" ", -- 8 --
-	" ", -- 9 --
-	" ", -- 10 --
+    " ", -- 1 --
+    " ", -- 2 --
+    " ", -- 3 --
+    "ﯢ ", -- 4 --
+    " ", -- 5 --
+    " ", -- 6 --
+    " ", -- 7 --
+    " ", -- 8 --
+    " ", -- 9 --
+    " " -- 10 --
 }
 theme.taglist_font = theme.font
 -- theme.taglist_shape =
@@ -132,8 +128,8 @@ theme.taglist_spacing = dpi(3)
 
 -- Widget separator
 theme.separator_text = "|"
---theme.separator_text = " :: "
---theme.separator_text = " • "
+-- theme.separator_text = " :: "
+-- theme.separator_text = " • "
 -- theme.separator_text = " •• "
 theme.separator_fg = theme.fg_normal
 
@@ -155,7 +151,7 @@ theme.wibar_bg_urgent = theme.bg_urgent
 theme.wibar_fg_occupied = theme.fg_normal
 theme.wibar_bg_occupied = theme.bg_normal
 
---theme.wibar_opacity = 0.7
+-- theme.wibar_opacity = 0.7
 theme.wibar_border_color = theme.fg_normal
 theme.wibar_border_width = dpi(0)
 theme.wibar_border_radius = dpi(0)
@@ -183,57 +179,54 @@ theme.layout_cornerne = themes_path .. "default/layouts/cornernew.png"
 theme.layout_cornersw = themes_path .. "default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path .. "default/layouts/cornersew.png"
 
---There are other variable sets
---overriding the default one when
---defined, the sets are:
---taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
---tasklist_[bg|fg]_[focus|urgent]
---titlebar_[bg|fg]_[normal|focus]
---tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
---mouse_finder_[color|timeout|animate_timeout|radius|factor]
---prompt_[fg|bg|fg_cursor|bg_cursor|font]
---hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
---Example:
---theme.taglist_bg_focus = "#ff0000"
+-- There are other variable sets
+-- overriding the default one when
+-- defined, the sets are:
+-- taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
+-- tasklist_[bg|fg]_[focus|urgent]
+-- titlebar_[bg|fg]_[normal|focus]
+-- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
+-- mouse_finder_[color|timeout|animate_timeout|radius|factor]
+-- prompt_[fg|bg|fg_cursor|bg_cursor|font]
+-- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
+-- Example:
+-- theme.taglist_bg_focus = "#ff0000"
 
 -- ##### titlebar ##### ---
 client.connect_signal("request::titlebars", function(c)
-	-- buttons for the titlebar
-	local buttons = gears.table.join(
-		awful.button({ }, 1, function()
-			c:emit_signal("request::activate", "titlebar", {raise = true})
-			awful.mouse.client.move(c)
-		end),
-		awful.button({ }, 3, function()
-			c:emit_signal("request::activate", "titlebar", {raise = true})
-			awful.mouse.client.resize(c)
-		end)
-	)
+    -- buttons for the titlebar
+    local buttons = gears.table.join(awful.button({}, 1, function()
+        c:emit_signal("request::activate", "titlebar", {raise = true})
+        awful.mouse.client.move(c)
+    end), awful.button({}, 3, function()
+        c:emit_signal("request::activate", "titlebar", {raise = true})
+        awful.mouse.client.resize(c)
+    end))
 
-	awful.titlebar(c) : setup {
-		{ -- Left
-			awful.titlebar.widget.iconwidget(c),
-			buttons = buttons,
-			layout  = wibox.layout.fixed.horizontal
-		},
-		{ -- Middle
-			{ -- Title
-				align  = "center",
-				widget = awful.titlebar.widget.titlewidget(c)
-			},
-			buttons = buttons,
-			layout  = wibox.layout.flex.horizontal
-		},
-		{ -- Right
-			awful.titlebar.widget.floatingbutton (c),
-			awful.titlebar.widget.maximizedbutton(c),
-			awful.titlebar.widget.stickybutton   (c),
-			awful.titlebar.widget.ontopbutton    (c),
-			awful.titlebar.widget.closebutton    (c),
-			layout = wibox.layout.fixed.horizontal()
-		},
-		layout = wibox.layout.align.horizontal
-	}
+    awful.titlebar(c):setup{
+        { -- Left
+            awful.titlebar.widget.iconwidget(c),
+            buttons = buttons,
+            layout = wibox.layout.fixed.horizontal
+        },
+        { -- Middle
+            { -- Title
+                align = "center",
+                widget = awful.titlebar.widget.titlewidget(c)
+            },
+            buttons = buttons,
+            layout = wibox.layout.flex.horizontal
+        },
+        { -- Right
+            awful.titlebar.widget.floatingbutton(c),
+            awful.titlebar.widget.maximizedbutton(c),
+            awful.titlebar.widget.stickybutton(c),
+            awful.titlebar.widget.ontopbutton(c),
+            awful.titlebar.widget.closebutton(c),
+            layout = wibox.layout.fixed.horizontal()
+        },
+        layout = wibox.layout.align.horizontal
+    }
 end)
 
 return theme

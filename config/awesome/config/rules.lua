@@ -81,15 +81,7 @@ return {
         },
         properties = {floating = true, ontop = true}
     }, -- Fullscreen Clients
-    {
-        rule_any = {
-            class = {
-                "steam_app_32440" -- Lego Star Wars The Complete Saga
-            },
-            instance = {}
-        },
-        properties = {fullscreen = true}
-    }, -- Centered Clients
+    {rule_any = {class = {}, instance = {}}, properties = {fullscreen = true}}, -- Centered Clients
     {
         rule_any = {
             type = {"dialog"},
@@ -147,7 +139,18 @@ return {
         properties = {screen = 1, tag = awful.screen.focused().tags[1]}
     }, -- Games
     {
-        rule_any = {class = {"factorio"}, instance = {}},
+        rule_any = {class = {"steam_app_%d+"}},
+        properties = {
+            screen = 1,
+            tag = awful.screen.focused().tags[5],
+            fullscreen = true,
+            size_hint_honor = false,
+            honor_padding = false,
+            maximized = true,
+            titlebars_enabled = false
+        }
+    }, {
+        rule_any = {class = {"Steam"}},
         properties = {screen = 1, tag = awful.screen.focused().tags[5]}
     }, -- Chat
     {

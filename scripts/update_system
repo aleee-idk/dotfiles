@@ -101,6 +101,9 @@ sudo npm update -g
 echo -e "Updating vim plugins"
 PLUG=no nvim "+PackerSync" "+au BufLeave * qa!"
 
+# update fish packages
+fish -c "fundle update"
+
 
 ## 2.- Update System  }}}
 

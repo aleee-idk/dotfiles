@@ -1,11 +1,11 @@
-require("config.options")
-require("config.keys")
-require("config.autocommands")
-require("config.templates")
+require("options")
+require("keys")
+require("autocommands")
+require("templates")
 
-require("config.plugins")
+require("plugins")
 
-require("config.plugin_config")
+require("plugin_config")
 
 -- Colors at the end so the config is loeaded firts
-require("config.colorscheme")
+require("colorscheme")

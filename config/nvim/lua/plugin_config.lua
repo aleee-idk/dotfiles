@@ -241,8 +241,11 @@ telescope.setup {
     -- Specific config
     pickers = {
         buffers = {
-            sort_lastused = true
-            -- theme = "dropdown",
+            sort_lastused = true,
+            mappings = {
+                i = {["d"] = require("telescope.actions").delete_buffer},
+                n = {["<c-d>"] = require("telescope.actions").delete_buffer}
+            }
         },
         find_files = {},
 
@@ -383,7 +386,6 @@ vim.cmd([[
       autocmd!
       autocmd BufWritePost *.js,*.lua,*.py silent! FormatWrite
     augroup END
-    nnoremap <silent> <leader>f :Format<CR>
 ]])
 
 -- Align Stuff
@@ -589,6 +591,27 @@ vim.g.UltiSnipsExpandTrigger = '<Nop>'
 -- vim.api.nvim_set_keymap('i', "<C-Tab>", "<Plug>(coc-snippets-expand)", {})
 
 vim.g.UltiSnipsEditSplit = "vertical"
+
+-- Split Lines
+require("revj").setup {
+    brackets = {first = '([{<', last = ')]}>'}, -- brackets to consider surrounding arguments
+    new_line_before_last_bracket = true, -- add new line between last argument and last bracket (only if no last seperator)
+    add_seperator_for_last_parameter = true, -- if a seperator should be added if not present after last parameter
+    enable_default_keymaps = false, -- enables default keymaps without having to set them below
+    keymaps = {
+        operator = '<Leader>J', -- for operator (+motion)
+        line = '<Leader>j', -- for formatting current line
+        visual = '<Leader>j' -- for formatting visual selection
+    }
+}
+
+-- Auto Pairs
+require('nvim-autopairs').setup()
+
+require("nvim-autopairs.completion.compe").setup({
+    map_cr = true, --  map <CR> on insert mode
+    map_complete = true -- it will auto insert `(` after select function or method item
+})
 
 -- Markdown Preview:
 

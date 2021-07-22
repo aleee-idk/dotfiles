@@ -4,7 +4,7 @@ android-file-transfer
 android-udev
 arandr
 archiso
-asciidoc
+atop
 autoconf
 automake
 autopep8
@@ -21,6 +21,7 @@ bitwarden-rofi
 blueberry
 bmon
 bpython
+bpytop
 brave-bin
 ccls
 cmatrix
@@ -45,20 +46,17 @@ flex
 fortune-mod
 fzf
 geeqie
-gn
 go
-go-tools
-gobject-introspection
 godot
 gparted
 grub
 gtest
+hardinfo
 hplip
 htop
 i3-battery-popup
 i3blocks
 inotify-tools
-itstool
 joplin-desktop
 kdeconnect
 kitty
@@ -72,7 +70,6 @@ luarocks
 lutris
 lxappearance
 mcomix
-meson
 mingw-w64-gcc
 mkinitcpio-numlock
 mon2cam-git
@@ -94,12 +91,12 @@ pamac-aur
 paprefs
 paru
 pavucontrol
+pcmanfm-gtk3
 picom-jonaburg-git
 playerctl
 polybar
 prettier
 python-black
-python-docutils
 python-pywal
 qmk
 qt5ct
@@ -112,7 +109,6 @@ rofi-bluetooth-git
 rofi-calc
 rofi-emoji
 rofi-power-menu
-rust
 sane-airscan
 scrot
 signal-desktop
@@ -135,7 +131,6 @@ transmission-remote-gtk
 tree
 ttf-times-new-roman
 udiskie-dmenu-git
-vala
 vimiv-qt-git
 virtualbox
 visual-studio-code-bin

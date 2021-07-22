@@ -130,6 +130,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/numb.nvim"
   },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
+  },
+  ["nvim-base16"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-base16"
+  },
   ["nvim-colorizer.lua"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
@@ -149,6 +157,10 @@ _G.packer_plugins = {
   ["nvim-lspinstall"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
+  },
+  ["nvim-revJ.lua"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-revJ.lua"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -233,6 +245,14 @@ _G.packer_plugins = {
   ["vim-snippets"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-snippets"
+  },
+  ["vim-textobj-parameter"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-textobj-parameter"
+  },
+  ["vim-textobj-user"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-textobj-user"
   },
   ["vim-transparent"] = {
     loaded = true,
