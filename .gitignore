@@ -3,6 +3,7 @@ sensible_env.sh
 *youtube*
 *cookie*
 *log*
+config/fish/fundle
 
 # TODO: Change when clean it
 flavours_data/*

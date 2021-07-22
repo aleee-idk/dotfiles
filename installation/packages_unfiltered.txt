@@ -45,6 +45,7 @@ flavours
 flex
 fortune-mod
 fzf
+gdb
 geeqie
 go
 godot
