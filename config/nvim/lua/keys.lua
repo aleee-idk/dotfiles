@@ -16,12 +16,9 @@ Modes:
 | 'c'          |   mapmode-c      |     Command-line                              |  :cmap                |
 | 't'          |   mapmode-t      |     Terminal                                  |  :tmap                |
 
---]]
-
--- Define Mapping with:
+--]] -- Define Mapping with:
 -- vim.api.nvim_set_keymap(mode, keys, action, options)
 -- options are defined in :help :map-argument
-
 -- Leader Key
 vim.g.mapleader = ' '
 -- vim.g.mapleader = '\<Space>'
@@ -36,16 +33,17 @@ vim.api.nvim_set_keymap('', "<C-l>", "<C-w>l", {})
 vim.api.nvim_set_keymap('n', "<CR>", ":noh<CR>", {silent = true})
 
 -- Toggle Autocomment
-vim.api.nvim_set_keymap('', "<Leader>tc", ":setlocal formatoptions=cro<CR>", {silent = true})
-vim.api.nvim_set_keymap('', "<Leader>tC", ":setlocal formatoptions-=cro<CR>", {silent = true})
+vim.api.nvim_set_keymap('', "<Leader>tc",
+                        [[if &fo =~ 'cro' | set fo-=cro | else | set fo+=cro | endif]],
+                        {silent = true})
 
 -- Toggle Auto Indent
-vim.api.nvim_set_keymap('', "<Leader>ti", ":setlocal autoindent<CR>", {silent = true})
-vim.api.nvim_set_keymap('', "<Leader>tI", ":setlocal noautoindent<CR>", {silent = true})
+vim.api.nvim_set_keymap('', "<Leader>ti", ":setlocal autoindent!<CR>",
+                        {silent = true})
 
 -- Toggle Spell Check
-vim.api.nvim_set_keymap('', "<Leader>ts", ":setlocal spell<CR>", {silent = true})
-vim.api.nvim_set_keymap('', "<Leader>tS", ":setlocal spell!<CR>", {silent = true})
+vim.api.nvim_set_keymap('', "<Leader>ts", ":setlocal spell!<CR>",
+                        {silent = true})
 
 -- Exit terminal mode
 vim.api.nvim_set_keymap('t', '<ESC>', [[<C-\><C-n>]], {noremap = true})

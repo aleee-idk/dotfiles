@@ -94,6 +94,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/fzf-gitignore"
   },
+  harpoon = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/harpoon"
+  },
   ["indent-blankline.nvim"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim"
@@ -146,6 +150,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
+  ["nvim-cursorword"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-cursorword"
+  },
   ["nvim-lightbulb"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-lightbulb"
@@ -158,9 +166,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
   },
+  ["nvim-mapper"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-mapper"
+  },
   ["nvim-revJ.lua"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-revJ.lua"
+  },
+  ["nvim-toggleterm.lua"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-toggleterm.lua"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -234,6 +250,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
   },
+  ["twilight.nvim"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/twilight.nvim"
+  },
   ultisnips = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/ultisnips"
@@ -273,6 +293,10 @@ _G.packer_plugins = {
   ["xresources-nvim"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/xresources-nvim"
+  },
+  ["zen-mode.nvim"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/zen-mode.nvim"
   }
 }
 

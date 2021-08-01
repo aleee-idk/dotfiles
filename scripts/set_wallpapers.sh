@@ -29,7 +29,7 @@ while true; do
         continue
     fi
 
-    wal -n -i "${selected_wallpapers[0]}"
+    # wal -n -i "${selected_wallpapers[0]}"
 
     # Set wallpapers
     feh --bg-fill "${selected_wallpapers[@]}"
@@ -39,7 +39,7 @@ while true; do
     [[ $REPLY =~ ^[yY]$ ]] && break
 done
 
-awesome-client 'awesome.restart()'
+# awesome-client 'awesome.restart()'
 
 # Change colorscheme
 # custom_pywal.py "$1"

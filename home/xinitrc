@@ -40,14 +40,14 @@ source "$HOME/dotfiles/scripts/env_variables.sh"
 
 # Start Programs
 setxkbmap -layout latam -option grp:shifts_toggle,caps:escape
+xsetroot -cursor_name left_ptr
 
 picom -b --experimental-backends &
 xss-lock -l -- multilockscreen --lock --show-layout &
+dunst &
 lxsession &
 udiskie &
 kdeconnect-indicator &
-$HOME/.fehbg
-# wal -R -n &
 
 # Start Window Manager or Desktop Enviroment
-exec awesome
+exec bspwm

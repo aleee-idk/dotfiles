@@ -23,6 +23,7 @@ bmon
 bpython
 bpytop
 brave-bin
+bspwm
 ccls
 cmatrix
 cowsay
@@ -34,18 +35,19 @@ docker-compose
 drawio-desktop
 droidcam
 dunst
+dust
 element-desktop
 evtest
 exa
 fd
 figlet
 firefox
+firefox-developer-edition
 flameshot
 flavours
 flex
 fortune-mod
 fzf
-gdb
 geeqie
 go
 godot
@@ -84,6 +86,8 @@ neofetch
 neovide
 networkmanager-dmenu-git
 newsboat
+nodejs-nativefier
+nvimpager-git
 nyx
 obs-studio
 ookla-speedtest-bin
@@ -112,6 +116,7 @@ rofi-emoji
 rofi-power-menu
 sane-airscan
 scrot
+shellcheck
 signal-desktop
 skanlite
 snapd
@@ -125,6 +130,7 @@ telegram-desktop
 termdown
 timeshift
 tldr
+tokei
 torbrowser-launcher
 transmission-gtk
 transmission-qt

@@ -34,19 +34,6 @@ vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- Set cursorline
--- AutoComands still in dev, come back later
--- only show cursorline on focused window
-vim.cmd(
-	[[
-	augroup CursorLine
-	au!
-	au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-	au WinLeave * setlocal nocursorline
-	augroup END
-	]]
-)
-
 -- Identation
 local indent = 4
 vim.opt.tabstop = indent
