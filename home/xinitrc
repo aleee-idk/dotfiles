@@ -46,7 +46,7 @@ picom -b --experimental-backends &
 xss-lock -l -- multilockscreen --lock --show-layout &
 dunst &
 lxsession &
-udiskie &
+pcmanfm -d &
 kdeconnect-indicator &
 
 # Start Window Manager or Desktop Enviroment

@@ -33,10 +33,11 @@
 shell = "bash -c '{}'"
 
 [[item]]
-file = "~/.config/awesome/themes/colors/base16.lua"
-template = "awesomewm"
-rewrite = true
-hook = 'awesome-client "awesome.restart()"'
+file = "~/.config/bspwm/colors"
+template = "bspwm"
+start = "# Start flavours"
+end = "# End flavours"
+hook = "bspc wm -r"
 
 [[item]]
 file = "~/.config/kitty/colors/base16.conf"
@@ -63,6 +64,13 @@ subtemplate = "default-256"
 start = "! Start flavours"
 end = "! End flavours"
 hook = "xrdb ~/dotfiles/home/Xresources"
+
+[[item]]
+file = "~/dotfiles/config/polybar/colors.ini"
+template = "polybar"
+start = "; Start flavours"
+end = "; End flavours"
+hoow = "~/dotfiles/config/polybar/launch.sh"
 
 # [[items]]
 # file = "~/.config/beautifuldiscord/style.css"

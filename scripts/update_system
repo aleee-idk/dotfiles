@@ -7,6 +7,7 @@ dependencies=(git ranger timeshift gio fd)
 
 max_backups=5
 backup_message="After Update Backup"
+bookmarks_backup_path="$Home/Nextcloud/principal/Misc/bookmarks_backup.md"
 
 # Colors
 red="\e[0;91m"
@@ -137,8 +138,9 @@ paru -Sc --noconfirm && paccache -rk2
 
 ## 5.- Clean Trash }}}
 
-## 6.- Update Dotfiles {{{
+## 6.- Backup Stuff {{{
 
+# Dotfiles
 if $do_git; then
 	cd "$dotfile_folder"
 	git_untracked=($(echo "$(git status --porcelain)" | awk '$1 == "??" {print $2}'))
@@ -149,7 +151,10 @@ if $do_git; then
 	cd "$HOME"
 fi
 
-## 6.- Update Dotfiles }}}
+# bookmarks
+buku --export "$bookmarks_backup_path"
+
+## 6.- Backup Stuff }}}
 
 ## 7.- Sort Wallpapers {{{
 

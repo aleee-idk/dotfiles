@@ -4,6 +4,7 @@ android-file-transfer
 android-udev
 arandr
 archiso
+asciidoc
 atop
 autoconf
 automake
@@ -49,17 +50,23 @@ flex
 fortune-mod
 fzf
 geeqie
+gn
 go
+go-tools
+gobject-introspection
 godot
 gparted
 grub
 gtest
+gucharmap
 hardinfo
 hplip
 htop
 i3-battery-popup
 i3blocks
 inotify-tools
+itstool
+jellyfin
 joplin-desktop
 kdeconnect
 kitty
@@ -73,6 +80,7 @@ luarocks
 lutris
 lxappearance
 mcomix
+meson
 mingw-w64-gcc
 mkinitcpio-numlock
 mon2cam-git
@@ -86,7 +94,6 @@ neofetch
 neovide
 networkmanager-dmenu-git
 newsboat
-nodejs-nativefier
 nvimpager-git
 nyx
 obs-studio
@@ -102,6 +109,7 @@ playerctl
 polybar
 prettier
 python-black
+python-docutils
 python-pywal
 qmk
 qt5ct
@@ -114,6 +122,7 @@ rofi-bluetooth-git
 rofi-calc
 rofi-emoji
 rofi-power-menu
+rust
 sane-airscan
 scrot
 shellcheck
@@ -138,6 +147,7 @@ transmission-remote-gtk
 tree
 ttf-times-new-roman
 udiskie-dmenu-git
+vala
 vimiv-qt-git
 virtualbox
 visual-studio-code-bin

@@ -25,8 +25,8 @@ function listdir
 	exa -la --no-permissions --no-filesize --no-time --no-time --no-user $argv
 end
 # Pretty list directories
-function ls --wraps exa --description 'alias ls=exa -l --color=always --icons --git '
-	exa -l --color=always --icons --git $argv
+function ls --wraps exa --description 'alias ls=exa -lh --color=always --icons --git '
+	exa -lh --color=always --icons --git $argv
 end
 
 # Python

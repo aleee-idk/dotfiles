@@ -1,10 +1,12 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 ## Add this to your wm startup file.
 
 readarray -t screens <<< $(xrandr --query | grep " connected" | cut -d" " -f1)
 # Bars:
-bars=("secondary" "main-normal")
+declare -A bars
+bars[HDMI1]="desktops system"
+bars[eDP1]="desktops"
 # bars=("main-normal")
 
 # Terminate already running bar instances
@@ -15,12 +17,9 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bars
 if type "xrandr"; then
-    for (( i=0; i < ${#screens[@]}; i++ )); do
-        s=$(echo ${screens[$i]}| awk '/[a-zA-Z]+/ { print }')
-        MONITOR="$s" polybar -c ~/.config/polybar/config.ini -q --reload ${bars[i]} &
+    for s in "${screens[@]}"; do
+		for b in ${bars[$s]}; do
+			MONITOR="$s" polybar -c ~/.config/polybar/config.ini -q --reload "$b" &
+		done
     done
-
-else
-    # Default bar
-    polybar -c ~/.config/polybar/config.ini main &
 fi

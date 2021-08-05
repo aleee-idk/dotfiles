@@ -146,6 +146,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
   },
+  ["nvim-comment-frame"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-comment-frame"
+  },
   ["nvim-compe"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-compe"

@@ -20,7 +20,7 @@ vim.cmd([[
 
 -- Auto update plugins on plugins.lua save
 vim.cmd([[
-	autocmd BufWritePost plugins.lua source % | PackerSync
+	autocmd BufWritePost pluginList.lua source % | PackerSync
 	]])
 
 -- highlight yank selection
