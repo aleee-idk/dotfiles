@@ -1,0 +1,5 @@
+require("plugins.harpoon")
+require("plugins.nvim-comment-frame")
+require("plugins.nvim-mapper")
+require("plugins.nvim-toggleterm")
+require("plugins.plugin_config")

@@ -3,11 +3,11 @@
 
 ## Variables {{{
 
-dependencies=(git ranger timeshift gio fd)
+dependencies=(git ranger timeshift gio fd buku)
 
 max_backups=5
 backup_message="After Update Backup"
-bookmarks_backup_path="$Home/Nextcloud/principal/Misc/bookmarks_backup.md"
+bookmarks_backup_path="$HOME/Nextcloud/principal/Misc/bookmarks_backup.md"
 
 # Colors
 red="\e[0;91m"
@@ -30,6 +30,7 @@ function usage ()
 	-h|help         Display this message
 	-G|no-git       Don't update git repos
 	-B|no-backup    Don't create a backup
+	-U|no-update    Don't update the system
 	-W|no-wallpaper Don't change the wallpaper"
 
 }    # ----------  end of function usage  ----------
@@ -38,15 +39,18 @@ function usage ()
 #  Handle command line arguments
 #-----------------------------------------------------------------------
 
+do_update=true
 do_git=true
 do_backup=true
 do_wallpaper=true
 
-while getopts ":hBG" opt
+while getopts ":hBGUW" opt
 do
 	case ${opt} in
 
 		h|help     )  usage; exit 0   ;;
+
+		U|no-update   ) do_update=false ;;
 
 		G|no-git   ) do_git=false ;;
 
@@ -87,24 +91,25 @@ paru -cc
 
 ## 2.- Update System {{{
 
-# Update system packages
-echo -e "Updating System"
-paru
+if $do_update; then
+	# Update system packages
+	echo -e "Updating System"
+	paru
 
-# Update Python packages
-pip freeze --user | cut -d'=' -f1 | xargs -n1 pip install -U
+	# Update Python packages
+	pip freeze --user | cut -d'=' -f1 | xargs -n1 pip install -U
 
-# Update npm pacages
-sudo npm update -g
+	# Update npm pacages
+	sudo npm update -g
 
-# Update nvim packages
-# PLUG=no disable some plugins
-echo -e "Updating vim plugins"
-PLUG=no nvim "+PackerSync" "+au BufLeave * qa!"
+	# Update nvim packages
+	# PLUG=no disable some plugins
+	echo -e "Updating vim plugins"
+	PLUG=no nvim "+PackerSync" "+au BufLeave * qa!"
 
-# update fish packages
-fish -c "fundle update"
-
+	# update fish packages
+	fish -c "fundle update"
+fi
 
 ## 2.- Update System  }}}
 

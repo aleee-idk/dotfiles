@@ -1,0 +1,157 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+	kitty -1
+
+# program launcher
+super + d
+	rofi -no-lazy-grab -show drun -modi drun -theme "$HOME/.config/rofi/themes/fullscreen_transparent.rasi"
+
+# Rofi Scripts
+super + r ; {c,b,e,x,d}
+	{ \
+		rofi -theme $HOME/.config/rofi/themes/sidebar.rasi -i -show calc -modi calc -no-show-match -no-sort -no-persist-history, \
+		$HOME/dotfiles/scripts/rofi/buku, \
+		$HOME/dotfiles/scripts/rofi/edit_file, \
+		$HOME/dotfiles/scripts/rofi/exec_command, \
+		udiskie-dmenu -matching regex -dmenu -i -no-custom -multi-select \
+	}
+
+# Power menu
+super + Escape
+	rofi -show p -modi p:rofi-power-menu -i -theme \
+	$HOME/.config/rofi/themes/sidebar.rasi
+
+# System Stuff
+
+# Volume
+XF86Audio{Raise,Lower}Volume
+	pactl set-sink-volume 0 {+,-}5%	
+
+XF86AudioMute
+	pactl set-sink-mute 0 toggle	
+
+# Media
+XF86Audio{Next,Prev,Play}
+	playerctl {next, previous, play-pause}
+
+# Screenshots
+{_, shift +} Print
+	{ \
+	scrot -ub /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f', \
+	flameshot gui \
+	}
+
+# File Manager
+super + f
+	pcmanfm
+
+
+# Brightness
+XF86MonBrightness{Up,Down}
+	xbacklight -{inc,dec} 5
+
+#
+# bspwm hotkeys
+#
+
+# restart bspwm / sxhkd
+super + shift + r
+	pkill -USR1 -x sxhkd && \
+	bspc wm -r
+
+## Windows
+
+# focus/swap the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+# Focus next / prev
+super + {_,shift + } + z
+	bspc node -f {next,prev}.local.leaf
+
+# close and kill
+super + shift + {_,control + }q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# Toggle floating / tiling
+super + shift + space
+	bspc node -t ~floating
+
+# Hide focused window / unhide all hided windows
+super + {_, shift +} n
+	bspc node {_, any.hidden} -g hidden 
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '{1-9,10}'
+
+# Send desktop to monitor, sort desktop after moving
+super + control + {h, j, k, l}
+	bspc desktop focused -m {west, south, north, east} --follow && \
+	bspc monitor -o $(bspc query -D -m --names | sort)
+
+super + control + {Left, Down, Up, Right}
+	bspc desktop focused -m {west, south, north, east} --follow && \
+	bspc monitor -o $(bspc query -D -m --names | sort)
+
+# Swap desktop between monitors, sort all desktop after swap
+# TODO: is ugly how te second dektop is reorder...
+super + s
+	desktop=$(bspc query --names -D -d focused) && \
+	bspc desktop -s next:focused &&  \
+	for monitor in $(bspc query -M --names); do bspc monitor "$monitor" -o $(bspc query -D -m "$monitor" --names | sort); done && \
+	bspc desktop -a "$desktop"
+
+# focus the next/previous desktop in the current monitor
+super + brace{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + bar
+	bspc desktop -f last
+
+#
+# preselect
+#
+
+# preselect the direction
+super + alt + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + alt + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + alt + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + alt + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# Resize moving all size symmetrically
+super + alt + {plus,minus}
+	{ \
+		bspc node -z top_left -20 -20 && bspc node -z bottom_right 20 20, \
+		bspc node -z top_left 20 20 && bspc node -z bottom_right -20 -20 \
+	}

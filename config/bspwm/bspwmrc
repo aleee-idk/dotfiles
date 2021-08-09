@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+# Config path
+DIR="$(dirname $(which $0))"
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+[[ $1 -gt 0 ]] && is_restart=true
+
+n_monitors=$(xrandr --listactivemonitors | head -1 | awk '{print $2}')
+
+if [[ "$n_monitors" -eq 1 ]]; then
+	bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+	# bspc monitor -d "" "" "" "ﯢ" "" "" "" "" "" ""
+else
+	bspc monitor HDMI1 -d 1 2 3 4 5
+	bspc monitor eDP1 -d 6 7 8 9 10
+	# bspc monitor HDMI1 -d "" "" "" "ﯢ" "" "" "" "" 
+	# bspc monitor eDP1 -d "" ""
+fi
+
+# Config
+
+bspc config border_width                        5
+bspc config window_gap                          12
+
+bspc config split_ratio                         0.52
+
+# set desktop layout to monocle if only 1 tiled window
+bspc config single_monocle                      true
+bspc config borderless_monocle                  true
+
+#                                               Layout
+bspc config automatic_scheme                    alternate
+
+# Add windows to the                            left
+bspc config initial_polarity                    second_child
+
+# Mouse
+
+# Use meta key to manipulate floating           windows
+bspc config pointer_modifier                    mod4
+
+bspc config pointer_action1                     move
+bspc config pointer_action3                     resize_corner
+
+bspc config click_to_focus                      true
+bspc config pointer_follows_monitor             true
+bspc config pointer_follows_focus               true
+bspc config focus_follows_pointer               true
+
+# Monitors
+
+bspc config top_padding                         20
+
+bspc config remove_disabled_monitors            true
+bspc config remove_unplugged_monitors           true
+
+# Rules
+"$DIR/rules"
+# bspc config external_rules_command "$DIR/rules.py"
+
+# Colors
+"$DIR/colors"
+
+# After the config was loaded
+if [[ "$is_restart" = true ]]; then
+	notify-send "BSPWM Restarted!"
+else
+	# Auto Start Apps only on launch
+	$HOME/.fehbg
+	"$HOME/.config/polybar/launch.sh"
+	firefox &
+	discord &
+	signal-desktop &
+fi

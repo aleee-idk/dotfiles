@@ -1,13 +1,11 @@
 acpi
 activitywatch-bin
+alacritty
 android-file-transfer
 android-udev
 arandr
 archiso
-asciidoc
 atop
-autoconf
-automake
 autopep8
 autorandr
 autotrash
@@ -49,13 +47,12 @@ flavours
 flex
 fortune-mod
 fzf
+gdb
 geeqie
-gn
 go
-go-tools
-gobject-introspection
 godot
 gparted
+gpointing-device-settings
 grub
 gtest
 gucharmap
@@ -65,7 +62,6 @@ htop
 i3-battery-popup
 i3blocks
 inotify-tools
-itstool
 jellyfin
 joplin-desktop
 kdeconnect
@@ -80,7 +76,6 @@ luarocks
 lutris
 lxappearance
 mcomix
-meson
 mingw-w64-gcc
 mkinitcpio-numlock
 mon2cam-git
@@ -109,7 +104,6 @@ playerctl
 polybar
 prettier
 python-black
-python-docutils
 python-pywal
 qmk
 qt5ct
@@ -122,7 +116,6 @@ rofi-bluetooth-git
 rofi-calc
 rofi-emoji
 rofi-power-menu
-rust
 sane-airscan
 scrot
 shellcheck
@@ -134,11 +127,11 @@ spotifywm-git
 steam
 stow
 system-config-printer
+tealdeer
 teams
 telegram-desktop
 termdown
 timeshift
-tldr
 tokei
 torbrowser-launcher
 transmission-gtk
@@ -147,7 +140,6 @@ transmission-remote-gtk
 tree
 ttf-times-new-roman
 udiskie-dmenu-git
-vala
 vimiv-qt-git
 virtualbox
 visual-studio-code-bin

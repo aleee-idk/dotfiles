@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Start flavours
+# Scheme Name   : Material Palenight
+# Scheme Author : Nate Peterson
+
+base00="#292D3E" # Default Background
+base01="#444267" # Lighter Background (Used for status bars)
+base02="#32374D" # Selection Background
+base03="#676E95" # Comments, Invisibles, Line Highlighting
+base04="#8796B0" # Dark Foreground (Used for status bars)
+base05="#959DCB" # Default Foreground, Caret, Delimiters, Operators
+base06="#959DCB" # Light Foreground (Not often used)
+base07="#FFFFFF" # Light Background (Not often used)
+base08="#F07178" # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+base09="#F78C6C" # Integers, Boolean, Constants, XML Attributes, Markup Link Url
+base0A="#FFCB6B" # Classes, Markup Bold, Search Text Background
+base0B="#C3E88D" # Strings, Inherited Class, Markup Code, Diff Inserted
+base0C="#89DDFF" # Support, Regular Expressions, Escape Characters, Markup Quotes
+base0D="#82AAFF" # Functions, Methods, Attribute IDs, Headings
+base0E="#C792EA" # Keywords, Storage, Selector, Markup Italic, Diff Changed
+# End flavours
+
+transparent="#00000000"
+bspc config normal_border_color "$base00"
+bspc config active_border_color "$base00"
+bspc config focused_border_color "$base01"
+bspc config presel_border_color "$base02"

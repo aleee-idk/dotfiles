@@ -72,6 +72,11 @@ start = "; Start flavours"
 end = "; End flavours"
 hoow = "~/dotfiles/config/polybar/launch.sh"
 
+[[item]]
+file = "~/dotfiles/config/zathura/zathurarc"
+template = "zathura"
+subtemplate = "recolor"
+
 # [[items]]
 # file = "~/.config/beautifuldiscord/style.css"
 # template = "styles"

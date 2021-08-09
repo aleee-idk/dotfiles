@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# Rules
+
+# Clean Rules before reload
+bspc rule -r "*"
+
+# Floating Windows
+bspc rule -a "pop-up" state=floating
+bspc rule -a Devtools state=floating
+bspc rule -a Thunar state=floating
+bspc rule -a Pcmanfm state=floating
+bspc rule -a vimiv state=floating
+bspc rule -a "Tor Browser" state=floating
+bspc rule -a files state=floating
+
+bspc rule -a *:*:"Event Tester" state=floating
+bspc rule -a *:"pinentry" state=floating
+bspc rule -a *:"pop-up" state=floating
+
+# Desktop Config
+bspc rule -a firefox desktop=1
+
+bspc rule -a qutebrowser desktop=2
+
+bspc rule -a Steam desktop=5
+bspc rule -a steam_app_* desktop=5
+
+bspc rule -a discord desktop=8
+bspc rule -a TelegramDesktop desktop=8
+bspc rule -a whatsapp-nativefier desktop=8
+bspc rule -a Signal desktop=8
+
+bspc rule -a mpv desktop=9
+
+bspc rule -a Spotify desktop=10
+bspc rule -a music desktop=10
+bspc rule -a ncmpcpp desktop=10
+
+
+bspc rule -a Screenkey manage=off
