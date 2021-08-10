@@ -4,7 +4,7 @@ packages='packages.txt'
 
 # read package file and install everythin, eather from the oficial repository or user repository
 while read line; do
-   sudo pacman -S --noconfirm --needed "$line" || paru -S "$line" </dev/tty
+   sudo pacman -S --noconfirm --needed "$line" || paru --skipreview --needed -S "$line" </dev/tty
 done < $packages
 
 echo "Insallet packages"
