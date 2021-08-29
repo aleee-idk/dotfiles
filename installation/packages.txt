@@ -1,11 +1,8 @@
-alacritty
 android-file-transfer
 android-udev
 arandr
 autorandr
 autotrash
-awesome
-awmtt
 base
 base-devel
 bash-completion
@@ -13,7 +10,6 @@ blueberry
 bpytop
 bspwm
 cmatrix
-cowsay
 cups
 cups-pdf
 discord
@@ -28,11 +24,7 @@ fish
 flameshot
 flavours
 gcc
-fortune-mod
 fzf
-go
-godot
-gparted
 grep
 grub
 gutenprint
@@ -58,7 +50,6 @@ neofetch
 neovim
 networkmanager
 networkmanager-dmenu-git
-ntfs-3g
 os-prober
 obs-studio
 ookla-speedtest-bin
@@ -91,12 +82,11 @@ splix
 spotify
 sshfs
 steam
-stow
 system-config-printer
 telegram-desktop
 thunar
 timeshift
-tldr
+teeldeer
 torbrowser-launcher
 transmission-gtk
 transmission-remote-gtk
@@ -105,11 +95,8 @@ tumbler
 udiskie-dmenu-git
 vimiv-qt-git
 virtualbox
-visual-studio-code-bin
 whatsapp-nativefier
-wine
 xclip
 xdg-user-dirs
 xf86-video-intel
 xorg
-xournalpp

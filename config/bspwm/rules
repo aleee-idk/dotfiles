@@ -13,18 +13,39 @@ bspc rule -a Pcmanfm state=floating
 bspc rule -a vimiv state=floating
 bspc rule -a "Tor Browser" state=floating
 bspc rule -a files state=floating
+bspc rule -a Transmission-gtk state=floating
+bspc rule -a Timeshift-gtk state=floating
+bspc rule -a Tk state=floating
 
 bspc rule -a *:*:"Event Tester" state=floating
 bspc rule -a *:"pinentry" state=floating
 bspc rule -a *:"pop-up" state=floating
+bspc rule -a *:"task_dialog" state=floating
+
+# KDE Plasma
+bspc rule -a plasmashell state=floating border=off
+bspc rule -a Plasma state=floating border=off
+bspc rule -a krunner state=floating border=off
+bspc rule -a Kmix state=floating border=off
+bspc rule -a Klipper state=floating border=off
+bspc rule -a Plasmoidviewer state=floating border=off
+bspc rule -a "*nexcloud*" state=floating border=off
+bspc rule -a *:*:"Desktop - Plasma" state=floating border=off
+bspc rule -a *:*"plasma-desktop" state=floating border=off
+bspc rule -a *:*win7 state=floating border=off
 
 # Desktop Config
 bspc rule -a firefox desktop=1
+bspc rule -a LibreWolf desktop=1
 
 bspc rule -a qutebrowser desktop=2
 
+# Games
 bspc rule -a Steam desktop=5
 bspc rule -a steam_app_* desktop=5
+bspc rule -a org-tlauncher-tlauncher-rmo-TLauncher desktop=5
+bspc rule -a Minecraft* desktop=5
+
 
 bspc rule -a discord desktop=8
 bspc rule -a TelegramDesktop desktop=8

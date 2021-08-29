@@ -21,6 +21,12 @@ langs=("en_US.UTF-8")
 layout=("la-latin1")
 x11layout=("latin")
 
+# packages
+packages='packages.txt'
+
+# Services
+services=(org.cups.cupsd.service bluetooth)
+
 # Setting locales
 
 while : ; do
@@ -127,70 +133,6 @@ usermod -aG wheel,audio,video,optical,storage,lpadmin "$user"
 
 sed -i -e "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers
 
-# Installing grub
-
-mkdir /boot/EFI
-
-
-echo "Mounting $efi as root partition"
-# Ask for root partition untl the right one is entered
-while : ; do
-    check=$(blkid -o value --match-tag TYPE $efi)
-    if [ $check == "vfat" ]; then
-        mount $efi /boot/EFI
-        if [ $? -eq 0 ]; then
-            break
-        fi
-    fi
-    echo "wrong file system, please use an EFI partition"
-    lsblk -o name,fstype,size,label,partlabel,mountpoint
-    read efi
-done
-echo "$efi was mounted as boot partition"
-
-if [ ${#os[@]} -eq 0 ]; then
-    echo "Mount another OS? (y/n)"
-    read answer
-    while [[ "$answer" == "y" || "$answer" == "Y" ]]; do
-        lsblk -o name,fstype,size,label,partlabel,mountpoint
-        read os
-        while : ; do
-            mkdir -p "/mnt$os"
-            mount $os "/mnt$os"
-            if [ $? -eq 0 ]; then
-                break
-            fi
-            echo "wrong file system, please use an EFI partition"
-            lsblk -o name,fstype,size,label,partlabel,mountpoint
-            read os
-        done
-        echo "Mount another OS? (y/n)"
-        read answer
-        [[ "$answer" == "y" || "$answer" == "Y" ]] && continue
-    done
-else
-    for i in "${os[@]}"; do
-        while : ; do
-            mkdir -p "/mnt$os"
-            mount $os "/mnt$os"
-            if [ $? -eq 0 ]; then
-                echo "$os was mounted"
-                break
-            fi
-            echo "something goes wrong"
-            lsblk -o name,fstype,size,label,partlabel,mountpoint
-            read os
-        done
-    done
-fi
-
-grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
-grub-mkconfig -o /boot/grub/grub.cfg
-
-for dir in /mnt/*; do
-    umount $dir
-done
-
 # Enable Network Manager
 
 systemctl enable NetworkManager
@@ -200,15 +142,9 @@ git config --global credential.helper store
 
 # Install AUR Repository
 
-sudo pacman -S --needed base-devel
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
-cd ..
-rm -r paru
+# TODO
 
 # dotfiles and package install
-rm -r /home/"$user"/{*,.*}
 cd /home/"$user"
 git clone https://github.com/aleee-idk/dotfiles.git
 cd dotfiles/installation
@@ -216,23 +152,20 @@ cd dotfiles/installation
 chown -R "$user":"$user" /home/"$user"/
 packages='packages.txt'
 
-# read package file and install everything, eather from the oficial repository or user repository
+echo "Installing packages..."
+# read package file and install everythin, eather from the oficial repository or user repository
 while read line; do
-    pacman -S --noconfirm --needed "$line" || sudo -u "$user" yay -S "$line" </dev/tty
+   sudo pacman -S --noconfirm --needed "$line" || paru --noconfirm --skipreview --needed -S "$line"
 done < $packages
 
 echo "Insalled packages"
 
-# Install lightdm
-sed -i -e "s/#greeter-session=example-gtk-gnome/greeter-session=lightdm-gtk-greeter/g" /etc/lightdm/lightdm.conf
-sed -i -e "s/#display-setup-script=/display-setup-script=xrandr --output HDMI1 --primary/g" /etc/lightdm/lightdm.conf
-systemctl enable lightdm
-
 # printer settup
 sed -i -e "s/SystemGroup sys root wheel/SystemGroup sys root wheel lpadmin/g" /etc/cups/cups-files.conf
-systemctl enable org.cups.cupsd.service
 
-systemctl enable bluetooth
+for service in "${services[@]}"; do
+	systemctl enable "$service"
+done
 
 # for i in "${x11latout[@]}"; do
 #   echo "setting X11 layout to: $i"

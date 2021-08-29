@@ -58,7 +58,7 @@ start = "-- Start flavours"
 end = "-- End flavours"
 
 [[item]]
-file = "~/dotfiles/home/Xresources"
+file = "~/dotfiles/home/dot-Xresources"
 template = "xresources"
 subtemplate = "default-256"
 start = "! Start flavours"
@@ -76,6 +76,18 @@ hoow = "~/dotfiles/config/polybar/launch.sh"
 file = "~/dotfiles/config/zathura/zathurarc"
 template = "zathura"
 subtemplate = "recolor"
+
+[[item]]
+file = "~/dotfiles/home/dot-themes/FlatColor/colors3"
+template = "gtk-flatcolor"
+subtemplate = "gtk-3"
+rewrite = true
+
+[[item]]
+file = "~/dotfiles/home/dot-themes/FlatColor/colors2"
+template = "gtk-flatcolor"
+subtemplate = "gtk-2"
+rewrite = true
 
 # [[items]]
 # file = "~/.config/beautifuldiscord/style.css"

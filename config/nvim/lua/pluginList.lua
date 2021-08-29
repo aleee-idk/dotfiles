@@ -27,7 +27,7 @@ return require('packer').startup({
         use 'lazytanuki/nvim-mapper'
 
         -- Time Tracker
-        use 'ActivityWatch/aw-watcher-vim'
+        -- use 'ActivityWatch/aw-watcher-vim'
 
         -- Code Utilities --
 

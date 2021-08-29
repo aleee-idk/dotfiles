@@ -83,7 +83,7 @@ vim.g.dashboard_custom_header = lines
 -- Alternatively, you can provide a table specifying your colors to the setup function.
 require('base16-colorscheme').setup({
     -- Start flavours
-	-- Base16 Material Palenight color
+	-- Base16 Material Palenight
 	-- Author: Nate Peterson
 	-- to be use with https://github.com/RRethy/nvim-base16
 

@@ -47,12 +47,15 @@ XF86Audio{Next,Prev,Play}
 
 # File Manager
 super + f
-	pcmanfm
-
+	thunar
 
 # Brightness
 XF86MonBrightness{Up,Down}
 	xbacklight -{inc,dec} 5
+
+# External Screen Conf
+Super + control + Shift + {Left, Down, Up, Right}
+	xrandr --output HDMI1 --rotate {left, inverted, normal, right};
 
 #
 # bspwm hotkeys
@@ -99,6 +102,11 @@ super + ctrl + {m,x,y,z}
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '{1-9,10}'
+
+# Send to another screen and focus
+super + control + {1-9,0}
+	bspc desktop {1-9,10} -m $(bspc query -M -d {1-9, 0})#next \
+	&& bspc desktop -f {1-9,10}
 
 # Send desktop to monitor, sort desktop after moving
 super + control + {h, j, k, l}

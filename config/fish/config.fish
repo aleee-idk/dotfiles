@@ -9,6 +9,11 @@ set -a PATH ~/.local/bin
 
 # Alias
 
+# Sudo
+function please --wraps sudo --description 'alias sudo = "sudo -v", refresh sudo timeout each time is called'
+	sudo -v $argv
+end
+
 # Pacman
 function paci --wraps pacman --description 'alias paci=pacman -S'
 	sudo pacman -S $argv
@@ -64,12 +69,12 @@ set file (cat $filename)
 
 # Vi Mode
 
-	neofetch
+	# neofetch
 	starship init fish | source
 
 # Start X at login
-	if status is-login
+if status is-login
 	if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-	exec startx -- -keeptty &> /dev/null
+		exec startx -- -keeptty &> /dev/null
 	end
-	end
+end

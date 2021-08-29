@@ -13,8 +13,8 @@ if [[ "$n_monitors" -eq 1 ]]; then
 	bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 	# bspc monitor -d "" "" "" "ﯢ" "" "" "" "" "" ""
 else
-	bspc monitor HDMI1 -d 1 2 3 4 5
-	bspc monitor eDP1 -d 6 7 8 9 10
+	bspc monitor HDMI1 -d 1 2 3 4 5 6 7 9
+	bspc monitor eDP1 -d 8 10
 	# bspc monitor HDMI1 -d "" "" "" "ﯢ" "" "" "" "" 
 	# bspc monitor eDP1 -d "" ""
 fi
@@ -64,13 +64,14 @@ bspc config remove_unplugged_monitors           true
 "$DIR/colors"
 
 # After the config was loaded
+
+"$HOME/.config/polybar/launch.sh"
 if [[ "$is_restart" = true ]]; then
 	notify-send "BSPWM Restarted!"
 else
 	# Auto Start Apps only on launch
 	$HOME/.fehbg
-	"$HOME/.config/polybar/launch.sh"
-	firefox &
+	librewolf &
 	discord &
 	signal-desktop &
 fi

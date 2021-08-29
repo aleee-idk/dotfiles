@@ -69,10 +69,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["aw-watcher-vim"] = {
-    loaded = true,
-    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/aw-watcher-vim"
-  },
   ["cheatsheet.nvim"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/cheatsheet.nvim"
