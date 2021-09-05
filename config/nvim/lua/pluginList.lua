@@ -61,6 +61,19 @@ return require('packer').startup({
             require = 'nvim-treesitter/nvim-treesitter'
         }
 
+        -- Git
+        use {
+            'TimUntersberger/neogit',
+            cmd = "Neogit",
+            requires = 'nvim-lua/plenary.nvim'
+        }
+
+        use {
+            'lewis6991/gitsigns.nvim',
+            requires = {'nvim-lua/plenary.nvim'},
+            config = [[require("plugins.gitsigns")]]
+        }
+
         -- Terminal Support
         use 'akinsho/nvim-toggleterm.lua'
 
@@ -69,12 +82,16 @@ return require('packer').startup({
         -- Telescope.nvim
         use {
             'nvim-telescope/telescope.nvim',
-            requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+            requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'},
+            config = [[require("plugins.telescope") ]]
         }
 
         use 'nvim-telescope/telescope-media-files.nvim'
 
-        use 'nvim-telescope/telescope-project.nvim'
+        use {
+            'ahmedkhalf/project.nvim',
+            config = [[ require("plugins.projects") ]]
+        }
 
         -- Harpoon
         use 'ThePrimeagen/harpoon'
@@ -104,7 +121,10 @@ return require('packer').startup({
         use 'fszymanski/fzf-gitignore'
 
         -- Peak lines
-        use 'nacro90/numb.nvim'
+        use {
+            'nacro90/numb.nvim',
+            config = function() require('numb').setup() end
+        }
 
         -- Split lines
         use {
@@ -137,8 +157,14 @@ return require('packer').startup({
         use "lukas-reineke/indent-blankline.nvim"
 
         -- Color Highlight
-        use 'norcalli/nvim-colorizer.lua'
+        use {
+            'norcalli/nvim-colorizer.lua',
+            config = function()
+                vim.opt.termguicolors = true
+                require'colorizer'.setup()
 
+            end
+        }
         -- Misc
 
         -- Dashboard

@@ -6,4 +6,5 @@ sensible_env.sh
 config/fish/fundle
 
 # TODO: Change when clean it
-flavours_data/*
+*/flavours_data/*
+*dot-theme*

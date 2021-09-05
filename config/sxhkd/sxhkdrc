@@ -54,7 +54,7 @@ XF86MonBrightness{Up,Down}
 	xbacklight -{inc,dec} 5
 
 # External Screen Conf
-Super + control + Shift + {Left, Down, Up, Right}
+super + control + shift + {Left, Down, Up, Right}
 	xrandr --output HDMI1 --rotate {left, inverted, normal, right};
 
 #
@@ -76,15 +76,15 @@ super + {_,shift + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
 
 # Focus next / prev
-super + {_,shift + } + z
-	bspc node -f {next,prev}.local.leaf
+super + Tab
+	bspc node -f next.local.leaf
 
 # close and kill
 super + shift + {_,control + }q
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
-super + m
+super + shift + Tab
 	bspc desktop -l next
 
 # Toggle floating / tiling
@@ -105,8 +105,9 @@ super + {_,shift + }{1-9,0}
 
 # Send to another screen and focus
 super + control + {1-9,0}
-	bspc desktop {1-9,10} -m $(bspc query -M -d {1-9, 0})#next \
-	&& bspc desktop -f {1-9,10}
+	sel_desktop={1-9,0}; \
+	bspc desktop "$sel_desktop" -m $(bspc query -M -d "$sel_desktop")#next \
+	&& bspc desktop -f "$sel_desktop"
 
 # Send desktop to monitor, sort desktop after moving
 super + control + {h, j, k, l}
@@ -132,26 +133,6 @@ super + brace{left,right}
 # focus the last node/desktop
 super + bar
 	bspc desktop -f last
-
-#
-# preselect
-#
-
-# preselect the direction
-super + alt + {h,j,k,l}
-	bspc node -p {west,south,north,east}
-
-# preselect the ratio
-super + alt + {1-9}
-	bspc node -o 0.{1-9}
-
-# cancel the preselection for the focused node
-super + alt + space
-	bspc node -p cancel
-
-# cancel the preselection for the focused desktop
-super + alt + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
 # move/resize

@@ -9,6 +9,9 @@ set -a PATH ~/.local/bin
 
 # Alias
 
+# Thefuck
+thefuck --alias | source
+
 # Sudo
 function please --wraps sudo --description 'alias sudo = "sudo -v", refresh sudo timeout each time is called'
 	sudo -v $argv
@@ -71,6 +74,7 @@ set file (cat $filename)
 
 	# neofetch
 	starship init fish | source
+
 
 # Start X at login
 if status is-login

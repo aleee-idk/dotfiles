@@ -90,6 +90,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/fzf-gitignore"
   },
+  ["gitsigns.nvim"] = {
+    config = { 'require("plugins.gitsigns")' },
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+  },
   harpoon = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/harpoon"
@@ -122,11 +127,18 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/moonlight.nvim"
   },
+  neogit = {
+    commands = { "Neogit" },
+    loaded = false,
+    needs_bufread = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/opt/neogit"
+  },
   neon = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/neon"
   },
   ["numb.nvim"] = {
+    config = { "\27LJ\1\0022\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\tnumb\frequire\0" },
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/numb.nvim"
   },
@@ -139,6 +151,7 @@ _G.packer_plugins = {
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-base16"
   },
   ["nvim-colorizer.lua"] = {
+    config = { "\27LJ\1\2]\0\0\2\0\6\0\n4\0\0\0007\0\1\0)\1\2\0:\1\2\0004\0\3\0%\1\4\0>\0\2\0027\0\5\0>\0\1\1G\0\1\0\nsetup\14colorizer\frequire\18termguicolors\bopt\bvim\0" },
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
   },
@@ -222,6 +235,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
+  ["project.nvim"] = {
+    config = { ' require("plugins.projects") ' },
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/project.nvim"
+  },
   ["suda.vim"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/suda.vim"
@@ -234,11 +252,8 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/telescope-media-files.nvim"
   },
-  ["telescope-project.nvim"] = {
-    loaded = true,
-    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/telescope-project.nvim"
-  },
   ["telescope.nvim"] = {
+    config = { 'require("plugins.telescope") ' },
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
@@ -301,6 +316,26 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: numb.nvim
+time([[Config for numb.nvim]], true)
+try_loadstring("\27LJ\1\0022\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\tnumb\frequire\0", "config", "numb.nvim")
+time([[Config for numb.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require("plugins.telescope") 
+time([[Config for telescope.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+require("plugins.gitsigns")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+try_loadstring("\27LJ\1\2]\0\0\2\0\6\0\n4\0\0\0007\0\1\0)\1\2\0:\1\2\0004\0\3\0%\1\4\0>\0\2\0027\0\5\0>\0\1\1G\0\1\0\nsetup\14colorizer\frequire\18termguicolors\bopt\bvim\0", "config", "nvim-colorizer.lua")
+time([[Config for nvim-colorizer.lua]], false)
+-- Config for: project.nvim
+time([[Config for project.nvim]], true)
+ require("plugins.projects") 
+time([[Config for project.nvim]], false)
 -- Conditional loads
 time("Condition for { 'dashboard-nvim' }", true)
 if
@@ -313,6 +348,12 @@ time([[packadd for dashboard-nvim]], true)
 else
 time("Condition for { 'dashboard-nvim' }", false)
 end
+
+-- Command lazy-loads
+time([[Defining lazy-load commands]], true)
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Neogit lua require("packer.load")({'neogit'}, { cmd = "Neogit", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
+time([[Defining lazy-load commands]], false)
+
 if should_profile then save_profiles() end
 
 end)

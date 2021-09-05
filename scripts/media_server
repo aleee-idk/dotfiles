@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Launch jellyfin and mpv in the background
+
+action=$1
+dependencies=(jellyfin jellyfin-mpv-shim)
+
+if ! /home/aleidk/dotfiles/scripts/check_dependencies "${dependencies[@]}"; then
+	notify-send "Missing dependencies, aborting..."
+	exit 1
+fi
+
+if [[ "$action" =~ "start" ]];then
+	systemctl start jellyfin.service
+
+	until systemctl -q is-active jellyfin.service; do
+		notify-send "waiting"
+		sleep 1
+	done
+
+	sleep 5
+
+	jellyfin-mpv-shim &>/dev/null &
+	notify-send "Media Server Started!"
+
+elif [[ "$action" =~ "stop" ]]; then
+	systemctl stop jellyfin.service
+	killall jellyfin-mpv-shim
+	notify-send "Media Server Stoped!"
+fi
