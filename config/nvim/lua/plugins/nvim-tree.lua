@@ -4,7 +4,7 @@ local mapper = require("nvim-mapper")
 vim.g.nvim_tree_side = 'left'
 
 -- 30 by default, can be width_in_columns or 'width_in_percent%'
-vim.g.nvim_tree_width = "15%"
+vim.g.nvim_tree_width = 30
 
 -- empty by default
 vim.g.nvim_tree_ignore = {'.git', 'node_modules', '*cache*'}

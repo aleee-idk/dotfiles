@@ -10,12 +10,12 @@ super + Return
 super + d
 	rofi -no-lazy-grab -show drun -modi drun -theme "$HOME/.config/rofi/themes/fullscreen_transparent.rasi"
 
-# Rofi Scripts
+# Run Stuff
 super + r ; {c,b,e,x,d}
 	{ \
 		rofi -theme $HOME/.config/rofi/themes/sidebar.rasi -i -show calc -modi calc -no-show-match -no-sort -no-persist-history, \
 		$HOME/dotfiles/scripts/rofi/buku, \
-		$HOME/dotfiles/scripts/rofi/edit_file, \
+		$TERMINAL --name "EDITOR" $EDITOR , \
 		$HOME/dotfiles/scripts/rofi/exec_command, \
 		udiskie-dmenu -matching regex -dmenu -i -no-custom -multi-select \
 	}

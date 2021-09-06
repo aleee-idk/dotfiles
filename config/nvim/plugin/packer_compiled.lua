@@ -82,6 +82,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/dracula.nvim"
   },
+  ["focus.nvim"] = {
+    config = { "\27LJ\1\2-\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\18plugins.focus\frequire\0" },
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/focus.nvim"
+  },
   ["formatter.nvim"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/formatter.nvim"
@@ -94,6 +99,10 @@ _G.packer_plugins = {
     config = { 'require("plugins.gitsigns")' },
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+  },
+  ["glow.nvim"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/glow.nvim"
   },
   harpoon = {
     loaded = true,
@@ -118,10 +127,6 @@ _G.packer_plugins = {
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/lualine.nvim"
-  },
-  ["markdown-preview.nvim"] = {
-    loaded = true,
-    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim"
   },
   ["moonlight.nvim"] = {
     loaded = true,
@@ -183,10 +188,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-mapper"
   },
-  ["nvim-revJ.lua"] = {
-    loaded = true,
-    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-revJ.lua"
-  },
   ["nvim-toggleterm.lua"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-toggleterm.lua"
@@ -203,6 +204,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context"
   },
+  ["nvim-ts-autotag"] = {
+    config = { "\27LJ\1\2g\0\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\4\0003\2\3\0:\2\5\1>\0\2\1G\0\1\0\fautotag\1\0\0\1\0\1\venable\2\nsetup\28nvim-treesitter.configs\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/opt/nvim-ts-autotag"
+  },
   ["nvim-ts-rainbow"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow"
@@ -210,6 +217,10 @@ _G.packer_plugins = {
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
+  },
+  nvim_context_vt = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim_context_vt"
   },
   ["omni.vim"] = {
     loaded = true,
@@ -240,11 +251,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/project.nvim"
   },
+  ["rest.nvim"] = {
+    config = { "\27LJ\1\2,\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\17plugins.rest\frequire\0" },
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/rest.nvim"
+  },
   ["suda.vim"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/suda.vim"
   },
   ["surround.nvim"] = {
+    config = { "\27LJ\1\2U\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\19mappings_style\rsandwich\nsetup\rsurround\frequire\0" },
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/surround.nvim"
   },
@@ -281,14 +298,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-snippets"
   },
-  ["vim-textobj-parameter"] = {
-    loaded = true,
-    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-textobj-parameter"
-  },
-  ["vim-textobj-user"] = {
-    loaded = true,
-    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-textobj-user"
-  },
   ["vim-transparent"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-transparent"
@@ -301,10 +310,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/which-key.nvim"
   },
-  winresizer = {
-    loaded = true,
-    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/winresizer"
-  },
   ["xresources-nvim"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/xresources-nvim"
@@ -316,10 +321,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: numb.nvim
-time([[Config for numb.nvim]], true)
-try_loadstring("\27LJ\1\0022\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\tnumb\frequire\0", "config", "numb.nvim")
-time([[Config for numb.nvim]], false)
+-- Config for: surround.nvim
+time([[Config for surround.nvim]], true)
+try_loadstring("\27LJ\1\2U\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\19mappings_style\rsandwich\nsetup\rsurround\frequire\0", "config", "surround.nvim")
+time([[Config for surround.nvim]], false)
 -- Config for: telescope.nvim
 time([[Config for telescope.nvim]], true)
 require("plugins.telescope") 
@@ -328,10 +333,22 @@ time([[Config for telescope.nvim]], false)
 time([[Config for gitsigns.nvim]], true)
 require("plugins.gitsigns")
 time([[Config for gitsigns.nvim]], false)
+-- Config for: focus.nvim
+time([[Config for focus.nvim]], true)
+try_loadstring("\27LJ\1\2-\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\18plugins.focus\frequire\0", "config", "focus.nvim")
+time([[Config for focus.nvim]], false)
 -- Config for: nvim-colorizer.lua
 time([[Config for nvim-colorizer.lua]], true)
 try_loadstring("\27LJ\1\2]\0\0\2\0\6\0\n4\0\0\0007\0\1\0)\1\2\0:\1\2\0004\0\3\0%\1\4\0>\0\2\0027\0\5\0>\0\1\1G\0\1\0\nsetup\14colorizer\frequire\18termguicolors\bopt\bvim\0", "config", "nvim-colorizer.lua")
 time([[Config for nvim-colorizer.lua]], false)
+-- Config for: rest.nvim
+time([[Config for rest.nvim]], true)
+try_loadstring("\27LJ\1\2,\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\17plugins.rest\frequire\0", "config", "rest.nvim")
+time([[Config for rest.nvim]], false)
+-- Config for: numb.nvim
+time([[Config for numb.nvim]], true)
+try_loadstring("\27LJ\1\0022\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\tnumb\frequire\0", "config", "numb.nvim")
+time([[Config for numb.nvim]], false)
 -- Config for: project.nvim
 time([[Config for project.nvim]], true)
  require("plugins.projects") 
@@ -354,6 +371,15 @@ time([[Defining lazy-load commands]], true)
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Neogit lua require("packer.load")({'neogit'}, { cmd = "Neogit", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType javascript ++once lua require("packer.load")({'nvim-ts-autotag'}, { ft = "javascript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescript ++once lua require("packer.load")({'nvim-ts-autotag'}, { ft = "typescript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType html ++once lua require("packer.load")({'nvim-ts-autotag'}, { ft = "html" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

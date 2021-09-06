@@ -1,17 +1,11 @@
-local scopes = {
-	o = vim.o,
-	b = vim.bo,
-	w = vim.w
-}
+local scopes = {o = vim.o, b = vim.bo, w = vim.w}
 
 local function opt(scope, key, value)
-	-- Add the option to the required scope
-	scopes[scope][key] = value
+    -- Add the option to the required scope
+    scopes[scope][key] = value
 
-	-- If is'n a global scope, add to the global anyways
-	if scope ~= 'o' then
-		scopes['o'][key] = value
-	end
+    -- If is'n a global scope, add to the global anyways
+    if scope ~= 'o' then scopes['o'][key] = value end
 end
 
 --[[

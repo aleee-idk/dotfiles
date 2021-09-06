@@ -2,7 +2,9 @@
 return require('packer').startup({
     function()
 
-        -- General Stuff --
+        ----------------------------------------------------------------------
+        --                          General Stuff                           --
+        ----------------------------------------------------------------------
 
         -- Packer can manage itself
         use 'wbthomason/packer.nvim'
@@ -18,18 +20,27 @@ return require('packer').startup({
         use 'chaoren/vim-wordmotion'
 
         -- Surround words actions
-        use 'blackCauldron7/surround.nvim'
+        use {
+            'blackCauldron7/surround.nvim',
+            config = function()
+                require"surround".setup {mappings_style = "sandwich"}
+            end
+        }
 
-        -- Window Resize
-        use 'simeji/winresizer'
+        -- Window Managment
+        use {
+            'beauwilliams/focus.nvim',
+            config = function() require('plugins.focus') end
+        }
 
         -- Lua mappings helper
         use 'lazytanuki/nvim-mapper'
 
-        -- Time Tracker
-        -- use 'ActivityWatch/aw-watcher-vim'
-
-        -- Code Utilities --
+        ----------------------------------------------------------------------
+        --                          Code Utilities                          --
+        --                               and                                --
+        --                         Editing Support                          --
+        ----------------------------------------------------------------------
 
         -- LSP
         use 'neovim/nvim-lspconfig'
@@ -61,7 +72,30 @@ return require('packer').startup({
             require = 'nvim-treesitter/nvim-treesitter'
         }
 
-        -- Git
+		use 'haringsrob/nvim_context_vt'
+
+        -- Autocompletion
+        use 'hrsh7th/nvim-compe'
+
+        -- Auto Format
+        use 'mhartington/formatter.nvim'
+
+        use 'windwp/nvim-autopairs'
+
+        use {
+            'windwp/nvim-ts-autotag',
+            ft = {'javascript', 'typescript', 'html'},
+            config = function()
+                require'nvim-treesitter.configs'.setup {
+                    autotag = {enable = true}
+                }
+            end
+        }
+
+        ----------------------------------------------------------------------
+        --                               Git                                --
+        ----------------------------------------------------------------------
+
         use {
             'TimUntersberger/neogit',
             cmd = "Neogit",
@@ -74,12 +108,19 @@ return require('packer').startup({
             config = [[require("plugins.gitsigns")]]
         }
 
-        -- Terminal Support
-        use 'akinsho/nvim-toggleterm.lua'
+        -- Create gitignore files using gitignore-io API
+        use 'fszymanski/fzf-gitignore'
+
+        ----------------------------------------------------------------------
+        --                          File Managment                          --
+        --                               and                                --
+        --                            Navigation                            --
+        ----------------------------------------------------------------------
+
+        -- File Managment --
+        use 'kyazdani42/nvim-tree.lua'
 
         -- Fuzzy Finder
-
-        -- Telescope.nvim
         use {
             'nvim-telescope/telescope.nvim',
             requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'},
@@ -93,11 +134,15 @@ return require('packer').startup({
             config = [[ require("plugins.projects") ]]
         }
 
-        -- Harpoon
+        -- Easy access to recurrent files
         use 'ThePrimeagen/harpoon'
 
-        -- Autocompletion
-        use 'hrsh7th/nvim-compe'
+        ----------------------------------------------------------------------
+        --                            Utilities                             --
+        ----------------------------------------------------------------------
+
+        -- Terminal Support
+        use 'akinsho/nvim-toggleterm.lua'
 
         -- Pictograms in Autocompletion
         use 'onsails/lspkind-nvim'
@@ -110,15 +155,9 @@ return require('packer').startup({
         use 'honza/vim-snippets'
 
         -- Comments
-        use 'b3nj5m1n/kommentary'
+        use 'b3nj5m1n/kommentary' -- Markdown
 
-        -- Markdown
-        use {
-            'iamcco/markdown-preview.nvim',
-            run = [[:call mkdp#util#install()]]
-        }
-
-        use 'fszymanski/fzf-gitignore'
+        use {'ellisonleao/glow.nvim', run = ":GlowInstall"}
 
         -- Peak lines
         use {
@@ -126,23 +165,21 @@ return require('packer').startup({
             config = function() require('numb').setup() end
         }
 
-        -- Split lines
-        use {
-            'AckslD/nvim-revJ.lua',
-            requires = {'kana/vim-textobj-user', 'sgur/vim-textobj-parameter'}
-        }
-
-        use 'windwp/nvim-autopairs'
-
-        -- File Managment --
-        use 'kyazdani42/nvim-tree.lua'
-
-        -- Better Looking --
-        -- Auto Format
-        use 'mhartington/formatter.nvim'
-
         -- Align stuff
         use 'junegunn/vim-easy-align'
+
+		-- Rest Client (Curl Wrapper)
+use {
+    'NTBBloodbath/rest.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+		require('plugins.rest')
+    end
+}
+
+        ----------------------------------------------------------------------
+        --                            Aesthetics                            --
+        ----------------------------------------------------------------------
 
         -- Status Line
         use {
@@ -165,28 +202,6 @@ return require('packer').startup({
 
             end
         }
-        -- Misc
-
-        -- Dashboard
-        use {
-            'glepnir/dashboard-nvim',
-            cond = function()
-                return true and os.getenv("PLUG") ~= "no" or false
-            end
-        }
-
-        -- Cheetsheats
-        use {
-            'sudormrfbin/cheatsheet.nvim',
-
-            requires = {
-                {'nvim-telescope/telescope.nvim'}, {'nvim-lua/popup.nvim'},
-                {'nvim-lua/plenary.nvim'}
-            }
-        }
-
-        -- WichKey
-        use 'folke/which-key.nvim'
 
         -- Zen Mode
         use {"folke/zen-mode.nvim", requires = {"folke/twilight.nvim"}}
@@ -206,6 +221,35 @@ return require('packer').startup({
         use 'rafamadriz/neon'
         use 'nekonako/xresources-nvim'
         use 'RRethy/nvim-base16'
+
+        ----------------------------------------------------------------------
+        --                               Halp                               --
+        ----------------------------------------------------------------------
+
+        -- Cheetsheats
+        use {
+            'sudormrfbin/cheatsheet.nvim',
+
+            requires = {
+                {'nvim-telescope/telescope.nvim'}, {'nvim-lua/popup.nvim'},
+                {'nvim-lua/plenary.nvim'}
+            }
+        }
+
+        -- WichKey
+        use 'folke/which-key.nvim'
+
+        ----------------------------------------------------------------------
+        --                               Misc                               --
+        ----------------------------------------------------------------------
+
+        -- Dashboard
+        use {
+            'glepnir/dashboard-nvim',
+            cond = function()
+                return true and os.getenv("PLUG") ~= "no" or false
+            end
+        }
 
     end,
     config = {display = {open_fn = require('packer.util').float}}

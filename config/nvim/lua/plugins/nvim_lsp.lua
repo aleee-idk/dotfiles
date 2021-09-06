@@ -24,17 +24,17 @@ local on_attach = function(client, bufnr)
                    "lsp_hover", "Show tooltip")
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts,
                    "LSP", "lsp_implementation", "Go to implementation")
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
-                   opts, "LSP", "lsp_signature", "Show Signature")
-    buf_set_keymap('n', '<Leader>wa',
+    -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
+    -- opts, "LSP", "lsp_signature", "Show Signature")
+    --[[ buf_set_keymap('n', '<Leader>wa',
                    '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts,
                    "LSP", "lsp_workspace_add", "Add Workspace")
     buf_set_keymap('n', '<Leader>wr',
                    '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts,
                    "LSP", "lsp_workspace_remove", "Remove Workspace")
-    buf_set_keymap('n', '<Leader>wl',
+    buf_set_keymap('n', '<Leader>cw',
                    '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
-                   opts, "LSP", "lsp_inspect", "Inspact Workspace")
+                   opts, "LSP", "lsp_inspect", "Inspect Workspace") ]]
     buf_set_keymap('n', '<Leader>cd',
                    '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts, "LSP",
                    "lsp_type_definition", "Type Definition")

@@ -1,8 +1,17 @@
--- Treesitter
+-- Rest plugin need this before treesitter
+local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+parser_configs.http = {
+  install_info = {
+    url = "https://github.com/NTBBloodbath/tree-sitter-http",
+    files = { "src/parser.c" },
+    branch = "main",
+  },
+}
+
 -- Note: Available capture groups and highlight group identifiers will be found in https://github.com/nvim-treesitter/nvim-treesitter/blob/master/lua/nvim-treesitter/highlight.lua file in the source code.
 require('nvim-treesitter.configs').setup({
     ensure_installed = {
-        "bash", "c", "cmake", "comment", "cpp", "css", "dockerfile", "elm",
+        "http", "bash", "c", "cmake", "comment", "cpp", "css", "dockerfile", "elm",
         "fish", "gdscript", "html", "javascript", "jsdoc", "json", "latex",
         "lua", "nix", "python", "query", "regex", "typescript", "yaml"
     },
