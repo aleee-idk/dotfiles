@@ -1,19 +1,19 @@
 /**
- * Base16 Material Palenight ROFI Color theme
+ * Base16 Porple ROFI Color theme
  *
  * Authors
- *  Scheme: Nate Peterson
+ *  Scheme: Niek den Breeje (https://github.com/AuditeMarlow)
  *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
  */
 
 * {
-    red:                         rgba ( 240, 113, 120, 100 % );
-    blue:                        rgba ( 130, 170, 255, 100 % );
-    lightfg:                     rgba ( 149, 157, 203, 100 % );
-    lightbg:                     rgba ( 68, 66, 103, 100 % );
-    foreground:                  rgba ( 149, 157, 203, 100 % );
-    background:                  rgba ( 41, 45, 62, 100 % );
-    background-color:            rgba ( 41, 45, 62, 0 % );
+    red:                         rgba ( 248, 69, 71, 100 % );
+    blue:                        rgba ( 132, 133, 206, 100 % );
+    lightfg:                     rgba ( 232, 232, 232, 100 % );
+    lightbg:                     rgba ( 51, 51, 68, 100 % );
+    foreground:                  rgba ( 216, 216, 216, 100 % );
+    background:                  rgba ( 41, 44, 54, 100 % );
+    background-color:            rgba ( 41, 44, 54, 0 % );
     separatorcolor:              @foreground;
     border-color:                @foreground;
     selected-normal-foreground:  @lightbg;

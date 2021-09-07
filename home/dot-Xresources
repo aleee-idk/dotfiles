@@ -2,25 +2,25 @@
 rofi.font:  APL385 Unicode size 12
 
 ! Start flavours
-! Base16 Material Palenight
-! Scheme: Nate Peterson
+! Base16 Porple
+! Scheme: Niek den Breeje (https://github.com/AuditeMarlow)
 
-#define base00 #292D3E
-#define base01 #444267
-#define base02 #32374D
-#define base03 #676E95
-#define base04 #8796B0
-#define base05 #959DCB
-#define base06 #959DCB
-#define base07 #FFFFFF
-#define base08 #F07178
-#define base09 #F78C6C
-#define base0A #FFCB6B
-#define base0B #C3E88D
-#define base0C #89DDFF
-#define base0D #82AAFF
-#define base0E #C792EA
-#define base0F #FF5370
+#define base00 #292c36
+#define base01 #333344
+#define base02 #474160
+#define base03 #65568a
+#define base04 #b8b8b8
+#define base05 #d8d8d8
+#define base06 #e8e8e8
+#define base07 #f8f8f8
+#define base08 #f84547
+#define base09 #d28e5d
+#define base0A #efa16b
+#define base0B #95c76f
+#define base0C #64878f
+#define base0D #8485ce
+#define base0E #b74989
+#define base0F #986841
 
 *foreground:   base05
 #ifdef background_opacity
