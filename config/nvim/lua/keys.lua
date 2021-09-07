@@ -23,12 +23,6 @@ Modes:
 vim.g.mapleader = ' '
 -- vim.g.mapleader = '\<Space>'
 
--- Split Navigation
-vim.api.nvim_set_keymap('', "<C-h>", "<C-w>h", {})
-vim.api.nvim_set_keymap('', "<C-j>", "<C-w>j", {})
-vim.api.nvim_set_keymap('', "<C-k>", "<C-w>k", {})
-vim.api.nvim_set_keymap('', "<C-l>", "<C-w>l", {})
-
 -- Remove Search Highlight
 vim.api.nvim_set_keymap('n', "<CR>", ":noh<CR>", {silent = true})
 

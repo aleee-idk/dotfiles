@@ -83,7 +83,7 @@ mapper.map("n", "<C-u>",
            {silent = true, noremap = true}, "LSP",
            "lspsaga_scroll_with_saga_down", "Scroll Down in LSP Saga preview")
 
-mapper.map("n", "<C-u>",
+mapper.map("n", "<C-i>",
            [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]],
            {silent = true, noremap = true}, "LSP",
            "lspsaga_scroll_with_saga_up", "Scroll Up in LSP Saga preview")
