@@ -46,6 +46,11 @@ return require('packer').startup({
         use 'neovim/nvim-lspconfig'
         use 'kabouzeid/nvim-lspinstall'
 
+        use {
+            'glepnir/lspsaga.nvim',
+            config = function() require('plugins.lspsaga') end
+        }
+
         -- Python venv support
         -- TODO: don't work, check later
         -- use 'HallerPatrick/py_lsp.nvim'
@@ -72,7 +77,7 @@ return require('packer').startup({
             require = 'nvim-treesitter/nvim-treesitter'
         }
 
-		use 'haringsrob/nvim_context_vt'
+        use 'haringsrob/nvim_context_vt'
 
         -- Autocompletion
         use 'hrsh7th/nvim-compe'
@@ -168,14 +173,12 @@ return require('packer').startup({
         -- Align stuff
         use 'junegunn/vim-easy-align'
 
-		-- Rest Client (Curl Wrapper)
-use {
-    'NTBBloodbath/rest.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-		require('plugins.rest')
-    end
-}
+        -- Rest Client (Curl Wrapper)
+        use {
+            'NTBBloodbath/rest.nvim',
+            requires = {'nvim-lua/plenary.nvim'},
+            config = function() require('plugins.rest') end
+        }
 
         ----------------------------------------------------------------------
         --                            Aesthetics                            --
