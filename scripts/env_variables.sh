@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Defaults
-export TERMINAL="kitty -1"
+export TERMINAL="kitty"
 export EDITOR="nvim"
 
 # Program Specifics

@@ -10,3 +10,7 @@ done < $packages
 
 echo "Installing user config..."
 "$HOME/dotfiles/installation/create_softlinks.sh"
+
+git clone https://github.com/xero/figlet-fonts.git /tmp/figlet/
+sudo mkdir -p /usr/share/figlet/fonts
+sudo cp /tmp/figlet/* /usr/share/figlet/fonts/
