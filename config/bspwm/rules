@@ -7,7 +7,7 @@ bspc rule -r "*"
 
 # Floating Windows
 bspc rule -a "pop-up" state=floating
-bspc rule -a Devtools state=floating
+bspc rule -a "*:Devtools" state=floating
 bspc rule -a Thunar state=floating
 bspc rule -a Pcmanfm state=floating
 bspc rule -a vimiv state=floating

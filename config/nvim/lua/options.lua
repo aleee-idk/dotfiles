@@ -1,11 +1,8 @@
-
 --[[
 vim.opt.{option}         ->  :set
 vim.opt_global.{option}  ->  :setglobal
 vim.opt_local.{option}   ->  :setlocal
---]]
-
--- Set Shell
+--]] -- Set Shell
 vim.opt.shell = "/usr/bin/env bash"
 vim.g.python3_host_prog = "/usr/bin/python3"
 
