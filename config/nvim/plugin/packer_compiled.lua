@@ -69,9 +69,41 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  LuaSnip = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/LuaSnip"
+  },
   ["cheatsheet.nvim"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/cheatsheet.nvim"
+  },
+  ["cmp-buffer"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/cmp-buffer"
+  },
+  ["cmp-calc"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/cmp-calc"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
+  },
+  ["cmp-nvim-lua"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua"
+  },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/cmp-path"
+  },
+  ["cmp-treesitter"] = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/cmp-treesitter"
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/cmp_luasnip"
   },
   ["dashboard-nvim"] = {
     loaded = false,
@@ -160,6 +192,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-base16"
   },
+  ["nvim-cmp"] = {
+    config = { "\27LJ\1\0026\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\27plugins.autocompletion\frequire\0" },
+    loaded = true,
+    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-cmp"
+  },
   ["nvim-colorizer.lua"] = {
     config = { "\27LJ\1\2]\0\0\2\0\6\0\n4\0\0\0007\0\1\0)\1\2\0:\1\2\0004\0\3\0%\1\4\0>\0\2\0027\0\5\0>\0\1\1G\0\1\0\nsetup\14colorizer\frequire\18termguicolors\bopt\bvim\0" },
     loaded = true,
@@ -168,10 +205,6 @@ _G.packer_plugins = {
   ["nvim-comment-frame"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-comment-frame"
-  },
-  ["nvim-compe"] = {
-    loaded = true,
-    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
   ["nvim-cursorword"] = {
     loaded = true,
@@ -291,17 +324,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/twilight.nvim"
   },
-  ultisnips = {
-    loaded = true,
-    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/ultisnips"
-  },
   ["vim-easy-align"] = {
     loaded = true,
     path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-easy-align"
-  },
-  ["vim-snippets"] = {
-    loaded = true,
-    path = "/home/aleidk/.local/share/nvim/site/pack/packer/start/vim-snippets"
   },
   ["vim-transparent"] = {
     loaded = true,
@@ -334,6 +359,10 @@ time([[Config for surround.nvim]], false)
 time([[Config for telescope.nvim]], true)
 require("plugins.telescope") 
 time([[Config for telescope.nvim]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+try_loadstring("\27LJ\1\0026\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\27plugins.autocompletion\frequire\0", "config", "nvim-cmp")
+time([[Config for nvim-cmp]], false)
 -- Config for: focus.nvim
 time([[Config for focus.nvim]], true)
 try_loadstring("\27LJ\1\2-\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\18plugins.focus\frequire\0", "config", "focus.nvim")

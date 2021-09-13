@@ -80,7 +80,16 @@ return require('packer').startup({
         use 'haringsrob/nvim_context_vt'
 
         -- Autocompletion
-        use 'hrsh7th/nvim-compe'
+        use {
+            'hrsh7th/nvim-cmp',
+            config = function() require('plugins.autocompletion') end,
+            requires = {
+
+                'hrsh7th/cmp-nvim-lsp', 'saadparwaiz1/cmp_luasnip',
+                'L3MON4D3/LuaSnip', 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lua',
+                'hrsh7th/cmp-buffer', 'hrsh7th/cmp-calc', 'ray-x/cmp-treesitter'
+            }
+        }
 
         -- Auto Format
         use 'mhartington/formatter.nvim'
@@ -154,10 +163,6 @@ return require('packer').startup({
 
         -- Function help as you type
         use 'ray-x/lsp_signature.nvim'
-
-        -- Snippets
-        use 'SirVer/ultisnips'
-        use 'honza/vim-snippets'
 
         -- Comments
         use 'b3nj5m1n/kommentary' -- Markdown

@@ -23,10 +23,15 @@ end
 local function setup_servers()
     require'lspinstall'.setup()
     local servers = require'lspinstall'.installed_servers()
+
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
     for _, server in pairs(servers) do
         nvim_lsp[server].setup {
             on_attach = on_attach,
-            settings = {Lua = {diagnostics = {globals = {'vim'}}}}
+            settings = {Lua = {diagnostics = {globals = {'vim'}}}},
+            capabilities = capabilities
         }
     end
 end
