@@ -1,54 +1,53 @@
+@import "./colors.scss";
+
+// base00 -- Default Background
+// base01 -- Lighter Background (Used for status bars)
+// base02 -- Selection Background
+// base03 -- Comments, Invisibles, Line Highlighting
+// base04 -- Dark Foreground (Used for status bars)
+// base05 -- Default Foreground, Caret, Delimiters, Operators
+// base06 -- Light Foreground (Not often used)
+// base07 -- Light Background (Not often used)
+// base08 -- Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+// base09 -- Integers, Boolean, Constants, XML Attributes, Markup Link Url
+// base0A -- Classes, Markup Bold, Search Text Background
+// base0B -- Strings, Inherited Class, Markup Code, Diff Inserted
+// base0C -- Support, Regular Expressions, Escape Characters, Markup Quotes
+// base0D -- Functions, Methods, Attribute IDs, Headings
+// base0E -- Keywords, Storage, Selector, Markup Italic, Diff Changed
+
+$bg_normal: $base00;
+$fg_normal: $base05;
+
 * {
   all: unset; //Unsets everything so you can style everything from scratch
+  color: $fg_normal;
 }
+
+// Specific stuff
+.profile_picture_container {
+  background-color: #883311;
+  border-radius: 100px;
+}
+
+.profile_picture {
+ background-image: url('/home/aleidk/Nextcloud/principal/Imagenes/Waifus/Splatoon/Splatoon_Otros/IMG_20180930_204225.jpg');
+  background-repeat: no-repeat;
+  background-size: 200px;
+  min-height: 200px;
+  min-width: 200px;
+  margin: 80px 20px 0px 65px;
+  border-radius: 500px;
+}
+
 
 //Global Styles
-.bar {
-  background-color: #3a3a3a;
-  color: #b0b4bc;
-  padding: 10px;
-}
 
-// Styles on classes (see eww.yuck for more information)
-
-.sidestuff slider {
-  all: unset;
-  color: #ffd5cd;
-}
-
-.metric scale trough highlight {
-  all: unset;
-  background-color: #D35D6E;
-  color: #000000;
+.main-container {
   border-radius: 10px;
 }
-.metric scale trough {
-  all: unset;
-  background-color: #4e4e4e;
-  border-radius: 50px;
-  min-height: 3px;
-  min-width: 50px;
-  margin-left: 10px;
-  margin-right: 20px;
-}
-.metric scale trough highlight {
-  all: unset;
-  background-color: #D35D6E;
-  color: #000000;
-  border-radius: 10px;
-}
-.metric scale trough {
-  all: unset;
-  background-color: #4e4e4e;
-  border-radius: 50px;
-  min-height: 3px;
-  min-width: 50px;
-  margin-left: 10px;
-  margin-right: 20px;
-}
-.label-ram {
-  font-size: large;
-}
-.workspaces button:hover {
-  color: #D35D6E;
+
+.main-container > box {
+  padding: 20px;
+  background-color: $bg_normal;
 }

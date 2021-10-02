@@ -52,6 +52,12 @@ subtemplate = "colors"
 rewrite = true
 
 [[item]]
+file = "~/.config/eww/colors.scss"
+template = "styles"
+subtemplate = "scss"
+rewrite = true
+
+[[item]]
 file = "~/.config/nvim/lua/colorscheme.lua"
 template = "nvim"
 start = "-- Start flavours"

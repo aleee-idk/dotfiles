@@ -24,9 +24,9 @@
 #}}}
 ##### connection settings ##### {{{
 #
-mpd_host = "10.0.0.10"
+# mpd_host = "10.0.0.10"
 #
-mpd_port = 6600
+# mpd_port = 6600
 #
 mpd_connection_timeout = 15
 #

@@ -1,0 +1,146 @@
+
+    
+        
+        (defwidget face [] 
+            (box :orientation "h" :space-evenly "true" 
+                (box :orientation "v" :class "profile" 
+                    (box :class "profile-icon")
+                    (box :class "profile-name" :orientation "v" 
+                        (box :class "hostname" "Hey ${profile_name}!")
+                        (box :class "username" "@obliviousofcraps")))))
+        (defwidget file-launcher [] 
+            (box :class "file-launcher" :orientation "v" :valign "center" :halign "center" :spacing 5 :space-evenly "false" 
+                (button :onclick "setsid -f thunar ~" "Home")
+                (button :onclick "setsid -f thunar ~/Downloads" "Downloads")
+                (button :onclick "setsid -f thunar ~/Documents" "Documents")
+                (button :onclick "setsid -f thunar ~/Pictures" "Pictures")
+                (button :onclick "setsid -f thunar ~/Music" "Music")
+                (button :onclick "setsid -f thunar ~/MEGAsync Downloads" "Mega")))
+        (defwidget weather [current_temp] 
+            (box :orientation "v" :class "weather" :space-evenly "false" :spacing 14 
+                (label :halign "center" :class "current-temp" :wrap "true" :text "The current temperature is ${current_temp}°C with ${weather_desc}.")
+                (box :orientation "v" :halign "center" :class "feels-like" "Feels like ${feels_like}°C")
+                (box :orientation "h" :halign "center" :class "wet-cond" :space-evenly "false" :spacing 10 
+                    (box :class "humidity" :style "color: #75c26d" "󰖌")
+                    (box :class "humidity-lit" :style "margin-left: -5px" humidity)
+                    (box :class "wind" :style "color: #b97de3" "󰖝")
+                    (box :class "wind-lit" wind))))
+        (defwidget date [] 
+            (box :orientation "h" :class "date" :space-evenly "false" :spacing 8 
+                (box :class "today" :halign "center" :style "color:#a7bdfb;font-family:'Material Design Icons Desktop';font-size: 20px;" "󰃭")
+                (box :orientation "v" :halign "center" :valign "center" :space-evenly "false" 
+                    (box :class "month" :halign "center" "${month} ${number_day}, ${day} "))))
+        (defwidget widget-time [] 
+            (box :orientation "h" :class "widget-time" :valign "center" :halign "center" :space-evenly "false" :spacing 10 
+                (box :class "hour" hour)
+                (box :class "dot-dot" ":")
+                (box :class "minute" min)))
+        (defwidget player-art [art] 
+			(box :orientation "v" :space-evenly "false" :spacing 5 
+                (box :class "song-art" :valign "center" :halign "center" :style "background-image: url('{{art}}');")
+                (box :class "player-btns" :space-evenly "false" :orientation "h" :halign "center" :valign "center" :spacing 12 
+				    (button :class "player-btn" :onclick "mpc prev" "󰒮")
+				    (button :class "toggle" :onclick "mpc toggle" :style "background-image: url('{{music_status}}');")
+				    (button :class "player-btn" :onclick "mpc next" "󰒭"))))
+        (defwidget player [] 
+            (box :orientation "h" :valign "center" :space-evenly "false" 
+                (box :class "song-data" :spacing 8 :orientation "v" :space-evenly "false" 
+                    (box :class "song-title" :orientation "h" :space-evenly "false" 
+                        (box :class "musicon" "󰎇")
+                        (box :class "song" song_title))
+                    (box :class "song-artist" :orientation "h" :space-evenly "false" 
+                        (box :class "musicon" "󰀄")
+                        (box :class "song" song_artist)))))
+        (defwidget quotes [quotes] 
+            (box :class "quotes" :orientation "h" 
+                 (label :limit 40 :text quotes)))
+        (defwidget launcher [] 
+            (box :orientation "v" :space-evenly "true" 
+                (box :class "launcher" :orientation "h" :space-evenly "true" 
+                    (button :onclick "setsid -f vivaldi-stable" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Kamijara/vivaldi_browser.png')")
+                    (button :onclick "setsid -f firefox" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/firefox_nightly.png')")
+                    (button :onclick "setsid -f kitty -d ~" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/termux.png')")
+                    (button :onclick "setsid -f thunar ~" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/filemanager_plus.png')")
+                    (button :onclick "setsid -f vivaldi-stable https://discord.com/channels/@me" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/discord_alt1.png')"))
+                (box :class "launcher" :orientation "h" :space-evenly "true" 
+                    (button :onclick "setsid -f vivaldi-stable github.com" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/github.png')")
+                    (button :onclick "./scripts/launch-spotify" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/spotify.png')")
+                    (button :onclick "setsid -f vivaldi-stable https://reddit.com" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/reddit.png')")
+                    (button :onclick "setsid -f vivaldi-stable https://youtube.com" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/youtube_music.png')")
+                    (button :onclick "setsid -f vivaldi-stable https://twitter.com" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/tweetcaster.png')"))))
+        (defwidget rofi [] 
+            (box :orientation "h" :halign "center" :valign "center" :space-evenly "true" 
+                (button :class "rofi" :onclick "setsid -f rofi -show drun" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/nexa_iconpack.png')")))
+                (defwidget screenshot [] 
+            (box :orientation "h" :halign "center" :valign "center" :space-evenly "true" 
+                (button :class "rofi" :onclick "~/.local/bin/scripts/screenshot.sh" :style "background-image:url('/home/aidoneus/.icons/Custom-apks/Crayons/instagram.png')")))
+        (defwidget widget-lock [] 
+            (box :orientation "h" :halign "center" :valign "center" :space-evenly "true" 
+                (button :class "lock-icon" :onclick "lxlock" "󰌾")))
+        (defwidget power [] 
+            (box :orientation "h" :halign "center" :valign "center" :space-evenly "true" 
+                (button :class "power" :onclick "~/.config/rofi/scripts/powermenu.sh" "󰐥")))
+        (defwidget slider-bars [rem_batt] 
+            (box :orientation "h" :vexpand "false" :hexpand "false" 
+                (box :orientation "h" :class "slider-bars" :space-evenly "false" :halign "center" :valign "center" :spacing 16 
+                    (box :orientation "v" :space-evenly "false" :class "slider-bars-batt" 
+                        (scale :orientation "v" :flipped "true" :class "batt" :active "false" :max 101 :value rem_batt)
+                        (label :text "󰋑"))
+                     (box :orientation "v" :space-evenly "false" :class "slider-bars-bright" 
+                        (scale :orientation "v" :flipped "true" :class "brightness" :max 101 :value current_bright :onchange "brightnessctl set {}%")
+                        (label :text "󰖨"))
+                    (box :orientation "v" :space-evenly "false" :class "slider-bars-vol" 
+                        (scale :orientation "v" :flipped "true" :class "vol" :min 0 :max 101 :value volume :onchange "amixer -D pulse sset Master {}%")
+                        (label :text "󱄠"))
+                    (box :orientation "v" :space-evenly "false" :class "slider-bars-cpu" 
+                        (scale :orientation "v" :flipped "true" :class "cpu" :active "false" :max 60 :value EWW_CPU_USAGE.avg)
+                        (label :text "󰍛"))
+                    (box :orientation "v" :space-evenly "false" :class "slider-bars-cpu-temp" 
+                        (scale :orientation "v" :flipped "true" :class "cpu-temp" :active "false" :max 101 :value EWW_TEMPS.CPU)
+                        (label :text "󰔏"))
+                    (box :orientation "v" :space-evenly "false" :class "slider-bars-ram" 
+                        (scale :orientation "v" :flipped "true" :class "ram-usage" :active "false" :max 101 :value ram_used)
+                        (label :text "󰘚")))))
+                        (defwindow pfile :stacking "bg" 
+			    :geometry (geometry :x "285px" :y "150px" :width "220px" :height "250px")
+			     				(face))
+        (defwindow file-launcher :stacking "bg" 
+			    :geometry (geometry :x "515px" :y "150px" :width "145px" :height "250px")
+			     				(file-launcher))
+        (defwindow weather :stacking "bg" 
+			    :geometry (geometry :x "670px" :y "260px" :width "220px" :height "80px")
+			     				(weather))
+        (defwindow widget-time :stacking "bg" 
+			    :geometry (geometry :x "670px" :y "150px" :width "220px" :height "100px"))
+        (defwindow date :stacking "bg" 
+			    :geometry (geometry :x "900px" :y "150px" :width "130px" :height "70px")
+			     				(date))
+        (defwindow player-art :stacking "bg" 
+			    :geometry (geometry :x "285px" :y "410px" :width "220px" :height "250px")
+			     				(player-art))
+        (defwindow player :stacking "bg" 
+			    :geometry (geometry :x "515px" :y "540px" :width "280px" :height "70px")
+			     				(player))
+        (defwindow quotes 
+			    :geometry (geometry :x "515px" :y "620px" :width "280px" :height "40px")
+			     				(quotes))
+        (defwindow launcher :stacking "bg" 
+			    :geometry (geometry :x "515px" :y "410px" :width "280px" :height "120px")
+			     				(launcher))
+        (defwindow slider-bars 
+			    :geometry (geometry :x "805px" :y "410px" :width "265px" :height "250px")
+			     				(slider-bars))
+        (defwindow rofi :stacking "bg" 
+			    :geometry (geometry :x "900px" :y "230px" :width "60px" :height "60px")
+			     				(rofi))
+        (defwindow screenshot :stacking "bg" 
+			    :geometry (geometry :x "990px" :y "230px" :width "60px" :height "60px")
+			     				(screenshot))
+        (defwindow widget-lock :stacking "bg" 
+			    :geometry (geometry :x "900px" :y "320px" :width "60px" :height "60px"))
+        (defwindow power :stacking "bg" 
+			    :geometry (geometry :x "990px" :y "320px" :width "60px" :height "60px")
+			     				(power))
+    
+    
+

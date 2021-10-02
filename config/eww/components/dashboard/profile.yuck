@@ -1,0 +1,45 @@
+(defpoll time :interval "10s"
+  "date '+%I:%M'")
+
+(defpoll user_name :interval "1h" "echo $USER@$(hostnamectl hostname)")
+(defpoll profile_picture :interval "1h" 'fd -ap "otros.*\.[a-z]+" $(xdg-user-dir PICTURES) | shuf -n 1')
+
+(defwindow dashboard
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0"
+                      :y "0"
+                      :width "100"
+                      :height "300"
+                      :anchor "center")
+  (grid))
+
+(defwidget grid []
+  ; Rows
+	(box 
+		:class "main-container"
+		:orientation "horizontal"
+    :space-evenly false
+  (profile)
+	)
+)
+
+(defwidget profile []
+(box
+  :class "profile"
+  :orientation "vertical"
+  :valign "center"
+  (box
+  :class "profile_picture_container"
+  :width 10.0
+  :height 10.0
+    (box
+      :class "profile_picture"
+    )
+  )
+  (label
+    :text user_name
+    :markup "**text**"
+  )
+)
+)

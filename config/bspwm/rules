@@ -22,6 +22,9 @@ bspc rule -a *:"pinentry" state=floating
 bspc rule -a *:"pop-up" state=floating
 bspc rule -a *:"task_dialog" state=floating
 
+
+bspc rule -a Emacs state=tiled
+
 # KDE Plasma
 bspc rule -a plasmashell state=floating border=off
 bspc rule -a Plasma state=floating border=off

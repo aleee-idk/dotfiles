@@ -1,1 +1,2 @@
 (include "./components/bar.yuck")
+(include "./components/dashboard/init.yuck")
