@@ -72,7 +72,7 @@ set file (cat $filename)
 
 # Vi Mode
 
-	neofetch
+  # neofetch
 	starship init fish | source
 
 

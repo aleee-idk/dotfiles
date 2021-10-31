@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+rofi_theme="-theme $HOME/.config/rofi/themes/sidebar.rasi"
+prompt="Search"
+mesg="
+  alt-1 Search in $(echo $BROWSER)
+  alt-2 Search in devdocs-desktop
+  alt-3 Search in devdocs online
+"
+
+choice=$(rofi $rofi_theme -dmenu -p "$prompt" -mesg "$mesg")
+
+case "$?" in
+  10) $BROWSER "$choice"
+  ;;
+  11) devdocs-desktop "$choice"
+  ;;
+  12) $BROWSER --new-tab "duckduckgo.com?q=!dev $choice"
+  ;;
+  *) echo default
+  ;;
+esac
+

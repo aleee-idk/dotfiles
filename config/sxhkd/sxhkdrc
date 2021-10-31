@@ -11,8 +11,10 @@ super + d
 	rofi -no-lazy-grab -show drun -modi drun -theme "$HOME/.config/rofi/themes/fullscreen_transparent.rasi"
 
 # Run Stuff
-super + r ; {c,b,e,x,d}
+super + r ; {m,s,c,b,e,x,d}
 	{ \
+		$HOME/dotfiles/scripts/rofi/meet, \
+		$HOME/dotfiles/scripts/rofi/search, \
 		rofi -theme $HOME/.config/rofi/themes/sidebar.rasi -i -show calc -modi calc -no-show-match -no-sort -no-persist-history, \
 		$HOME/dotfiles/scripts/rofi/buku, \
 		$TERMINAL --name "EDITOR" $EDITOR , \

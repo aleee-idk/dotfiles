@@ -1,5 +1,16 @@
 -- Additional Plugins
 lvim.plugins = {
+
+	----------------------------------------------------------------------
+	--                            Code Stuff                            --
+	----------------------------------------------------------------------
+	{
+		"pianocomposer321/yabs.nvim",
+		config = function()
+			require("user.plugins.yabs")
+		end,
+	},
+
 	-- Sudo support inside vim
 	{ "lambdalisue/suda.vim" },
 
@@ -22,8 +33,6 @@ lvim.plugins = {
 		cmd = "FzfGitignore",
 	},
 
-	{ "ellisonleao/glow.nvim", run = ":GlowInstall", cmd = ":Glow" },
-
 	{
 		"nacro90/numb.nvim",
 		config = function()
@@ -38,6 +47,11 @@ lvim.plugins = {
 			require("user.plugins.rest")
 		end,
 	},
+
+	----------------------------------------------------------------------
+	--                            Aesthetics                            --
+	----------------------------------------------------------------------
+
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
@@ -98,7 +112,38 @@ lvim.plugins = {
 	},
 
 	{
+		"romgrk/nvim-treesitter-context",
+		event = "BufRead",
+		config = function()
+			require("treesitter-context").setup({})
+		end,
+	},
+
+	{
 		"p00f/nvim-ts-rainbow",
+	},
+
+	{
+		"lewis6991/spellsitter.nvim",
+		config = function()
+			require("spellsitter").setup()
+		end,
+	},
+	{
+		"haringsrob/nvim_context_vt",
+	},
+	{
+		"mfussenegger/nvim-ts-hint-textobject",
+		config = function()
+			vim.api.nvim_set_keymap(
+				"o",
+				"m",
+				[[:<C-U>lua require('tsht').nodes()<CR>]],
+				{ silent = true, noremap = true }
+			)
+			vim.api.nvim_set_keymap("v", "m", [[:lua require('tsht').nodes()<CR>]], { silent = true, noremap = true })
+			require("tsht").config.hint_keys = { "h", "j", "f", "d", "n", "v", "s", "l", "a" }
+		end,
 	},
 
 	----------------------------------------------------------------------
@@ -128,6 +173,17 @@ lvim.plugins = {
 		end,
 		requires = "nvim-lua/plenary.nvim",
 		event = "BufRead",
+	},
+
+	{
+		"iamcco/markdown-preview.nvim",
+		ft = { "markdown" },
+		run = "cd app && yarn install",
+	},
+
+	{
+		"mzlogin/vim-markdown-toc",
+		ft = { "markdown" },
 	},
 
 	----------------------------------------------------------------------

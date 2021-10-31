@@ -12,7 +12,7 @@ def main():
 
     # Return a dict with the palette.
     # Set quiet to 'True' to disable notifications.
-    colors = pywal.colors.get(sys.argv[1])
+    colors=pywal.colors.get(sys.argv[1])
 
     # Apply the palette to all open terminals.
     # Second argument is a boolean for VTE terminals.
