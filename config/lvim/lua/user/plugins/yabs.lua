@@ -1,6 +1,25 @@
 local yabs = require("yabs")
 local Terminal = require("toggleterm.terminal").Terminal
 
+local run_term = nil
+
+function TOGGLE_RUN(cmd)
+	if run_term == nil then
+		run_term = Terminal:new({
+			cmd = cmd,
+			count = 7,
+			start_in_insert = false,
+			on_open = function()
+				print("executing run task...")
+			end,
+			on_close = function()
+				print("exit run task...")
+			end,
+		})
+	end
+	run_term:toggle()
+end
+
 yabs:setup({
 	languages = { -- List of languages in vim `filetype` format
 		lua = {
@@ -18,10 +37,8 @@ yabs:setup({
 			default_task = "run",
 			tasks = {
 				run = {
-					command = "yarn start",
-					output = function(cmd)
-						Terminal:new({ cmd = cmd }):toggle()
-					end,
+					command = "export BROWSER=firefox-developer-edition && yarn start",
+					output = TOGGLE_RUN,
 				},
 				test = {
 					command = "cd $(gir rev-parse --show-toplevel) && yarn test -- --coverage --watchAll=false",
@@ -60,6 +77,10 @@ yabs:setup({
 })
 
 vim.api.nvim_set_keymap("n", "<F1>", [[:lua require("yabs"):run_default_task()<CR>]], {
+	noremap = true,
+	silent = true,
+})
+vim.api.nvim_set_keymap("t", "<F1>", [[<cmd>lua TOGGLE_RUN()<CR>]], {
 	noremap = true,
 	silent = true,
 })
