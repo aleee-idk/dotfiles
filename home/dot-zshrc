@@ -1,0 +1,205 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#--------------------------------------------------------------------#
+#                           Configuration                            #
+#--------------------------------------------------------------------#
+
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd beep extendedglob notify
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/aleidk/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# $PATH.
+export PATH=$HOME/bin:$HOME/dotfiles/scripts:$HOME/.local/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+#installation via script from github
+#export ZSH="/home/$USER/.oh-my-zsh"
+#installation via paru -S oh-my-zsh-git
+export ZSH=/usr/share/oh-my-zsh/
+
+# disable ZSH_THEME if this is used
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# if you installed the package oh-my-zsh-powerline-theme-git then you type here "powerline" as zsh theme
+# ZSH_THEME="powelevel10k/powelevel10k"
+
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# search if exist an alias for the executed command
+ZSH_ALIAS_FINDER_AUTOMATIC=true
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  git
+  alias-finder
+  archlinux
+  bgnotify
+  colored-man-pages
+  command-not-found
+  copydir # copydir to send $PDW to system clipboard
+  cp # alias to use rsync to copy files
+  dirpersist # save last 20 unique directories in ~/.zdirs
+  docker
+  docker-compose
+  extract # single wrapper to extract different filetypes
+  fd
+  fzf
+  gitignore # add gi list | [TEMPLATE] to fetch from gitignore.io
+  git-prompt
+  npm
+  pip
+  python
+# react-native
+  ripgrep
+  rsync
+  rust
+  safe-paste # don't run code when pasting
+# sudo # prefix last command with sudo with <Esc><Esc>
+  systemd
+  thefuck # fix last command with <Esc><Esc>
+  universalarchive # compress files by a command ua <format> <files>
+# vi-mode
+  yarn
+  z
+)
+
+source $ZSH/oh-my-zsh.sh
+
+#--------------------------------------------------------------------#
+#                            User Config                             #
+#--------------------------------------------------------------------#
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+setopt GLOB_DOTS
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export HISTCONTROL=ignoreboth:erasedups
+
+#PS1='[\u@\h \W]\$ '
+
+source $HOME/dotfiles/scripts/env_variables.sh
+
+#--------------------------------------------------------------------#
+#                              Aliases                               #
+#--------------------------------------------------------------------#
+
+# Exa for listing
+alias ls='exa -lh --color=always --icons --git '
+alias la='exa -alh --color=always --icons --git '
+alias ld='exa -la --no-permissions --no-filesize --no-time --no-time --no-user'
+
+#fix obvious typo's
+alias cd..='cd ..'
+alias pdw="pwd"
+
+# benchmark lvim
+alias lvimt="lvim --startuptime /tmp/nvim-startuptime"
+
+# Pacman
+alias pacman='sudo pacman --color auto'
+
+#readable output
+alias df='df -h'
+
+# Packages
+alias pkgu="paru -Syu"
+alias pkgi="paru -S"
+alias pkgr="paru -R"
+
+# recent packages
+alias pkglast="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -25 | nl"
+
+#Cleanup orphaned packages
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
+
+#search content with ripgrep
+alias rg="rg --sort path"
+
+#get the error messages from journalctl
+alias jctl="journalctl -p 3 -xb"
+
+#--------------------------------------------------------------------#
+#                            Start Stuff                             #
+#--------------------------------------------------------------------#
+
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx
+fi
+
+# reporting tools - install when not installed
+# install neofetch
+# neofetch
+# install screenfetch
+#screenfetch
+# install ufetch-git
+#ufetch
+# install ufetch-arco-git
+#ufetch-arco
+# install arcolinux-paleofetch-git
+#paleofetch
+# install alsi
+#alsi
+# install arcolinux-bin-git - standard on ArcoLinux isos (or sfetch - smaller)
+#hfetch
+# install lolcat
+#sfetch | lolcat

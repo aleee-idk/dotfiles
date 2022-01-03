@@ -28,12 +28,6 @@ lvim.plugins = {
 	},
 
 	{
-
-		"fszymanski/fzf-gitignore",
-		cmd = "FzfGitignore",
-	},
-
-	{
 		"nacro90/numb.nvim",
 		config = function()
 			require("numb").setup()
@@ -48,6 +42,39 @@ lvim.plugins = {
 		end,
 	},
 
+	{
+		"simrat39/rust-tools.nvim",
+		config = function()
+			require("rust-tools").setup({
+				tools = {
+					autoSetHints = true,
+					hover_with_actions = true,
+					runnables = {
+						use_telescope = true,
+					},
+				},
+				server = {
+					cmd = { vim.fn.stdpath("data") .. "/lsp_servers/rust/rust-analyzer" },
+					on_attach = require("lvim.lsp").common_on_attach,
+					on_init = require("lvim.lsp").common_on_init,
+				},
+			})
+		end,
+		ft = { "rust", "rs" },
+	},
+
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "BufRead",
+	},
+
+	{
+		"folke/trouble.nvim",
+		cmd = "TroubleToggle",
+		config = function()
+			require("user.plugins.trouble")
+		end,
+	},
 	----------------------------------------------------------------------
 	--                            Aesthetics                            --
 	----------------------------------------------------------------------
@@ -184,6 +211,13 @@ lvim.plugins = {
 	{
 		"mzlogin/vim-markdown-toc",
 		ft = { "markdown" },
+	},
+
+	{
+		"henriquehbr/nvim-startup.lua",
+		config = function()
+			require("nvim-startup").setup()
+		end,
 	},
 
 	----------------------------------------------------------------------

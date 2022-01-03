@@ -33,11 +33,12 @@
 shell = "bash -c '{}'"
 
 [[item]]
-file = "~/.config/bspwm/colors"
-template = "bspwm"
+file = "~/.config/i3/config"
+template = "i3"
+subtemplate = "default"
 start = "# Start flavours"
 end = "# End flavours"
-hook = "bspc wm -r"
+# hook = "i3 restart"
 
 [[item]]
 file = "~/.config/kitty/colors/base16.conf"

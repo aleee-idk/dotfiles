@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+# Usage: 
+
+# work_setup setup [up|down]
+# setup: back, front
+
+work_software=(
+  "brave"
+  # "slack"
+  "blueberry"
+  )
+
+back_services=(
+  "mariadb"
+  "mongodb"
+  )
+
+back_sofware=(
+  "insomnia"
+  "com.github.alecaddd.sequeler"
+  )
+
+setup=$1
+state=$2
+
+open_software(){
+  pkexec $1 & >/dev/null
+}
+
+back_setup() {
+  if [[ "$state" == "up" ]]; then
+    for service in "${back_services[@]}"; do
+      sudo systemctl start "$service"
+    done
+
+    for software in "${back_sofware[@]}"; do
+      open_software "$software"
+    done
+  else 
+    for service in "${back_services[@]}"; do
+      sudo systemctl stop "$service"
+    done
+
+    for software in "${back_sofware[@]}"; do
+      wmctrl -c "$software"
+    done
+  fi
+}
+
+work_setup() {
+  if [[ "$state" == "up" ]]; then
+    for software in "${work_software[@]}"; do
+      open_software "$software"
+    done
+  else 
+    for software in "${work_software[@]}"; do
+      wmctrl -c "$software"
+    done
+  fi
+}
+
+work_setup
+
+if [[ "$setup" == "back" ]]; then
+  back_setup
+fi
+

@@ -10,16 +10,19 @@ super + Return
 super + d
 	rofi -no-lazy-grab -show drun -modi drun -theme "$HOME/.config/rofi/themes/fullscreen_transparent.rasi"
 
+super + e
+  kitty lvim
+
 # Run Stuff
-super + r ; {m,s,c,b,e,x,d}
+super + r ; {m,s,c,b,x,d,s}
 	{ \
 		$HOME/dotfiles/scripts/rofi/meet, \
 		$HOME/dotfiles/scripts/rofi/search, \
 		rofi -theme $HOME/.config/rofi/themes/sidebar.rasi -i -show calc -modi calc -no-show-match -no-sort -no-persist-history, \
 		$HOME/dotfiles/scripts/rofi/buku, \
-		$TERMINAL --name "EDITOR" $EDITOR , \
 		$HOME/dotfiles/scripts/rofi/exec_command, \
 		udiskie-dmenu -matching regex -dmenu -i -no-custom -multi-select \
+		$HOME/dotfiles/scripts/rofi/rofi-systemd \
 	}
 
 # Power menu
@@ -31,14 +34,18 @@ super + Escape
 
 # Volume
 XF86Audio{Raise,Lower}Volume
-	pactl set-sink-volume 0 {+,-}5%	
+	pactl set-sink-volume @DEFAULT_SINK@ {+,-}5%	
 
 XF86AudioMute
-	pactl set-sink-mute 0 toggle	
+	pactl set-sink-mute @DEFAULT_SINK@ toggle	
 
 # Media
 XF86Audio{Next,Prev,Play}
 	playerctl {next, previous, play-pause}
+
+# MPD
+shift + XF86Audio{Next,Prev,Play}
+	mpc -q {next, prev, toggle}
 
 # Screenshots
 {_, shift +} Print
@@ -62,89 +69,92 @@ super + control + shift + {Left, Down, Up, Right}
 #
 # bspwm hotkeys
 #
-
-# restart bspwm / sxhkd
-super + shift + r
-	pkill -USR1 -x sxhkd && \
-	bspc wm -r
-
-## Windows
-
-# focus/swap the node in the given direction
-super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
-
-super + {_,shift + }{Left,Down,Up,Right}
-	bspc node -{f,s} {west,south,north,east}
-
-# Focus next / prev
-super + Tab
-	bspc node any.above -l normal; \
-	bspc node -f next.local.leaf; \
-	bspc node -l above
-
-# close and kill
-super + shift + {_,control + }q
-	bspc node -{c,k}
-
-# alternate between the tiled and monocle layout
-super + shift + Tab
-	bspc desktop -l next
-
-# Toggle floating / tiling
-super + shift + space
-	bspc node -t ~floating
-
-# Hide focused window / unhide all hided windows
-super + {_, shift +} n
-	bspc node {_, any.hidden} -g hidden 
-
-# set the node flags
-super + ctrl + {m,x,y,z}
-	bspc node -g {marked,locked,sticky,private}
-
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '{1-9,10}'
-
-# Send to another screen and focus
-super + control + {1-9,0}
-	sel_desktop={1-9,0}; \
-	bspc desktop "$sel_desktop" -m $(bspc query -M -d "$sel_desktop")#next \
-	&& bspc desktop -f "$sel_desktop"
-
-# Send desktop to monitor, sort desktop after moving
-super + control + {h, j, k, l}
-	bspc desktop focused -m {west, south, north, east} --follow && \
-	bspc monitor -o $(bspc query -D -m --names | sort)
-
-super + control + {Left, Down, Up, Right}
-	bspc desktop focused -m {west, south, north, east} --follow && \
-	bspc monitor -o $(bspc query -D -m --names | sort)
-
-# Swap desktop between monitors, sort all desktop after swap
-# TODO: is ugly how te second dektop is reorder...
-super + s
-	desktop=$(bspc query --names -D -d focused) && \
-	bspc desktop -s next:focused &&  \
-	for monitor in $(bspc query -M --names); do bspc monitor "$monitor" -o $(bspc query -D -m "$monitor" --names | sort); done && \
-	bspc desktop -a "$desktop"
-
-# focus the next/previous desktop in the current monitor
-super + brace{left,right}
-	bspc desktop -f {prev,next}.local
-
-# focus the last node/desktop
-super + bar
-	bspc desktop -f last
-
-#
-# move/resize
-#
-
-# Resize moving all size symmetrically
-super + alt + {plus,minus}
-	{ \
-		bspc node -z top_left -20 -20 && bspc node -z bottom_right 20 20, \
-		bspc node -z top_left 20 20 && bspc node -z bottom_right -20 -20 \
-	}
+# 
+# # restart bspwm / sxhkd
+# super + shift + r
+#   bspc wm -d > /tmp/bspwm_state; \
+# 	pkill -USR1 -x sxhkd; \
+# 	bspc wm -r; \
+# 	~/.fehbg; \
+#   bspc wm -l /tmp/bspwm_state
+# 
+# ## Windows
+# 
+# # focus/swap the node in the given direction
+# super + {_,shift + }{h,j,k,l}
+# 	bspc node -{f,s} {west,south,north,east}
+# 
+# super + {_,shift + }{Left,Down,Up,Right}
+# 	bspc node -{f,s} {west,south,north,east}
+# 
+# # Focus next / prev
+# super + Tab
+# 	bspc node any.above -l normal; \
+# 	bspc node -f next.local.leaf; \
+# 	bspc node -l above
+# 
+# # close and kill
+# super + shift + {_,control + }q
+# 	bspc node -{c,k}
+# 
+# # alternate between the tiled and monocle layout
+# super + shift + Tab
+# 	bspc desktop -l next
+# 
+# # Toggle floating / tiling
+# super + shift + space
+# 	bspc node -t ~floating
+# 
+# # Hide focused window / unhide all hided windows
+# super + {_, shift +} n
+# 	bspc node {_, any.hidden} -g hidden 
+# 
+# # set the node flags
+# super + ctrl + {m,x,y,z}
+# 	bspc node -g {marked,locked,sticky,private}
+# 
+# # focus or send to the given desktop
+# super + {_,shift + }{1-9,0}
+# 	bspc {desktop -f,node -d} '{1-9,10}'
+# 
+# # Send to another screen and focus
+# super + control + {1-9,0}
+# 	sel_desktop={1-9,0}; \
+# 	bspc desktop "$sel_desktop" -m $(bspc query -M -d "$sel_desktop")#next \
+# 	&& bspc desktop -f "$sel_desktop"
+# 
+# # Send desktop to monitor, sort desktop after moving
+# super + control + {h, j, k, l}
+# 	bspc desktop focused -m {west, south, north, east} --follow && \
+# 	bspc monitor -o $(bspc query -D -m --names | sort)
+# 
+# super + control + {Left, Down, Up, Right}
+# 	bspc desktop focused -m {west, south, north, east} --follow && \
+# 	bspc monitor -o $(bspc query -D -m --names | sort)
+# 
+# # Swap desktop between monitors, sort all desktop after swap
+# # TODO: is ugly how te second dektop is reorder...
+# super + s
+# 	desktop=$(bspc query --names -D -d focused) && \
+# 	bspc desktop -s next:focused &&  \
+# 	for monitor in $(bspc query -M --names); do bspc monitor "$monitor" -o $(bspc query -D -m "$monitor" --names | sort); done && \
+# 	bspc desktop -a "$desktop"
+# 
+# # focus the next/previous desktop in the current monitor
+# super + brace{left,right}
+# 	bspc desktop -f {prev,next}.local
+# 
+# # focus the last node/desktop
+# super + bar
+# 	bspc desktop -f last
+# 
+# #
+# # move/resize
+# #
+# 
+# # Resize moving all size symmetrically
+# super + alt + {plus,minus}
+# 	{ \
+# 		bspc node -z top_left -20 -20 && bspc node -z bottom_right 20 20, \
+# 		bspc node -z top_left 20 20 && bspc node -z bottom_right -20 -20 \
+# 	}

@@ -1,4 +1,5 @@
 local yabs = require("yabs")
+local Terminal = require("toggleterm.terminal").Terminal
 
 yabs:setup({
 	languages = { -- List of languages in vim `filetype` format
@@ -17,8 +18,10 @@ yabs:setup({
 			default_task = "run",
 			tasks = {
 				run = {
-					command = "cd $(git rev-parse --show-toplevel) && BROWSER=$DEV_BROWSER yarn start",
-					output = "quickfix",
+					command = "yarn start",
+					output = function(cmd)
+						Terminal:new({ cmd = cmd }):toggle()
+					end,
 				},
 				test = {
 					command = "cd $(gir rev-parse --show-toplevel) && yarn test -- --coverage --watchAll=false",

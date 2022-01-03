@@ -2,7 +2,7 @@
 
 # Defaults
 export TERMINAL="kitty"
-export EDITOR="nvim"
+export EDITOR="lvim"
 export BROSER="librewolf"
 
 # Program Specifics
@@ -14,12 +14,9 @@ export SUDO_PROMP="\e[0;91mPsw Please!\e[0m "
 # Custom
 export wallpapers="$HOME/Nextcloud/principal/Imagenes/Waifus"
 
-
-
 # --- End Definitions Section ---
 # check if we are being sourced by another script or shell
 
 [[ "${#BASH_SOURCE[@]}" -gt "1" ]] && { return 0; }
 
 # --- Begin Code Execution Section ---
-

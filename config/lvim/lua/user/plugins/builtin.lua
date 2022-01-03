@@ -15,6 +15,8 @@ lvim.builtin.dap.active = true
 --                            Treesitter                            --
 ----------------------------------------------------------------------
 
+local treesitter = lvim.builtin.treesitter
+
 local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 parser_configs.http = {
 	install_info = {
@@ -25,7 +27,7 @@ parser_configs.http = {
 }
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {
+treesitter.ensure_installed = {
 	"bash",
 	"css",
 	"dockerfile",
@@ -40,30 +42,38 @@ lvim.builtin.treesitter.ensure_installed = {
 	"yaml",
 	"http",
 }
-lvim.builtin.treesitter.ignore_install = {}
-lvim.builtin.treesitter.highlight.enabled = true
+treesitter.ignore_install = {}
+treesitter.highlight.enabled = true
+treesitter.rainbow.enable = true
+treesitter.autotag.enable = true
+
+vim.cmd([[set foldmethod=expr]])
+vim.cmd([[set foldexpr=nvim_treesitter#foldexpr()]])
 
 ----------------------------------------------------------------------
 --                            Telescope                             --
 ----------------------------------------------------------------------
 
+local actions = require("telescope.actions")
+
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 lvim.builtin.telescope.on_config_done = function()
 	local telescope_config = lvim.builtin.telescope.defaults
 
-	-- telescope_config.mappings.i["<C-j>"] = actions.move_selection_next
-	-- telescope_config.mappings.i["<C-k>"] = actions.move_selection_previous
-	-- telescope_config.mappings.i["<C-n>"] = actions.cycle_history_next
-	-- telescope_config.mappings.i["<C-p>"] = actions.cycle_history_prev
-	-- telescope_config.mappings.i["<C-s>"] = actions.file_vsplit
-	-- telescope_config.mappings.i["<C-v>"] = actions.file_split
-	-- -- for normal mode
-	-- telescope_config.mappings.n["j"] = actions.move_selection_next
-	-- telescope_config.mappings.n["k"] = actions.move_selection_previous
-	-- telescope_config.mappings.n["n"] = actions.cycle_history_next
-	-- telescope_config.mappings.n["p"] = actions.cycle_history_prev
-	-- telescope_config.mappings.n["s"] = actions.file_vsplit
-	-- telescope_config.mappings.n["v"] = actions.file_split
+	telescope_config.mappings.i["<C-j>"] = actions.move_selection_next
+	telescope_config.mappings.i["<C-k>"] = actions.move_selection_previous
+	telescope_config.mappings.i["<C-n>"] = actions.cycle_history_next
+	telescope_config.mappings.i["<C-p>"] = actions.cycle_history_prev
+	telescope_config.mappings.i["<C-s>"] = actions.file_vsplit
+	telescope_config.mappings.i["<C-v>"] = actions.file_split
+	telescope_config.mappings.i["<esc>"] = actions.close
+	-- for normal mode
+	telescope_config.mappings.n["j"] = actions.move_selection_next
+	telescope_config.mappings.n["k"] = actions.move_selection_previous
+	telescope_config.mappings.n["n"] = actions.cycle_history_next
+	telescope_config.mappings.n["p"] = actions.cycle_history_prev
+	telescope_config.mappings.n["s"] = actions.file_vsplit
+	telescope_config.mappings.n["v"] = actions.file_split
 
 	-- Other configs
 	telescope_config.prompt_prefix = "> "
@@ -71,6 +81,11 @@ lvim.builtin.telescope.on_config_done = function()
 	telescope_config.scroll_strategy = nil
 	telescope_config.file_ignore_patterns = { "%.env", "cache", ".xlsx" }
 
+	lvim.builtin.telescope.pickers = {
+		find_files = {
+			find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+		},
+	}
 	-- Extensions
 	lvim.builtin.telescope.extensions = {
 		extensions = {
@@ -94,7 +109,6 @@ lvim.builtin.which_key.mappings["sT"] = { "<cmd>TodoTelescope<CR>", "TODO" }
 ----------------------------------------------------------------------
 
 lvim.builtin.nvimtree.quit_on_open = 1
-lvim.builtin.nvimtree.hide_dotfiles = 1
 lvim.builtin.nvimtree.git_hl = 1
 lvim.builtin.nvimtree.highlight_opened_files = 1
 lvim.builtin.nvimtree.add_trailing = 1
@@ -133,7 +147,7 @@ lvim.builtin.nvimtree.setup = {
 	-- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
 	update_focused_file = {
 		-- enables the feature
-		enable = false,
+		enable = true,
 		-- update the root directory of the tree to the one of the folder containing the file if the file is not under the current root directory
 		-- only relevant when `update_focused_file.enable` is true
 		update_cwd = false,
@@ -148,7 +162,15 @@ lvim.builtin.nvimtree.setup = {
 		-- the command arguments as a list
 		args = {},
 	},
-
+	filters = {
+		dotfiles = true,
+		custom = {},
+	},
+	git = {
+		enable = true,
+		ignore = true,
+		timeout = 500,
+	},
 	view = {
 		-- width of the window, can be either a number (columns) or a string in `%`
 		width = 30,
@@ -234,5 +256,32 @@ dap.configurations.javascript = {
 		protocol = "inspector",
 		port = 9222,
 		webRoot = "${workspaceFolder}",
+	},
+}
+
+----------------------------------------------------------------------
+--                            Dashboard                             --
+----------------------------------------------------------------------
+
+lvim.builtin.dashboard.custom_section = {
+	a = {
+		description = { "  Recent Projects    " },
+		command = "Telescope projects",
+	},
+	b = {
+		description = { "  Find File          " },
+		command = "Telescope find_files",
+	},
+	c = {
+		description = { "  New File           " },
+		command = ":ene!",
+	},
+	d = {
+		description = { "  Recently Used Files" },
+		command = "Telescope oldfiles",
+	},
+	e = {
+		description = { "  Find Word          " },
+		command = "Telescope live_grep",
 	},
 }
