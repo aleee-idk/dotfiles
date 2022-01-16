@@ -1,5 +1,6 @@
 include "$HOME/.config/i3/options.conf"
 include "$HOME/.config/i3/keys.conf"
+include "$HOME/.config/i3/rules.conf"
 
 ## Variables
 set $mod Mod4
@@ -16,51 +17,6 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-
-
-# Rules
-
-# Floatings
-for_window [title="updates"] floating enabled
-for_window [title="Event Tester"] floating enabled
-for_window [title="pinentry"] floating enabled
-for_window [title="popu-up"] floating enabled
-for_window [title="task_dialog"] floating enabled
-
-for_window [instance="Devtools"] floating enabled
-
-for_window [class="pop-up"] floating enabled
-for_window [class="Thunar"] floating enabled
-for_window [class="Pcmanfm"] floating enabled
-for_window [class="vimiv"] floating enabled
-for_window [class="Tor Browser"] floating enabled
-for_window [class="files"] floating enabled
-for_window [class="Transmission-ftk"] floating enabled
-for_window [class="Timeshift-gtk"] floating enabled
-for_window [class="Tk"] floating enabled
-
-# Desktop configuration
-
-assign [class="firefox"] $ws1
-assign [class="libreWolf"] $ws1
-assign [class="Brave"] $ws1
-
-assign [class="Steam"] $ws5
-assign [class="steam_app_*"] $ws5
-assign [class="org-tlauncher-tlauncher-rmo-TLauncher"] $ws5
-assign [class="Minecraft*"] $ws5
-
-assign [class="libreoffice*"] $ws6
-
-assign [class="Slack"] $ws7
-
-assign [class="TelegramDesktop"] $ws8
-assign [class="whatsapp-nativefier-d40211"] $ws8
-assign [class="discord"] $ws8
-assign [class="Signal"] $ws8
-
-assign [class="mpv"] $ws9
-assign [class="Spotify"] $ws10
 
 ##	Aesthetics
 

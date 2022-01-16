@@ -18,10 +18,14 @@ lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.term_mode["<F12>"] = [[<C-\><C-n>]]
--- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = ""
--- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
+
+-- Delete without override yanked text
+vim.api.nvim_set_keymap("n", "d", [["_d]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "d", [["_d]], { noremap = true, silent = true })
+
+-- Map D -> default vim "d"
+vim.api.nvim_set_keymap("n", "D", "d", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "D", "d", { noremap = true, silent = true })
 
 -- plugins
 require("user.listPlugins")

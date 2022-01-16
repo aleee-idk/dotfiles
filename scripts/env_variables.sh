@@ -3,7 +3,7 @@
 # Defaults
 export TERMINAL="kitty"
 export EDITOR="lvim"
-export BROSER="librewolf"
+export BROWSER="librewolf"
 
 # Program Specifics
 export QT_QPA_PLATFORMTHEME="qt5ct"

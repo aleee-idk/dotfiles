@@ -9,6 +9,7 @@ function TOGGLE_RUN(cmd)
 			cmd = cmd,
 			count = 7,
 			start_in_insert = false,
+			close_on_exit = false,
 			on_open = function()
 				print("executing run task...")
 			end,
@@ -51,6 +52,19 @@ yabs:setup({
 				},
 			},
 		},
+		javascript = {
+			default_task = "run",
+			tasks = {
+				run = {
+					command = "yarn start",
+					output = TOGGLE_RUN,
+				},
+				sync = {
+					command = "yarn run sync",
+					output = TOGGLE_RUN,
+				},
+			},
+		},
 	},
 	tasks = { -- Same values as `language.tasks`, but global
 		build = {
@@ -85,5 +99,5 @@ vim.api.nvim_set_keymap("t", "<F1>", [[<cmd>lua TOGGLE_RUN()<CR>]], {
 	silent = true,
 })
 vim.api.nvim_set_keymap("n", "<F2>", [[:lua require("yabs"):run_task("run")<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<F3>", [[:lua require("yabs"):run_task("test")<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<F4>", [[:lua require("yabs"):run_task("build")<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F3>", [[:lua require("yabs"):run_task("sync")<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F4>", [[:lua require("yabs"):run_task("test")<CR>]], { noremap = true, silent = true })

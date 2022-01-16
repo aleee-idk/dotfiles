@@ -14,15 +14,12 @@ super + e
   kitty lvim
 
 # Run Stuff
-super + r ; {m,s,c,b,x,d,s}
+super + r ; {m,s,d,p}
 	{ \
 		$HOME/dotfiles/scripts/rofi/meet, \
 		$HOME/dotfiles/scripts/rofi/search, \
-		rofi -theme $HOME/.config/rofi/themes/sidebar.rasi -i -show calc -modi calc -no-show-match -no-sort -no-persist-history, \
-		$HOME/dotfiles/scripts/rofi/buku, \
-		$HOME/dotfiles/scripts/rofi/exec_command, \
-		udiskie-dmenu -matching regex -dmenu -i -no-custom -multi-select \
-		$HOME/dotfiles/scripts/rofi/rofi-systemd \
+		$HOME/dotfiles/scripts/rofi/docker, \
+		keepmenu &, \
 	}
 
 # Power menu

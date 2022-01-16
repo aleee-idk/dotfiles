@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+rofi_theme="-theme $HOME/.config/rofi/themes/sidebar.rasi"
+promt="Toggle docker services"
+
+compose_files="$HOME/dotfiles/scripts/docker"
+
+running_containers="$(docker-compose ls -q)"
+
+msg="Running containers:
+$(printf '> %s\n')"
+
+# We use "printf '%s\n'" to format the array one item to a line.
+choice=$(ls "$compose_files" | sort | rofi $rofi_theme -dmenu -p "$promt" -mesg "$msg" -no-lazy-grab)
+
+file="$compose_files/$choice/docker-compose.yml"
+
+if [[ -z "$choice" ]]; then
+	notify-send "Run Docker" "Nothing selected!"
+	exit
+fi
+
+docker-compose --file "$file" up -d
+
+if [[ $? == 0 ]]; then
+	notify-send "Docker" "Containers for $choice started!"
+else
+	notify-send "Docker" "Error starting $choice!"
+fi
