@@ -1,18 +1,28 @@
-/* {Porple} by {Niek den Breeje (https://github.com/AuditeMarlow)} */
+$rosewater: hsl(10, 56%, 91%);
+$flamingo: hsl(0, 59%, 88%);
+$mauve: hsl(279, 70%, 83%);
+$pink: hsl(316, 72%, 86%);
+$maroon: hsl(349, 60%, 77%);
+$red: hsl(342, 79%, 75%);
+$peach: hsl(24, 88%, 78%);
+$yellow: hsl(41, 88%, 84%);
+$green: hsl(128, 58%, 79%);
+$teal: hsl(171, 53%, 81%);
+$blue: hsl(207, 93%, 79%);
+$sky: hsl(189, 71%, 73%);
+$lavender: hsl(238, 100%, 89%);
 
-$base00: #292c36;
-$base01: #333344;
-$base02: #474160;
-$base03: #65568a;
-$base04: #b8b8b8;
-$base05: #d8d8d8;
-$base06: #e8e8e8;
-$base07: #f8f8f8;
-$base08: #f84547;
-$base09: #d28e5d;
-$base0A: #efa16b;
-$base0B: #95c76f;
-$base0C: #64878f;
-$base0D: #8485ce;
-$base0E: #b74989;
-$base0F: #986841;
+/* ----- black & white ----- */
+
+/*                 H     S     L */
+$black0: hsl(251, 33%, 9%);
+$black1: hsl(251, 19%, 12%);
+$black2: hsl(240, 20%, 15%);
+$black3: hsl(249, 18%, 22%);
+$black4: hsl(254, 12%, 36%);
+$gray0: hsl(247, 8%, 46%);
+$gray1: hsl(274, 11%, 59%);
+$gray2: hsl(285, 10%, 75%);
+$white: hsl(220, 38%, 89%);
+
+$background: $black1;

@@ -1,40 +1,37 @@
-(defpoll time :interval "10s"
-  "date '+%I:%M'")
-
-(defpoll volume :interval "1s"
-"amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1"
+(defwidget bar []
+  (centerbox :orientation "h"
+    (box :orientation "h" :space-evenly false (workspaces) )
+    (box :orientation "h" :space-evenly false "hi!" )
+    "sidestuff"
+  )
 )
 
-(defvar show false)
+(defwidget workspaces []
+  (box :class "workspaces"
+       :orientation "h"
+       :space-evenly true
+       :halign "start"
+       :spacing 10
+    (button :onclick "wmctrl -s 1" 1)
+    (button :onclick "wmctrl -s 2" 2)
+    (button :onclick "wmctrl -s 3" 3)
+    (button :onclick "wmctrl -s 4" 4)
+    (button :onclick "wmctrl -s 5" 5)
+    (button :onclick "wmctrl -s 6" 6)
+    (button :onclick "wmctrl -s 7" 7)
+    (button :onclick "wmctrl -s 8" 8)
+    (button :onclick "wmctrl -s 9" 9)
+    (button :onclick "wmctrl -s 0" 10)
+    ))
 
-(defwindow bar
-  :monitor 0
-  :windowtype "dock"
-  :geometry (geometry :x "-1%"
-                      :y "2"
-                      :width "20%"
-                      :height "25px"
-                      :anchor "top right")
-  :reserve (struts :side "top" :distance "0%")
-  (bar_widgets))
-
-(defwidget bar_widgets []
-	(box 
-		:orientation "horizontal"
-		:class "system"
-		:spacing 10
-		:space-evenly true
-		(volume_widget)
-		time
-	)
-)
-
-(defwidget volume_widget []
-	(expander 
-		:name "slideright"
-		:expanded show
-		(box
-			volume
-		)
-	)	
-)
+  (defwindow bar
+    :monitor 0
+    :windowtype "dock"
+    :geometry (geometry :x "0%"
+      :y "0%"
+      :width "90%"
+      :height "15px"
+    :anchor "top center")
+    :reserve (struts :side "top" :distance "4%")
+    (bar)
+  )
