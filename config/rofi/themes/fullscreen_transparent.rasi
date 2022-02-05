@@ -27,7 +27,7 @@ configuration {
 window {
 	fullscreen           : true;
 	transparency         : "real";
-	background-color     : @background-dim;
+	background-color     : #00000055;
 	padding              : 10;
 }
 
