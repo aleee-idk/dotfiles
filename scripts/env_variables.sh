@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Wayland
+export XDG_CURRENT_DESKTOP=sway
+
 # Defaults
 export TERMINAL="kitty"
 export EDITOR="lvim"

@@ -29,15 +29,16 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%	
 
 # Media control
-bindsym XF86AudioNext  exect playerctl next
-bindsym XF86AudioPrev  exect playerctl previous
-bindsym XF86AudioPlay  exect playerctl play-pause
+bindsym XF86AudioNext  exec playerctl next
+bindsym XF86AudioPrev  exec playerctl previous
+bindsym XF86AudioPlay  exec playerctl play-pause
 
 # Rotate Screen
 
 # Screenshot
 
-
+bindsym $mod+Print exec grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy
+bindsym Shift+Print exec grim -g "$(slurp)" - | swappy -f -
 
 # mouse button for dragging.
 floating_modifier $mod normal

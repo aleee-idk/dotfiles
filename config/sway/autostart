@@ -1,0 +1,13 @@
+# Auto Start Stuff
+
+# One time
+exec --no-startup-id discord
+exec --no-startup-id librewolf
+exec --no-startup-id signal-desktop
+exec --no-startup-id systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec --no-startup-id kdeconnect-indicator
+
+# Always
+# exec_always --no-startup-id "pgrep -x sxhkd > /dev/null || sxhkd &"
+# exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
+# exec_always --no-startup-id "$HOME/.fehbg"

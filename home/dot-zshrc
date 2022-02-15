@@ -182,9 +182,9 @@ alias jctl="journalctl -p 3 -xb"
 #                            Start Stuff                             #
 #--------------------------------------------------------------------#
 
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  exec startx
-fi
+# if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+#   exec startx
+# fi
 
 # reporting tools - install when not installed
 # install neofetch

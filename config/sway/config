@@ -18,6 +18,8 @@ set $menu rofi -no-lazy-grab -show drun -modi drun -theme "$HOME/.config/rofi/th
 ## Includes
 
 include keys
+include autostart
+include rules
 
 ### Output configuration
 #
@@ -62,17 +64,7 @@ output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+    swaybar_command waybar
 }
 
 include /etc/sway/config.d/*
@@ -80,6 +72,7 @@ include /etc/sway/config.d/*
 input * {
     xkb_layout "latam"
     xkb_options "grp:shifts_toggle,caps:escape"
+    xkb_numlock enable
 }
 
 # Options
@@ -93,11 +86,4 @@ default_border pixel 2
 #new_window pixel
 #hide_edge_borders smart_no_gaps
 
-# Auto Start Stuff
-
-exec --no-startup-id discord
-exec --no-startup-id librewolf
-exec --no-startup-id signal-desktop
-# exec_always --no-startup-id "pgrep -x sxhkd > /dev/null || sxhkd &"
-# exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
-# exec_always --no-startup-id "$HOME/.fehbg"
+xwayland enable
