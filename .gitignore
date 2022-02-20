@@ -8,3 +8,7 @@ config/fish/fundle
 # TODO: Change when clean it
 */flavours_data/*
 *dot-theme*
+
+config/spicetify/CustomApps/spicetify-marketplace
+config/spicetify/Extracted
+config/spicetify/Backup
