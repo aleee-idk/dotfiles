@@ -173,10 +173,6 @@ lvim.plugins = {
 		end,
 	},
 	{
-		"haringsrob/nvim_context_vt",
-		event = "BufRead",
-	},
-	{
 		"mfussenegger/nvim-ts-hint-textobject",
 		config = function()
 			vim.api.nvim_set_keymap(

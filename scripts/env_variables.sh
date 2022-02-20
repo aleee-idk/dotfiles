@@ -12,7 +12,7 @@ export SXHKD_SHELL="bash"
 export SUDO_PROMP="\e[0;91mPsw Please!\e[0m "
 
 # Custom
-export wallpapers="$HOME/Nextcloud/principal/Imagenes/Waifus"
+export wallpapers="$HOME/Pictures/Waifus"
 
 # --- End Definitions Section ---
 # check if we are being sourced by another script or shell

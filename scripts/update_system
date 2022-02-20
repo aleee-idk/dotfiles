@@ -3,11 +3,7 @@
 
 ## Variables {{{
 
-dependencies=(git ranger timeshift gio fd buku)
-
-max_backups=5
-backup_message="After Update Backup"
-bookmarks_backup_path="$HOME/Nextcloud/principal/Misc/bookmarks_backup.md"
+dependencies=(git gio fd)
 
 # Colors
 red="\e[0;91m"
@@ -22,8 +18,7 @@ bold="\e[1m"
 uline="\e[4m"
 reset="\e[0m"
 
-function usage ()
-{
+function usage() {
 	echo "Usage :  $0 [options] [--]
 
 	Options:
@@ -33,43 +28,45 @@ function usage ()
 	-U|no-update    Don't update the system
 	-W|no-wallpaper Don't change the wallpaper"
 
-}    # ----------  end of function usage  ----------
+} # ----------  end of function usage  ----------
 
 #-----------------------------------------------------------------------
 #  Handle command line arguments
 #-----------------------------------------------------------------------
 
-do_update=true
 do_git=true
 do_backup=true
 do_wallpaper=true
 
-while getopts ":hBGUW" opt
-do
+while getopts ":hGUW" opt; do
 	case ${opt} in
 
-		h|help     )  usage; exit 0   ;;
+	h | help)
+		usage
+		exit 0
+		;;
 
-		U|no-update   ) do_update=false ;;
+	U | no-update) do_update=false ;;
 
-		G|no-git   ) do_git=false ;;
+	G | no-git) do_git=false ;;
 
-		B|no-backup ) do_backup=false ;;
+	W | no-wallpaper) do_wallpaper=false ;;
 
-		W|no-wallpaper ) do_wallpaper=false ;;
+	*)
+		echo -e "\n  Option does not exist : OPTARG\n"
+		usage
+		exit 1
+		;;
 
-		* )  echo -e "\n  Option does not exist : OPTARG\n"
-			usage; exit 1   ;;
-
-		esac    # --- end of case ---
-	done
+	esac # --- end of case ---
+done
 
 ## Variables }}}
 
 ## 0.- Initialization {{{
 
 for dep in "${dependencies[@]}"; do
-	if ! command -v "$dep" &> /dev/null; then
+	if ! command -v "$dep" &>/dev/null; then
 		echo -e "$red${dep}$reset not fount!"
 		exit 1
 	fi
@@ -105,10 +102,7 @@ if $do_update; then
 	# Update nvim packages
 	# PLUG=no disable some plugins
 	echo -e "Updating vim plugins"
-	PLUG=no nvim "+PackerSync" "+au BufLeave * qa!"
-
-	# update fish packages
-	fish -c "fundle update"
+	# PLUG=no nvim "+PackerSync" "+au BufLeave * qa!"
 fi
 
 ## 2.- Update System  }}}
@@ -156,9 +150,6 @@ if $do_git; then
 	cd "$HOME"
 fi
 
-# bookmarks
-buku --export "$bookmarks_backup_path"
-
 ## 6.- Backup Stuff }}}
 
 ## 7.- Sort Wallpapers {{{
@@ -175,37 +166,8 @@ fi
 
 ## 8.- Change Wallpapers }}}
 
-## 9.- Create Restore Point {{{
-
-# TODO update backup estrategy
-
-# if $do_backup; then
-	# sudo timeshift --create --comment "$backup_message"
-# fi
-
-## 9.- Create Restore Point }}}
-
-## 10.- Delete Olds Restore Points {{{
-
-# Get Snapshots
-# snapshots_lines=$(sudo timeshift --list | sed -n '/^-.*-$/, $ p' | sed -n '2,$ p')
-# snapshots=()
-
-# for line in "$snapshots_lines"; do
-# 	snapshots+=($(echo "$line" | awk '{print $3}'))
-# done
-
-# snapshot_diff=$((${#snapshots[@]} - $max_backups - 1))
-
-# for i in seq 0 $snapshot_diff; do
-# 	sudo timeshift --delete --snapshot "${snapshots[$i]}"
-# done
-
-## 10.- Delete Olds Restore Points }}}
-
 ## 11.- Resume Output {{{
 
-(( "${#git_untracked[@]}" > 0 )) && echo -e "There were $red${#git_untracked[@]}$reset files, please check it out."
+(("${#git_untracked[@]}" > 0)) && echo -e "There were $red${#git_untracked[@]}$reset files, please check it out."
 
 ## 11.- Resume Output }}}
-

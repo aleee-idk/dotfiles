@@ -6,11 +6,11 @@ import os
 import re
 
 #   Cambiar dependiendo del OS
-path = os.getenv('HOME') + '/Nextcloud/principal/Imagenes/Waifus/'
-log_file = os.path.dirname(__file__) + '/sort_image_log.txt'
-wallpapers_directories = ['Fondos_Cel', 'Fondos_PC', 'Otros']
-folder_Search = ('[a-zA-Z0-9]*Fondos*', '[a-zA-Z0-9]*Otros*')
-folder_Divider = '/'
+path = os.getenv("HOME") + "/Pictures/Waifus/"
+log_file = os.path.dirname(__file__) + "/sort_image_log.txt"
+wallpapers_directories = ["Fondos_Cel", "Fondos_PC", "Otros"]
+folder_Search = ("[a-zA-Z0-9]*Fondos*", "[a-zA-Z0-9]*Otros*")
+folder_Divider = "/"
 square_like_size = 200
 
 
@@ -28,9 +28,9 @@ def createDir(directory_name: str):
     """
     try:
         os.mkdir(directory_name)
-        print('Carpeta: ' + directory_name + ' Creada! :D')
+        print("Carpeta: " + directory_name + " Creada! :D")
     except OSError:
-        print('Carpeta ' + directory_name + ' ya existe! >:c')
+        print("Carpeta " + directory_name + " ya existe! >:c")
 
 
 def move_directory(file_to_move: str, new_wallpaper_directory: str):
@@ -45,7 +45,7 @@ def move_directory(file_to_move: str, new_wallpaper_directory: str):
         @type  new_wallpaper_directory:  str
     """
     i = 0
-    msg = ''
+    msg = ""
     base_directory_name = os.path.basename(os.path.dirname(file_to_move))
     base_directory_path = os.path.dirname(os.path.abspath(file_to_move))
     file_name = os.path.basename(file_to_move)
@@ -54,14 +54,18 @@ def move_directory(file_to_move: str, new_wallpaper_directory: str):
         try:
             if i == 1:
                 os.rename(
-                    file_to_move, f'{base_directory_path}/{base_directory_name}_{new_wallpaper_directory}/{file_name}')
+                    file_to_move,
+                    f"{base_directory_path}/{base_directory_name}_{new_wallpaper_directory}/{file_name}",
+                )
                 break
             else:
-                old_name = os.path.basename(file_to_move).split('.')
-                new_name = f'{old_name[0]}({str(i)}).{old_name[1]}'
+                old_name = os.path.basename(file_to_move).split(".")
+                new_name = f"{old_name[0]}({str(i)}).{old_name[1]}"
                 os.rename(
-                    file_to_move, f'{base_directory_path}/{base_directory_name}_{new_wallpaper_directory}/{new_name}')
-                msg = f'Archivo: {os.path.basename(file_to_move)} Ya existe \nSe renombrará como: {new_name}'
+                    file_to_move,
+                    f"{base_directory_path}/{base_directory_name}_{new_wallpaper_directory}/{new_name}",
+                )
+                msg = f"Archivo: {os.path.basename(file_to_move)} Ya existe \nSe renombrará como: {new_name}"
                 break
         except Exception as err:
             input()
@@ -70,10 +74,9 @@ def move_directory(file_to_move: str, new_wallpaper_directory: str):
 
     print()
     if i != 1:
-        write_to_log(msg + '\n')
+        write_to_log(msg + "\n")
         print(msg)
-    write_to_log(
-        f'{file_name} Fue movido a: {base_directory_name} \n\n')
+    write_to_log(f"{file_name} Fue movido a: {base_directory_name} \n\n")
 
 
 def check_files(file_to_check: str):
@@ -94,7 +97,7 @@ def check_files(file_to_check: str):
         # conseguir el ancho - alto para categorizar la imágen
         size_difference = img_size[0] - img_size[1]
     except:
-        print('Archivo no es una imagen, se moverá a otros')
+        print("Archivo no es una imagen, se moverá a otros")
         move_directory(file_to_check, wallpapers_directories[2])
         return
 
@@ -102,28 +105,37 @@ def check_files(file_to_check: str):
     if size_difference != 0 and (abs(size_difference) > square_like_size):
 
         # Imagen no cuadrada
-        print(f'{os.path.basename(file_to_check)} Es un Fondo, será movido')
+        print(f"{os.path.basename(file_to_check)} Es un Fondo, será movido")
 
         #   Verificar si es vertical u horizontal
         if size_difference < 0:
 
             # Es vertical - mover a Fondo_Cel
             move_directory(file_to_check, wallpapers_directories[0])
-            print(os.path.basename(file_to_check) +
-                  ' Fue movido a: ' + wallpapers_directories[0])
+            print(
+                os.path.basename(file_to_check)
+                + " Fue movido a: "
+                + wallpapers_directories[0]
+            )
 
         else:
 
             # es horizontal - mover a Fondo_Pc
             move_directory(file_to_check, wallpapers_directories[1])
-            print(os.path.basename(file_to_check) +
-                  ' Fue movido a: ' + wallpapers_directories[1])
+            print(
+                os.path.basename(file_to_check)
+                + " Fue movido a: "
+                + wallpapers_directories[1]
+            )
 
     else:
         # Imagen es cuadrada - mover a otros
         move_directory(file_to_check, wallpapers_directories[2])
-        print(os.path.basename(file_to_check) +
-              ' Fue movido a: ' + wallpapers_directories[2])
+        print(
+            os.path.basename(file_to_check)
+            + " Fue movido a: "
+            + wallpapers_directories[2]
+        )
 
 
 def get_list_of_files(directory_name: str):
@@ -161,29 +173,32 @@ def write_to_log(message: str):
     @return:  None.
     @rtype :  None.
     """
-    with open(log_file, 'a') as file:
+    with open(log_file, "a") as file:
         file.write(message)
+
 
 # Main
 
 
 def main():
-    current_directory = ''
+    current_directory = ""
 
-    write_to_log('\n*** ' + str(date.today()) + ' ***\n')
+    write_to_log("\n*** " + str(date.today()) + " ***\n")
 
     # Recorrer todas las carpetas
     file_list = get_list_of_files(path)
     for file_entry in file_list:
 
         # Saltar carpetas NSFW
-        if re.search('NSFW*', os.path.dirname(file_entry)):
-            print('Carpeta NSFW! No voy a entrar ahí :c')
+        if re.search("NSFW*", os.path.dirname(file_entry)):
+            print("Carpeta NSFW! No voy a entrar ahí :c")
             continue
 
         # No volver a revisar las carpetas ya realizadas
-        if re.search(folder_Search[0], os.path.dirname(file_entry)) or re.search(folder_Search[1], os.path.dirname(file_entry)):
-            print('Directorio ya revisado! :3')
+        if re.search(folder_Search[0], os.path.dirname(file_entry)) or re.search(
+            folder_Search[1], os.path.dirname(file_entry)
+        ):
+            print("Directorio ya revisado! :3")
             continue
 
         # Crear carpetas "Fodo_X_directory" cuando cambie el directorio
@@ -192,12 +207,13 @@ def main():
             parent_wallpaper_directories = []
             for i, dir in enumerate(wallpapers_directories):
                 parent_wallpaper_directories.append(
-                    f'{current_directory}{folder_Divider}{os.path.basename(current_directory)}_{dir}{folder_Divider}')
+                    f"{current_directory}{folder_Divider}{os.path.basename(current_directory)}_{dir}{folder_Divider}"
+                )
                 createDir(parent_wallpaper_directories[i])
 
         # Clasificar archivos
         check_files(file_entry)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

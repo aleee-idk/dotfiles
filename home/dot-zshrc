@@ -27,7 +27,7 @@ compinit
 # End of lines added by compinstall
 
 # $PATH.
-export PATH=$HOME/bin:$HOME/dotfiles/scripts:$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/dotfiles/scripts:$HOME/dotfiles/scripts/rofi/rofi-translate:.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 #installation via script from github
@@ -162,8 +162,8 @@ alias pacman='sudo pacman --color auto'
 alias df='df -h'
 
 # Packages
-alias pkgu="paru -Syu"
-alias pkgi="paru -S"
+alias pkgu="paru -Syu --removemake --cleanafter --sudoloop --color always"
+alias pkgi="paru -S --skipreview --removemake --cleanafter --sudoloop --color always --needed"
 alias pkgr="paru -R"
 
 # recent packages

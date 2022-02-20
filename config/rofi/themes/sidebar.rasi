@@ -9,7 +9,7 @@ configuration {
 
 * {
 	// find cool font
-	font                 : "Noto Sans Bold 13";
+	font                 : "JetBrainsMono NF bold 13";
 
 	// transparent color
     transparent          : #00000000;

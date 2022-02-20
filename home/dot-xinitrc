@@ -52,7 +52,6 @@ dunst &
 polkit-dumb-agent &
 thunar --daemon &
 kdeconnect-indicator &
-nexcloud --background &
 
 # Start Window Manager or Desktop Enviroment
 exec i3

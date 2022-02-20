@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+rofi_theme="-theme $HOME/.config/rofi/themes/sidebar.rasi"
+
+# TODO: Fix search problem
+
+# This is the entry of rofi trans-shell
+# This script require trans-shell itself, if you don't have one.
+# You can install it from your package manager(if provided) or from source(clone trans-shell from github)
+
+function Configs {
+	# The default translator for translate-shell
+	export primary_translator="google"
+	# The alternative transltor for translate-shell
+	export secondary_translator="bing"
+
+	export transHistory="/tmp/rofi_trans"
+	export transAudioCacheDir="/tmp/rofi_trans_audio"
+	export transTarget="es"
+	export save_audio="save_audio"
+	export transArgs="-b -no-play"
+	export verbose="0"
+	export auto_refresh="0"
+	export version=1
+}
+
+# Setup environment variable for configs.
+Configs
+
+if [[ -z "$default" ]]; then default="brief"; fi
+if [[ "$1" == "verbose" ]]; then default="verbose"; fi
+if [[ "$1" == "brief" ]]; then default="brief"; fi
+if [[ "$1" == "delete" ]]; then default="delete"; fi
+
+rofi -sidebar-mode -modi "verbose:rofi_trans_verbose,brief:rofi_trans_brief,delete:rofi_trans_delete" -show "$default"

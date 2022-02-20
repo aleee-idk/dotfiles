@@ -14,12 +14,14 @@ super + e
   kitty lvim
 
 # Run Stuff
-super + r ; {m,s,d,p}
+super + r ; {m,s,d,p,f,t}
 	{ \
 		$HOME/dotfiles/scripts/rofi/meet, \
 		$HOME/dotfiles/scripts/rofi/search, \
 		$HOME/dotfiles/scripts/rofi/docker, \
-		keepmenu &, \
+		bwmenu &, \
+		$HOME/dotfiles/scripts/rofi/faker, \
+		$HOME/dotfiles/scripts/rofi/rofi-translate/rofi_trans\
 	}
 
 # Power menu
@@ -61,7 +63,7 @@ XF86MonBrightness{Up,Down}
 
 # External Screen Conf
 super + control + shift + {Left, Down, Up, Right}
-	xrandr --output HDMI1 --rotate {left, inverted, normal, right};
+	xrandr --output HDMI-1 --rotate {left, inverted, normal, right};
 
 #
 # bspwm hotkeys

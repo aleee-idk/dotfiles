@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+rofi_theme="-theme $HOME/.config/rofi/themes/sidebar.rasi"
+
+providers=(
+	"words"
+	"paragraph"
+	"name"
+	"first name"
+	"last name"
+	"email"
+	"password"
+	"ulr"
+	"address"
+	"product"
+)
+
+# shellcheck disable=SC2086
+choice=$(printf '%s\n' "${providers[@]}" | rofi $rofi_theme -dmenu -p 'Faker data')
+
+case $choice in
+"text")
+	random=$(faker-cli --locale es_MX -l text)
+	;;
+"words")
+	random=$(faker-cli --locale es_MX -l words)
+	;;
+"paragraph")
+	random=$(faker-cli --locale es_MX -l paragraph)
+	;;
+"paragraphs")
+	random=$(faker-cli --locale es_MX -l paragraph)
+	;;
+"name")
+	random=$(faker-cli --locale es_MX -n findName)
+	;;
+"first name")
+	random=$(faker-cli --locale es_MX -n firstName)
+	;;
+"last name")
+	random=$(faker-cli --locale es_MX -n lastName)
+	;;
+"email")
+	random=$(faker-cli --locale es_MX -i email)
+	;;
+"ulr")
+	random=$(faker-cli --locale es_MX -i url)
+	;;
+"password")
+	random=$(faker-cli --locale es_MX -i password)
+	;;
+"address")
+	random=$(faker-cli --locale es_MX -a streetAddress)
+	;;
+"product")
+	random=$(faker-cli --locale es_MX -C product)
+	;;
+*) ;;
+esac
+
+if [[ -n "$random" ]]; then
+	random="${random//\"/}"
+
+	xte "str $random"
+fi
