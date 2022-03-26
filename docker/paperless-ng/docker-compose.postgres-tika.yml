@@ -1,0 +1,47 @@
+services:
+  broker:
+    image: redis:6.0
+    restart: unless-stopped
+
+  paperless-ng:
+    image: jonaswinkler/paperless-ng:latest
+    container_name: paperless-ng
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - broker
+      - gotenberg
+      - tika
+    ports:
+      - 7210:8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ${HOME}/Containers/paperless-ng/data:/usr/src/paperless/data
+      - ${HOME}/Containers/paperless-ng/media:/usr/src/paperless/media
+      - ${HOME}/Containers/paperless-ng/export:/usr/src/paperless/export
+      - ${HOME}/Containers/paperless-ng/consume:/usr/src/paperless/consume
+    env_file:
+      - paperless-ng/.env
+    environment:
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_DBHOST: postgres
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+      PAPERLESS_TIME_ZONE: America/Santiago
+      USERMAP_UID: 1000
+      USERMAP_GID: 1000
+
+  gotenberg:
+    image: thecodingmachine/gotenberg
+    restart: unless-stopped
+    environment:
+      DISABLE_GOOGLE_CHROME: 1
+
+  tika:
+    image: apache/tika
+    restart: unless-stopped

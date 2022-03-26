@@ -4,7 +4,7 @@ require("nvim-comment-frame").setup({
 	disable_default_keymap = true,
 
 	-- width of the comment frame
-	frame_width = 70,
+	frame_width = 80,
 
 	-- wrap the line after 'n' characters
 	line_wrap_len = 50,

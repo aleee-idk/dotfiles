@@ -11,6 +11,8 @@ set noswapfile
 lvim.autocommands.custom_groups = {
 	-- On entering insert mode in any file, scroll the window so the cursor line is centered
 	{ "InsertEnter", "*", ":normal zz" },
+	{ "BufNewFile", "*.env", ":set filetype=env" },
+	{ "BufRead", "*.env", ":set filetype=env" },
 }
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
@@ -34,6 +36,7 @@ require("user.plugins.builtin")
 ----------------------------------------------------------------------
 --                               LSP                                --
 ----------------------------------------------------------------------
+lvim.lsp.automatic_servers_installation = false
 
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
@@ -43,7 +46,7 @@ formatters.setup({
 	{ exe = "prettier" },
 	{ exe = "reorder-python-imports" },
 	{ exe = "rustfmt" },
-	{ exe = "shfmt" },
+	{ exe = "shfmt", extra_filetypes = { "env" } },
 	{ exe = "stylua" },
 })
 

@@ -20,6 +20,8 @@ setopt autocd beep extendedglob notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
+
+zstyle ':completion:*' group-name ''
 zstyle :compinstall filename '/home/aleidk/.zshrc'
 
 autoload -Uz compinit
@@ -27,7 +29,7 @@ compinit
 # End of lines added by compinstall
 
 # $PATH.
-export PATH=$HOME/bin:$HOME/dotfiles/scripts:$HOME/dotfiles/scripts/rofi/rofi-translate:.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/dotfiles/scripts:$HOME/dotfiles/scripts/rofi/rofi-translate:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 #installation via script from github

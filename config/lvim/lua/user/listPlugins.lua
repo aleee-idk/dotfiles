@@ -67,6 +67,15 @@ lvim.plugins = {
 	},
 
 	{
+		"akinsho/flutter-tools.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("user.plugins.flutter-tools")
+		end,
+		ft = "dart",
+	},
+
+	{
 		"elkowar/yuck.vim",
 		ft = "yuck",
 	},

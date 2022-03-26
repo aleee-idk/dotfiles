@@ -34,16 +34,17 @@ treesitter.ensure_installed = {
 	"dockerfile",
 	"fish",
 	"html",
+	"http",
+	"javascript",
 	"json",
 	"lua",
 	"python",
 	"scss",
 	"toml",
-	"typescript",
-	"javascript",
 	"tsx",
+	"typescript",
 	"yaml",
-	"http",
+	"dart",
 }
 treesitter.ignore_install = {}
 treesitter.highlight.enabled = true
@@ -231,7 +232,7 @@ lvim.builtin.nvimtree.setup = {
 --                            Bufferline                            --
 ----------------------------------------------------------------------
 
-vim.g.bufferline = {
+lvim.builtin.bufferline.options = {
 	-- Enable/disable animations
 	animation = true,
 
@@ -349,3 +350,9 @@ lvim.builtin.dashboard.custom_section = {
 		command = "Telescope live_grep",
 	},
 }
+
+----------------------------------------------------------------------
+--                            Completion                            --
+----------------------------------------------------------------------
+
+require("luasnip").filetype_extend("dart", { "flutter" })

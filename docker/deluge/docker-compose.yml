@@ -1,0 +1,18 @@
+services:
+  deluge:
+    image: lscr.io/linuxserver/deluge
+    container_name: deluge
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Santiago
+      - DELUGE_LOGLEVEL=error #optional
+    volumes:
+      - ${HOME}/Containers/deluge/config:/config
+      - ${HOME}/Downloads/deluge:/downloads
+    ports:
+      - 7220:8112
+      - 58846:58846
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped

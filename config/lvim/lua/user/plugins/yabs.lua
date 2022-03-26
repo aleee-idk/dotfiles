@@ -34,6 +34,24 @@ yabs:setup({
 				},
 			},
 		},
+		typescriptreact = {
+			default_task = "run",
+			tasks = {
+				run = {
+					command = "export BROWSER=firefox-developer-edition && yarn start",
+					output = TOGGLE_RUN,
+				},
+				test = {
+					command = "cd $(gir rev-parse --show-toplevel) && yarn test -- --coverage --watchAll=false",
+					output = "quickfix",
+					type = "quickfix",
+				},
+				build = {
+					command = "cd $(git rev-parse --show-toplevel) && yarn build",
+					output = "quickfix",
+				},
+			},
+		},
 		javascriptreact = {
 			default_task = "run",
 			tasks = {
@@ -62,6 +80,24 @@ yabs:setup({
 				sync = {
 					command = "yarn run sync",
 					output = TOGGLE_RUN,
+				},
+			},
+		},
+
+		dart = {
+			default_task = "run",
+			tasks = {
+				run = {
+					command = "FlutterRun",
+					type = "vim",
+				},
+				sync = {
+					command = "FlutterEmulators",
+					type = "vim",
+				},
+				test = {
+					command = "FlutterDevices",
+					type = "vim",
 				},
 			},
 		},
