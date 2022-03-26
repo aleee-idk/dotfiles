@@ -88,6 +88,7 @@ linux-firmware
 linux-headers
 lua-format
 luacheck
+lunarvim-git
 lxappearance
 lxappearance
 lxsession
@@ -115,6 +116,7 @@ npm
 ntfs-3g
 nvim-packer-git
 obs-studio
+oh-my-zsh-git
 oh-my-zsh-git
 ookla-speedtest-bin
 openssh
@@ -171,7 +173,6 @@ timeshift
 tlauncher-tl
 tor
 torbrowser-launcher
-ttf-times-new-roman
 trashman
 ttf-dejavu
 ttf-droid
@@ -180,6 +181,7 @@ ttf-hack
 ttf-ms-fonts
 ttf-roboto
 ttf-roboto-mono
+ttf-times-new-roman
 ttf-ubuntu-font-family
 tumbler
 udiskie

@@ -27,13 +27,13 @@ compinit
 # End of lines added by compinstall
 
 # $PATH.
-export PATH=$HOME/bin:$HOME/dotfiles/scripts:$HOME/dotfiles/scripts/rofi/rofi-translate:.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/dotfiles/scripts:$HOME/dotfiles/scripts/rofi/rofi-translate:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 #installation via script from github
 #export ZSH="/home/$USER/.oh-my-zsh"
 #installation via paru -S oh-my-zsh-git
-export ZSH=/usr/share/oh-my-zsh/
+export ZSH=/usr/share/oh-my-zsh
 
 # disable ZSH_THEME if this is used
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
@@ -88,7 +88,7 @@ plugins=(
   bgnotify
   colored-man-pages
   command-not-found
-  copydir # copydir to send $PDW to system clipboard
+  copypath # copydir to send $PDW to system clipboard
   cp # alias to use rsync to copy files
   dirpersist # save last 20 unique directories in ~/.zdirs
   docker
