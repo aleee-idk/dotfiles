@@ -1,0 +1,21 @@
+services:
+  transmission:
+    image: lscr.io/linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Santiago
+      # - WHITELIST=iplist #optional
+      # - PEERPORT=peerport #optional
+      # - HOST_WHITELIST=dnsnane list #optional
+    volumes:
+      - ${HOME}/Containers/transmission/config:/config
+      - ${HOME}/Downloads/transmission:/downloads
+      - ${HOME}/Downloads/Torrents-Watch:/watch
+    env_file: transmission/.env
+    ports:
+      - 7230:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped

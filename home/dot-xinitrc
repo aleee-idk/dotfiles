@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=2086,1090,1091,3046,3020
 
 # System Stuff
 
@@ -32,9 +33,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 	unset f
 fi
 
-# Sensible Env Variables
-$HOME/dotfiles/scripts/sensible_env.sh
-
 # Env Variables
 source "$HOME/dotfiles/scripts/env_variables.sh"
 
@@ -47,11 +45,14 @@ $HOME/.screenlayout/home.sh
 
 udiskie &
 picom -b --experimental-backends &
-xss-lock -l -- i3lock-fancy-dualmonitor &
+# xss-lock -l -- i3lock-fancy-dualmonitor &
+xss-lock -l -- &
 dunst &
 polkit-dumb-agent &
 thunar --daemon &
 kdeconnect-indicator &
+easyeffects --gapplication-service &>/dev/null &
+playerctld &>/dev/null &
 
 # Start Window Manager or Desktop Enviroment
 exec i3

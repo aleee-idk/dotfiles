@@ -37,13 +37,18 @@ require("focus").setup({
 	-- Not displayed in uned windows
 	-- See :h relativenumber
 	-- Default: false
-	relativenumber = true,
+	-- relativenumber = true,
 
 	-- Displays hybrid line numbers in the ed window only
 	-- Not displayed in uned windows
 	-- Combination of :h relativenumber, but also displays the line number of the current line only
 	-- Default: false
-	-- hybridnumber = true
+	hybridnumber = true,
+
+	-- Preserve absolute numbers in the unfocussed windows
+	-- Works in combination with relativenumber or hybridnumber
+	-- Default: false
+	-- absolutenumber_unfocussed = true,
 
 	-- Enable auto highlighting for ed/unfocussed windows
 	-- Default: false

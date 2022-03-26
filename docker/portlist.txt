@@ -1,0 +1,27 @@
+List of ports for the services:
+
+# Databases
+3306 -> MariaDB
+
+# Monitors
+7000 -> homer (landing page)
+7010 -> PHPMyAdmin (MariaDB) admin@admin.cl 12345678
+7020 -> PGadming (Postgres)
+
+# Personal Stuff
+7100 -> Vaultwarden
+7110 -> Firefly III
+
+# Files Managment
+7200 -> Syncthing
+7210 -> Paperless-ng
+7220 -> Deluge
+7230 -> Deluge
+
+# Media
+7300 -> Sonarr
+7310 -> Radarr
+7320 -> Bazarr
+7330 -> Lidarr
+7340 -> Prowlarr
+7350 -> Prowlarr

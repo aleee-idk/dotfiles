@@ -1,0 +1,15 @@
+services:
+  firefly:
+    image: fireflyiii/core:latest
+    container_name: firefly
+    restart: always
+    volumes:
+      - ${HOME}/Containers/firefly/upload:/var/www/html/storage/upload
+    env_file: firefly/.env
+    ports:
+      - 7110:8080
+    depends_on:
+      - postgres
+volumes:
+  firefly_iii_upload:
+  firefly_iii_db:

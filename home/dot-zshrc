@@ -20,6 +20,8 @@ setopt autocd beep extendedglob notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
+
+zstyle ':completion:*' group-name ''
 zstyle :compinstall filename '/home/aleidk/.zshrc'
 
 autoload -Uz compinit

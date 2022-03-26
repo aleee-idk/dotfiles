@@ -11,6 +11,10 @@ export FLAVOURS_DATA_DIRECTORY="$HOME/dotfiles/config/flavours_data"
 export SXHKD_SHELL="bash"
 export SUDO_PROMP="\e[0;91mPsw Please!\e[0m "
 
+# Flutter
+export JAVA_HOME='/usr/lib/jvm/java-8-openjdk'
+# export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
+
 # Custom
 export wallpapers="$HOME/Pictures/Waifus"
 

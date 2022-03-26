@@ -1,0 +1,93 @@
+services:
+  sonarr:
+    # Series / Anime
+    image: lscr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Santiago
+    volumes:
+      - ${HOME}/Containers/sonarr/config:/config
+      - ${HOME}/Drives/Raid/Series:/tv #optional
+      - ${HOME}/Downloads/transmission:/downloads #optional
+    ports:
+      - 7300:8989
+    restart: unless-stopped
+
+  radarr:
+    # Movies
+    image: lscr.io/linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Santiago
+    volumes:
+      - ${HOME}/Containers/radarr/config:/config
+      - ${HOME}/Drives/Raid/Movies:/movies #optional
+      - ${HOME}/Downloads/transmission:/downloads #optional
+    ports:
+      - 7310:7878
+    restart: unless-stopped
+
+  bazarr:
+    # Subtitles
+    image: lscr.io/linuxserver/bazarr
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Santiago
+    volumes:
+      - ${HOME}/Containers/radarr/config:/config
+      - ${HOME}/Drives/Raid/Movies:/movies #optional
+      - ${HOME}/Drives/Raid/Series:/tv #optional
+    ports:
+      - 7320:6767
+    restart: unless-stopped
+
+  lidarr:
+    # Music
+    image: lscr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Santiago
+    volumes:
+      - ${HOME}/Containers/lidarr/config:/config
+      - ${HOME}/Drives/Raid/Music:/music #optional
+      - ${HOME}/Downloads/transmission:/downloads #optional
+    ports:
+      - 7330:8686
+    restart: unless-stopped
+
+  prowlarr:
+    # indexers and downloaders
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Santiago
+    volumes:
+      - ${HOME}/Containers/prowlarr/config:/config
+    ports:
+      - 7340:9696
+    restart: unless-stopped
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Santiago
+    volumes:
+      - ${HOME}/Containers/readarr/config:/config
+      - ${HOME}/Drives/Raid/Books:/books #optional
+      - ${HOME}/Downloads/transmission:/downloads #optional
+    ports:
+      - 7350:8787
+    restart: unless-stopped

@@ -1,4 +1,6 @@
+.env
 sensible_env.sh
+
 *__pycache__*
 *youtube*
 *cookie*
@@ -12,3 +14,7 @@ config/fish/fundle
 config/spicetify/CustomApps/spicetify-marketplace
 config/spicetify/Extracted
 config/spicetify/Backup
+config/lvim/plugin/packer_compiled.lua
+
+config/gtk-2.0
+config/gtk-3.0

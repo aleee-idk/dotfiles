@@ -1,0 +1,28 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    depends_on:
+      - caddy
+    restart: always
+    environment:
+      - WEBSOCKET_ENABLED=true # Enable WebSocket notifications.
+    volumes:
+      - ${HOME}/Containers/vaultwarden/data:/data
+
+  caddy:
+    image: caddy:2
+    container_name: caddy
+    restart: always
+    ports:
+      - 80:80
+      - 7100:443
+    volumes:
+      - ${HOME}/Containers/vaultwarden/caddy:/usr/bin/caddy # Your custom build of Caddy.
+      - ${HOME}/Containers/vaultwarden/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ${HOME}/Containers/vaultwarden/caddy-config:/config
+      - ${HOME}/Containers/vaultwarden/caddy-data:/data
+    env_file:
+      - vaultwarden/.env
+    environment:
+      - LOG_FILE=/data/access.log
