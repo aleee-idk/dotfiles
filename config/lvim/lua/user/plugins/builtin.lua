@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 
 -- enable
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.autopairs.active = true
 lvim.builtin.bufferline.active = true
