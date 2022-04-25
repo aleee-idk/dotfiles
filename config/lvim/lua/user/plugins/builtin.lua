@@ -336,32 +336,32 @@ dap.configurations.javascript = {
 --                            Dashboard                             --
 ----------------------------------------------------------------------
 
-local alpha = lvim.builtin.alpha
+local header_text = "aleidk"
+local header_font = "DOS Rebel"
+local footer_text = "let's code :3"
 
-alpha.mode = "dashboard"
+-- Set Dashboard Header
+local file = io.popen([[figlet -f "]] .. header_font .. [[" ]] .. header_text)
+local lines = {}
+for line in file:lines() do
+	lines[#lines + 1] = line
+end
 
--- alpha.dashboard.section = {
--- 	a = {
--- 		description = { "  Recent Projects    " },
--- 		command = "Telescope projects",
--- 	},
--- 	b = {
--- 		description = { "  Find File          " },
--- 		command = "Telescope find_files",
--- 	},
--- 	c = {
--- 		description = { "  New File           " },
--- 		command = ":ene!",
--- 	},
--- 	d = {
--- 		description = { "  Recently Used Files" },
--- 		command = "Telescope oldfiles",
--- 	},
--- 	e = {
--- 		description = { "  Find Word          " },
--- 		command = "Telescope live_grep",
--- 	},
--- }
+lvim.builtin.alpha.dashboard.section = {
+  header = {
+    type= "text",
+    val= lines,
+  },
+  buttons = {entries = {
+      { "SPC s p", " Recent Projects", "<CMD>Telescope projects<CR>" },
+      { "SPC s f", "  Find File", "<CMD>Telescope find_files<CR>" },
+      { "SPC s r", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
+  }},
+  footer = {
+    type= "text",
+    val= footer_text,
+  },
+}
 
 ----------------------------------------------------------------------
 --                            Completion                            --

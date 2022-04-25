@@ -2,9 +2,6 @@
 lvim.colorscheme = "catppuccin"
 -- lvim.transparent_window = true
 
-local header_text = "aleidk"
-local header_font = "DOS Rebel"
-
 -- Color Scheme
 local catppuccin = require("catppuccin")
 
@@ -87,12 +84,3 @@ lvim.builtin.lualine.inactive_sections = {
 }
 lvim.builtin.lualine.tabline = {}
 lvim.builtin.lualine.extensions = { "nvim-tree" }
-
--- Set Dashboard Header
-local file = io.popen([[figlet -f "]] .. header_font .. [[" ]] .. header_text)
-local lines = {}
-for line in file:lines() do
-	lines[#lines + 1] = line
-end
-
-lvim.builtin.dashboard.custom_header = lines
