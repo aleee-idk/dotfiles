@@ -11,10 +11,7 @@ function TOGGLE_RUN(cmd)
 			start_in_insert = false,
 			close_on_exit = false,
 			on_open = function()
-				print("executing run task...")
-			end,
-			on_close = function()
-				print("exit run task...")
+				print("executing " + cmd)
 			end,
 		})
 	end
@@ -126,6 +123,8 @@ yabs:setup({
 	},
 })
 
+require("telescope").load_extension("yabs")
+
 vim.api.nvim_set_keymap("n", "<F1>", [[:lua require("yabs"):run_default_task()<CR>]], {
 	noremap = true,
 	silent = true,
@@ -134,6 +133,4 @@ vim.api.nvim_set_keymap("t", "<F1>", [[<cmd>lua TOGGLE_RUN()<CR>]], {
 	noremap = true,
 	silent = true,
 })
-vim.api.nvim_set_keymap("n", "<F2>", [[:lua require("yabs"):run_task("run")<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<F3>", [[:lua require("yabs"):run_task("sync")<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<F4>", [[:lua require("yabs"):run_task("test")<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<F2>", [[:Telescope yabs tasks<CR>]], { noremap = true, silent = true })

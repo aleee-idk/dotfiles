@@ -6,7 +6,7 @@ import os
 import re
 
 #   Cambiar dependiendo del OS
-path = os.getenv("HOME") + "/Pictures/Waifus/"
+path = os.getenv("wallpapers")
 log_file = os.path.dirname(__file__) + "/sort_image_log.txt"
 wallpapers_directories = ["Fondos_Cel", "Fondos_PC", "Otros"]
 folder_Search = ("[a-zA-Z0-9]*Fondos*", "[a-zA-Z0-9]*Otros*")

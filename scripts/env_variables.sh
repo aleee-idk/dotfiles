@@ -16,7 +16,7 @@ export JAVA_HOME='/usr/lib/jvm/java-8-openjdk'
 # export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
 
 # Custom
-export wallpapers="$HOME/Pictures/Waifus"
+export wallpapers="$HOME/Drives/Raid/Pictures/Waifus"
 
 # --- End Definitions Section ---
 # check if we are being sourced by another script or shell

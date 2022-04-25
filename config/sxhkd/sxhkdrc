@@ -55,7 +55,7 @@ shift + XF86Audio{Next,Prev,Play}
 
 # File Manager
 super + f
-	thunar
+	dolphin
 
 # Brightness
 XF86MonBrightness{Up,Down}

@@ -112,7 +112,6 @@ lvim.builtin.which_key.mappings["sT"] = { "<cmd>TodoTelescope<CR>", "TODO" }
 --                            Nvim-Tree                             --
 ----------------------------------------------------------------------
 
-lvim.builtin.nvimtree.quit_on_open = 1
 lvim.builtin.nvimtree.git_hl = 1
 lvim.builtin.nvimtree.highlight_opened_files = 1
 lvim.builtin.nvimtree.add_trailing = 1
@@ -123,6 +122,10 @@ lvim.keys.normal_mode["<C-f>"] = ":NvimTreeToggle<CR>"
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
 
 lvim.builtin.nvimtree.setup = {
+	auto_reload_on_write = true,
+	hide_root_folder = true,
+	hijack_unnamed_buffer_when_opening = true,
+
 	-- disables netrw completely
 	disable_netrw = true,
 	-- hijack netrw window on startup
@@ -174,6 +177,11 @@ lvim.builtin.nvimtree.setup = {
 		enable = true,
 		ignore = true,
 		timeout = 500,
+	},
+	actions = {
+		open_file = {
+			quit_on_open = true,
+		},
 	},
 	view = {
 		-- width of the window, can be either a number (columns) or a string in `%`
@@ -328,28 +336,32 @@ dap.configurations.javascript = {
 --                            Dashboard                             --
 ----------------------------------------------------------------------
 
-lvim.builtin.dashboard.custom_section = {
-	a = {
-		description = { "  Recent Projects    " },
-		command = "Telescope projects",
-	},
-	b = {
-		description = { "  Find File          " },
-		command = "Telescope find_files",
-	},
-	c = {
-		description = { "  New File           " },
-		command = ":ene!",
-	},
-	d = {
-		description = { "  Recently Used Files" },
-		command = "Telescope oldfiles",
-	},
-	e = {
-		description = { "  Find Word          " },
-		command = "Telescope live_grep",
-	},
-}
+local alpha = lvim.builtin.alpha
+
+alpha.mode = "dashboard"
+
+-- alpha.dashboard.section = {
+-- 	a = {
+-- 		description = { "  Recent Projects    " },
+-- 		command = "Telescope projects",
+-- 	},
+-- 	b = {
+-- 		description = { "  Find File          " },
+-- 		command = "Telescope find_files",
+-- 	},
+-- 	c = {
+-- 		description = { "  New File           " },
+-- 		command = ":ene!",
+-- 	},
+-- 	d = {
+-- 		description = { "  Recently Used Files" },
+-- 		command = "Telescope oldfiles",
+-- 	},
+-- 	e = {
+-- 		description = { "  Find Word          " },
+-- 		command = "Telescope live_grep",
+-- 	},
+-- }
 
 ----------------------------------------------------------------------
 --                            Completion                            --
