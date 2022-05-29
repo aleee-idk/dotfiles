@@ -7,7 +7,7 @@ lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.autopairs.active = true
 lvim.builtin.bufferline.active = true
-lvim.builtin.dap.active = true
+lvim.builtin.dap.active = false
 lvim.builtin.notify.active = true
 
 -- disable
@@ -31,6 +31,7 @@ parser_configs.http = {
 treesitter.ensure_installed = {
 	"bash",
 	"css",
+	"dart",
 	"dockerfile",
 	"fish",
 	"html",
@@ -44,7 +45,7 @@ treesitter.ensure_installed = {
 	"tsx",
 	"typescript",
 	"yaml",
-	"dart",
+	"php",
 }
 treesitter.ignore_install = {}
 treesitter.highlight.enabled = true
@@ -123,7 +124,6 @@ local tree_cb = require("nvim-tree.config").nvim_tree_callback
 
 lvim.builtin.nvimtree.setup = {
 	auto_reload_on_write = true,
-	hide_root_folder = true,
 	hijack_unnamed_buffer_when_opening = true,
 
 	-- disables netrw completely
@@ -134,12 +134,8 @@ lvim.builtin.nvimtree.setup = {
 	open_on_setup = false,
 	-- will not open on setup if the filetype is in this list
 	ignore_ft_on_setup = {},
-	-- closes neovim automatically when the tree is the last **WINDOW** in the view
-	auto_close = true,
 	-- opens the tree when changing/opening a new tab if the tree wasn't previously opened
 	open_on_tab = false,
-	-- close when open a file
-	quit_on_open = true,
 	-- hijacks new directory buffers when they are opened.
 	update_to_buf_dir = {
 		-- enable the feature
@@ -184,6 +180,7 @@ lvim.builtin.nvimtree.setup = {
 		},
 	},
 	view = {
+		hide_root_folder = true,
 		-- width of the window, can be either a number (columns) or a string in `%`
 		width = 30,
 		-- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
@@ -311,26 +308,26 @@ lvim.builtin.bufferline.options = {
 --                             Debugger                             --
 ----------------------------------------------------------------------
 
-local dap_install = require("dap-install")
-local dbg_list = require("dap-install.api.debuggers").get_installed_debuggers()
+-- local dap_install = require("dap-install")
+-- local dbg_list = require("dap-install.api.debuggers").get_installed_debuggers()
 
-for _, debugger in ipairs(dbg_list) do
-	dap_install.config(debugger)
-end
+-- for _, debugger in ipairs(dbg_list) do
+-- 	dap_install.config(debugger)
+-- end
 
-local dap = require("dap")
-dap.configurations.javascript = {
-	{
-		type = "chrome",
-		request = "attach",
-		program = "${file}",
-		cwd = vim.fn.getcwd(),
-		sourceMaps = true,
-		protocol = "inspector",
-		port = 9222,
-		webRoot = "${workspaceFolder}",
-	},
-}
+-- local dap = require("dap")
+-- dap.configurations.javascript = {
+-- 	{
+-- 		type = "chrome",
+-- 		request = "attach",
+-- 		program = "${file}",
+-- 		cwd = vim.fn.getcwd(),
+-- 		sourceMaps = true,
+-- 		protocol = "inspector",
+-- 		port = 9222,
+-- 		webRoot = "${workspaceFolder}",
+-- 	},
+-- }
 
 ----------------------------------------------------------------------
 --                            Dashboard                             --
@@ -348,19 +345,21 @@ for line in file:lines() do
 end
 
 lvim.builtin.alpha.dashboard.section = {
-  header = {
-    type= "text",
-    val= lines,
-  },
-  buttons = {entries = {
-      { "SPC s p", " Recent Projects", "<CMD>Telescope projects<CR>" },
-      { "SPC s f", "  Find File", "<CMD>Telescope find_files<CR>" },
-      { "SPC s r", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
-  }},
-  footer = {
-    type= "text",
-    val= footer_text,
-  },
+	header = {
+		type = "text",
+		val = lines,
+	},
+	buttons = {
+		entries = {
+			{ "SPC s p", " Recent Projects", "<CMD>Telescope projects<CR>" },
+			{ "SPC s f", "  Find File", "<CMD>Telescope find_files<CR>" },
+			{ "SPC s r", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
+		},
+	},
+	footer = {
+		type = "text",
+		val = footer_text,
+	},
 }
 
 ----------------------------------------------------------------------

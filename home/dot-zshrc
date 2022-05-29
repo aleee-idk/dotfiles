@@ -145,6 +145,9 @@ source $HOME/dotfiles/scripts/env_variables.sh
 #                              Aliases                               #
 #--------------------------------------------------------------------#
 
+# Fix kitty terminal issue over SSH
+[[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
+
 # Exa for listing
 alias ls='exa -lh --color=always --icons --git '
 alias la='exa -alh --color=always --icons --git '

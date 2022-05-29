@@ -9,8 +9,8 @@ services:
       - TZ=Chile/Santiago
     volumes:
       - ${HOME}/Containers/syncthing/config:/config
-      - ${HOME}/Pictures:/data/Pictures
-      - ${HOME}/Music:/data/Music
+      - ${HOME}/Drives/Raid/Pictures:/data/Pictures
+      - ${HOME}/Drives/Raid/Music:/data/Music
     ports:
       - 7200:8384
       - 22000:22000/tcp

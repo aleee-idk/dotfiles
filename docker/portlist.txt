@@ -11,6 +11,7 @@ List of ports for the services:
 # Personal Stuff
 7100 -> Vaultwarden
 7110 -> Firefly III
+7120 -> Vikunja
 
 # Files Managment
 7200 -> Syncthing

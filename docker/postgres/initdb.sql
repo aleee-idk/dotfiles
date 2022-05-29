@@ -1,2 +1,3 @@
 CREATE DATABASE paperless;
 CREATE DATABASE firefly;
+CREATE DATABASE vikunja;

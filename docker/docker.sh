@@ -19,4 +19,4 @@ done
 
 # Check if all volumes are own by normal user, throw notification if not
 
-docker-compose -f docker-compose.yml ${files[@]} up -d
+docker-compose -f docker-compose.yml ${files[@]} $@

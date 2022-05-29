@@ -8,11 +8,12 @@ set fo+=cro
 set noswapfile
 ]])
 
-lvim.autocommands.custom_groups = {
+lvim.autocmd = {
 	-- On entering insert mode in any file, scroll the window so the cursor line is centered
 	{ "InsertEnter", "*", ":normal zz" },
 	{ "BufNewFile", "*.env", ":set filetype=env" },
 	{ "BufRead", "*.env", ":set filetype=env" },
+	{ "BufEnter", "*", "++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif" },
 }
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
@@ -48,6 +49,7 @@ formatters.setup({
 	{ exe = "rustfmt" },
 	{ exe = "shfmt", extra_filetypes = { "env" } },
 	{ exe = "stylua" },
+	{ exe = "php-cs-fixer" },
 })
 
 local linters = require("lvim.lsp.null-ls.linters")
@@ -66,10 +68,16 @@ lvim.lsp.on_attach_callback = function(client, _)
 	require("lsp_signature").on_attach()
 end
 
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
+-- Emmet-ls
+local lspconfig = require("lspconfig")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+lspconfig.emmet_ls.setup({
+	-- on_attach = on_attach,
+	capabilities = capabilities,
+	filetypes = { "html", "php", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
+})
 
 -- IDK why this doesn't work outside config.lua
 lvim.builtin.which_key.mappings["t"] = {

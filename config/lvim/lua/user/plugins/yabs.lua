@@ -10,9 +10,6 @@ function TOGGLE_RUN(cmd)
 			count = 7,
 			start_in_insert = false,
 			close_on_exit = false,
-			on_open = function()
-				print("executing " + cmd)
-			end,
 		})
 	end
 	run_term:toggle()
@@ -54,6 +51,10 @@ yabs:setup({
 			tasks = {
 				run = {
 					command = "export BROWSER=firefox-developer-edition && yarn start",
+					output = TOGGLE_RUN,
+				},
+				run_dev = {
+					command = "export BROWSER=firefox-developer-edition && yarn dev",
 					output = TOGGLE_RUN,
 				},
 				test = {

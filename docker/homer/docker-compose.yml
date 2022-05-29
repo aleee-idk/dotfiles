@@ -1,9 +1,0 @@
-services:
-  homer:
-    image: b4bz/homer:latest
-    container_name: homer
-    ports:
-      - 7000:8080
-    volumes:
-      - ${HOME}/Containers/homer/data:/www/assets
-    restart: always

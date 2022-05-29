@@ -53,6 +53,7 @@ thunar --daemon &
 kdeconnect-indicator &
 easyeffects --gapplication-service &>/dev/null &
 playerctld &>/dev/null &
+numlockx &
 
 # Start Window Manager or Desktop Enviroment
 exec i3

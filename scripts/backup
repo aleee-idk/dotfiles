@@ -1,0 +1,75 @@
+#!/bin/env bash
+
+keepDayly=7
+keepWeekly=4
+keepMonthly=3
+
+declare -A repositories
+
+# key = repo ; value = directory to backup
+repositories["$HOME/Drives/Backup/Raid"]="$HOME/Drives/Raid/"
+
+# Exclude patters of the backup
+exclude=(
+	'.Trash-1000'
+	'lost+found'
+)
+
+set -Eeuo pipefail
+
+excludeString="$(printf -- "--exclude %s " "${exclude[@]}")"
+
+for i in "${!repositories[@]}"; do
+	repo="$i"
+	path="${repositories[$i]}"
+
+	# Current Date
+	currentDate=$(date +"%Y-%m-%d")
+
+	# Get last backup 'YYYY-MM-DD'
+	lastBkp=$(borg list "$repo" --format '{name}{NL}' --last 1)
+
+	if [[ "$lastBkp" == "$currentDate" ]]; then
+		echo "There is a backup for this date"
+		continue
+	fi
+
+	echo -e "\nCreating Backup for $currentDate\n"
+
+	# Backup direcories
+	borg create \
+		--verbose \
+		--progress \
+		--stats \
+		--compression none \
+		--exclude-caches \
+		$excludeString \
+		"$repo"::'{now:%Y-%m-%d}' \
+		"$path"
+
+	echo -e "\nPruning old backups\n"
+
+	# Remove old backups
+	borg prune \
+		--list \
+		--progress \
+		--keep-daily "$keepDayly" \
+		--keep-weekly "$keepWeekly" \
+		--keep-monthly "$keepMonthly" \
+		"$repo"
+
+	echo -e "\nFreeing space\n"
+
+	# Free space
+	borg compact --progress "$repo"
+
+done
+
+sleep 5m
+
+exit
+
+# Shutdown the system if are not logged users
+if [[ -z $(users) ]]; then
+	systemctl poweroff
+fi

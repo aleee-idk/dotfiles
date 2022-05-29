@@ -155,7 +155,13 @@ lvim.plugins = {
 	{
 		"windwp/nvim-ts-autotag",
 		event = "InsertEnter",
-		ft = { "html", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+		ft = {
+    'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 'rescript',
+    'xml',
+    'php',
+    'markdown',
+    'glimmer','handlebars','hbs',
+    },
 		config = function()
 			require("nvim-ts-autotag").setup()
 		end,
@@ -172,6 +178,10 @@ lvim.plugins = {
 	{
 		"p00f/nvim-ts-rainbow",
 		event = "BufRead",
+    config = function ()
+      require("nvim-treesitter.configs").setup {
+      }
+    end
 	},
 
 	{
