@@ -5,8 +5,8 @@
 readarray -t screens <<<$(xrandr --query | grep " connected" | cut -d" " -f1)
 # Bars:
 declare -A bars
-bars["HDMI-1"]="main"
-# bars[eDP1]="desktops system"
+bars["HDMI-A-0"]="main"
+bars["HDMI-A-1"]="main"
 
 # Terminate already running bar instances
 killall -q polybar

@@ -63,7 +63,7 @@ XF86MonBrightness{Up,Down}
 
 # External Screen Conf
 super + control + shift + {Left, Down, Up, Right}
-	xrandr --output HDMI-1 --rotate {left, inverted, normal, right};
+	xrandr --output HDMI-A-0 --rotate {left, inverted, normal, right};
 
 #
 # bspwm hotkeys

@@ -5,6 +5,11 @@ include "$HOME/.config/i3/rules.conf"
 ## Variables
 set $mod Mod4
 
+# Screens
+
+set $screen1 "HDMI-A-0"
+set $screen2 "HDMI-A-1"
+
 # Workspace variables
 
 set $ws1 "1"

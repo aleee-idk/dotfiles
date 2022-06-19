@@ -21,3 +21,4 @@ config/gtk-3.0
 config/lvim/plugin/packer_compiled.lua
 config/lvim/plugin/packer_compiled.lua
 scripts/sort_image_log.txt
+config/lvim/plugin/packer_compiled.lua

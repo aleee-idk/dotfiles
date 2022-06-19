@@ -5,14 +5,15 @@ rofi_theme="-theme $HOME/.config/rofi/themes/sidebar.rasi"
 declare -A links
 
 links[Usercode]="https://meet.google.com/cst-ywbc-ebk"
-links[Procomercial - dev]="https://meet.google.com/zxq-ohvh-pma"
 links[Karubag - dev]="https://meet.google.com/khr-sbms-ipt"
-links[Piloto Go - dev]="https://meet.google.com/mnw-rxwn-zco"
 links[Ovalleapp - dev]="https://meet.google.com/egf-mdmn-ogi"
+links[Piloto Go - dev]="https://meet.google.com/mnw-rxwn-zco"
+links[Procomercial - dev]="https://meet.google.com/zxq-ohvh-pma"
 links[Sercotec - dev]="https://meet.google.com/rvo-fvns-xun"
+links[Temuco - dev]="https://meet.google.com/mxj-ciyh-kfi"
 
 # We use "printf '%s\n'" to format the array one item to a line.
-choice=$(printf '%s\n' "${!links[@]}" | sort | rofi $rofi_theme -i -dmenu -p 'Edit config')
+choice=$(printf '%s\n' "${!links[@]}" | rofi $rofi_theme -i -dmenu -p 'Edit config')
 
 if [ "$choice" ]; then
 	brave "${links[$choice]}"

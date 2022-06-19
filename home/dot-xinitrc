@@ -39,9 +39,9 @@ source "$HOME/dotfiles/scripts/env_variables.sh"
 # Start Programs
 
 # X Server config
-setxkbmap -layout latam -option grp:shifts_toggle,caps:escape &
+setxkbmap -layout latam &
 xsetroot -cursor_name left_ptr &
-$HOME/.screenlayout/home.sh
+$HOME/.screenlayout/screen.sh
 
 udiskie &
 picom -b --experimental-backends &

@@ -113,11 +113,6 @@ lvim.builtin.which_key.mappings["sT"] = { "<cmd>TodoTelescope<CR>", "TODO" }
 --                            Nvim-Tree                             --
 ----------------------------------------------------------------------
 
-lvim.builtin.nvimtree.git_hl = 1
-lvim.builtin.nvimtree.highlight_opened_files = 1
-lvim.builtin.nvimtree.add_trailing = 1
-lvim.builtin.nvimtree.group_empty = 1
-
 -- bindings
 lvim.keys.normal_mode["<C-f>"] = ":NvimTreeToggle<CR>"
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
@@ -178,6 +173,12 @@ lvim.builtin.nvimtree.setup = {
 		open_file = {
 			quit_on_open = true,
 		},
+	},
+	renderer = {
+		highlight_git = true,
+		group_empty = true,
+		add_trailing = true,
+		highlight_opened_files = "all",
 	},
 	view = {
 		hide_root_folder = true,
