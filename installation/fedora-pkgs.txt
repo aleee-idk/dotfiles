@@ -1,0 +1,9 @@
+cargo
+fzf
+g++
+lazygit
+npm
+tealdeer
+thefuck
+zsh
+bat
