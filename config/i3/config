@@ -67,6 +67,8 @@ exec --no-startup-id discord
 exec --no-startup-id librewolf
 exec --no-startup-id signal-desktop
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+exec_always --no-startup-id "$HOME/.screenlayout/screen.sh"
+exec_always --no-startup-id "picom -b --experimental-backends &"
 exec_always --no-startup-id "pgrep -x sxhkd > /dev/null || sxhkd &"
 exec_always --no-startup-id "$HOME/.config/polybar/launch.sh"
 exec_always --no-startup-id "$HOME/.fehbg"
