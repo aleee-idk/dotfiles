@@ -72,7 +72,7 @@ yabs:setup({
 			default_task = "run",
 			tasks = {
 				run = {
-					command = "yarn start",
+					command = "NODE_ENV=localhost yarn start",
 					output = TOGGLE_RUN,
 				},
 				sync = {

@@ -5,6 +5,8 @@ rofi_theme="-theme $HOME/.config/rofi/themes/sidebar.rasi"
 declare -A links
 
 links[Usercode]="https://meet.google.com/cst-ywbc-ebk"
+links[Apptivate - dev]="https://meet.google.com/xha-nyqd-bcm"
+links[Hacienda - dev]="https://meet.google.com/nxw-ryyd-bgw"
 links[Karubag - dev]="https://meet.google.com/khr-sbms-ipt"
 links[Ovalleapp - dev]="https://meet.google.com/egf-mdmn-ogi"
 links[Piloto Go - dev]="https://meet.google.com/mnw-rxwn-zco"

@@ -17,10 +17,11 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # Launch bars
 if type "xrandr"; then
 	for s in "${screens[@]}"; do
-		desktops=$(bspc query -D -m "$s" | wc -w)
-		bar_width=$((desktops * 3))
 		for b in ${bars[$s]}; do
-			MONITOR="$s" DESKTOPS="${bar_width}%" polybar -c ~/.config/polybar/config.ini -q --reload "$b" &
+
+			[[ $s == 'HDMI-A-1' ]] && bottom="true" || bottom="false"
+
+			MONITOR="$s" BOTTOM="$bottom" polybar -c ~/.config/polybar/config.ini -q --reload "$b" &
 		done
 	done
 fi

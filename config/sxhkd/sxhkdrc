@@ -21,7 +21,7 @@ super + r ; {m,s,d,p,f,t}
 		$HOME/dotfiles/scripts/rofi/docker, \
 		bwmenu &, \
 		$HOME/dotfiles/scripts/rofi/faker, \
-		$HOME/dotfiles/scripts/rofi/rofi-translate/rofi_trans\
+		kpl & \
 	}
 
 # Power menu

@@ -7,6 +7,7 @@ services:
       - 5432:5432
     volumes:
       - ${HOME}/Containers/postgres/data:/var/lib/postgresql/data
+      - ${HOME}/Containers/postgres/path/pg_config:/usr/bin/pg_config
       - ./postgres/initdb.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
     environment:
       POSTGRES_USER: root
@@ -16,6 +17,8 @@ services:
     image: dpage/pgadmin4
     container_name: pgadmin
     restart: unless-stopped
+    volumes:
+      - ${HOME}/Containers/postgres/pgadmin/var/lib/pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: "admin@admin.cl"
       PGADMIN_DEFAULT_PASSWORD: "12345678"
