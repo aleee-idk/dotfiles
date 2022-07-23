@@ -49,7 +49,7 @@ formatters.setup({
 	{ exe = "rustfmt" },
 	{ exe = "shfmt", extra_filetypes = { "env" } },
 	{ exe = "stylua" },
-	{ exe = "php-cs-fixer" },
+	{ exe = "phpcsfixer" },
 })
 
 local linters = require("lvim.lsp.null-ls.linters")

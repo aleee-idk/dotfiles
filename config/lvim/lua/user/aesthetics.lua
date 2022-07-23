@@ -1,4 +1,5 @@
 -- Current colorscheme
+vim.g.catppuccin_flavour = "frappe"
 lvim.colorscheme = "catppuccin"
 -- lvim.transparent_window = true
 
@@ -10,27 +11,34 @@ catppuccin.setup({
 	transparent_background = true,
 	term_colors = false,
 	styles = {
-		comments = "italic",
-		functions = "italic",
-		keywords = "italic",
-		strings = "NONE",
-		variables = "bold",
+    comments = { "italic" },
+    conditionals = { "italic" },
+    loops = {"italic"},
+    functions = {"italic"},
+    keywords = {"italic"},
+    strings = {"italic"},
+    variables = {"italic"},
+    numbers = {},
+    booleans = {},
+    properties = {},
+    types = {},
+    operators = {},
 	},
 	integrations = {
 		treesitter = true,
 		native_lsp = {
 			enabled = true,
 			virtual_text = {
-				errors = "italic",
-				hints = "italic",
-				warnings = "italic",
-				information = "italic",
+        errors = { "italic" },
+        hints = { "italic" },
+        warnings = { "italic" },
+        information = { "italic" },
 			},
 			underlines = {
-				errors = "underline",
-				hints = "underline",
-				warnings = "underline",
-				information = "underline",
+        errors = { "underline" },
+        hints = { "underline" },
+        warnings = { "underline" },
+        information = { "underline" },
 			},
 		},
 		lsp_trouble = true,
@@ -42,12 +50,22 @@ catppuccin.setup({
 		nvimtree = {
 			enabled = true,
 			show_root = true,
+      transparent_panel = true,
 		},
-		which_key = true,
 		indent_blankline = {
 			enabled = true,
-			colored_indent_levels = false,
+			colored_indent_levels = true,
 		},
+    neotree = {
+      enabled = false,
+      show_root = true,
+      transparent_panel = false,
+    },
+    dap = {
+      enabled = false,
+      enable_ui = false,
+    },
+		which_key = true,
 		dashboard = true,
 		neogit = false,
 		vim_sneak = false,
@@ -60,8 +78,11 @@ catppuccin.setup({
 		hop = false,
 		notify = true,
 		telekasten = true,
+    symbols_outline = true,
+    mini = false,
 	},
 })
+
 
 lvim.builtin.lualine.theme = lvim.colorscheme
 lvim.builtin.lualine.component_separators = { "", "" }
